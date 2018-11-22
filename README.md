@@ -2,6 +2,8 @@
 인적성검사 문제를 제공하고, 채점 결과와 백분위를 관리해주는 오픈소스 플랫폼입니다.<br/>
 PAT is a Open Source Project for Personality / Aptitude Tests in South Korea.
 * What is Personality / Aptitude Tests in South Korea? [Click here](https://n.pr/2Twx43C)
+[![Build Status](https://travis-ci.org/janghe11/PAT.svg?branch=develop)](https://travis-ci.org/janghe11/PAT)
+[![Build Status](https://travis-ci.org/janghe11/PAT.svg?branch=master)](https://travis-ci.org/janghe11/PAT)
 
 ## 개발 개요(Development Overview)
 * 1차 개발 기간(1st development period) : 2018/11/22 ~ 2019/2/27
