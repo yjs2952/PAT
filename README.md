@@ -7,6 +7,7 @@ PAT is a Open Source Project for Personality / Aptitude Tests in South Korea.
 * 1차 개발 기간(1st development period) : 2018/11/22 ~ 2019/2/27
 * 개발자(Developer) : [윤지수](https://github.com/yjs2952), [장태희](https://github.com/janghe11), [정시윤](https://github.com/siyoon210)
 * 핵심 기능(Core functions) : 문제 게재 기능, 문제 풀기 기능, 문제 채점 및 성적표 기능, 백분위 기능
+* Docs : https://1drv.ms/f/s!AiWztNJa_dvMl0aqM2el7y-etQae
 * Languages & Tools : Java Spring, MySQL
 * 엔티티(Entities) : ![Entities](./docs/images/Entities.png)
 * Infrastructure Schema : 
