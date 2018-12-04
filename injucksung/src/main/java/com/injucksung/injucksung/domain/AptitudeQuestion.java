@@ -1,7 +1,5 @@
 package com.injucksung.injucksung.domain;
 
-import lombok.*;
-
 import javax.persistence.*;
 import java.util.Set;
 
@@ -18,5 +16,6 @@ public class AptitudeQuestion extends Question{
     @JoinColumn(name = "question_id")
     private Set<Choice> choices;
 
+    @Column(nullable = false)
     private int score;
 }

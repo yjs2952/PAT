@@ -58,10 +58,10 @@ INSERT INTO question (category_id, book_content_id, book_number, query, dtype)
 VALUES (4, 6, 1, '다음 지문을 보고 밑줄에 해당되는 유의어를 고르시오', 'apt');
 INSERT INTO aptitude_question (id, score)
 VALUES (1, 5);
-INSERT INTO passage (type, content, sequence)
-VALUES ('text',
-        '동해물과 백두산이 마르고 닳도록 하나님이 보우하사 우리 나라만세 무궁화 삼천리 화려 강산 <u>대한</u>사람 대한으로 길이 보전하세 남산 위에 저 나무 철갑을 두른 듯 바람 서리 불변함은 우리 기상일세 무궁화 삼천리 화려 강산 대한 사람 대한으로 길이 보전하세',
-        1);
+INSERT INTO passage (sequence, dtype)
+VALUES (1, 'txt');
+INSERT INTO text_passage(id,content)
+VALUES (1, '동해물과 백두산이 마르고 닳도록 하나님이 보우하사 우리 나라만세 무궁화 삼천리 화려 강산 <u>대한</u>사람 대한으로 길이 보전하세 남산 위에 저 나무 철갑을 두른 듯 바람 서리 불변함은 우리 기상일세 무궁화 삼천리 화려 강산 대한 사람 대한으로 길이 보전하세');
 INSERT INTO question_passage (question_id, passage_id)
 VALUES (1, 1);
 INSERT INTO choice (question_id, content, correct)
@@ -79,10 +79,10 @@ INSERT INTO question (category_id, book_content_id, book_number, query, dtype)
 VALUES (4, 6, 2, '다음 지문을 보고 밑줄에 해당되는 유의어를 고르시오', 'apt');
 INSERT INTO aptitude_question (id, score)
 VALUES (2, 5);
-INSERT INTO passage (type, content, sequence)
-VALUES ('text',
-        '저번에 말이야 객체와 인스턴스의 차이점이 뭔지아냐고 병수가 물어보더라고, 아주 재밌었어, 결국 <u>객체</u>도 영어로는 오브젝트니까 별개의 단어인데 우리는 혼용해서 쓰고 있자나? 인스턴스는 특정 클래스로 부터 나온 객체임을 강조하고 싶을때 사용한다고 자바의 정석에서는 그렇게 써있었어, 내가 이런말을 왜하냐면 아무말이나 써야하니까 갑자기 생각나는 내용을 써봤어 복습도 되고 좋다.',
-        1);
+INSERT INTO passage (sequence, dtype)
+VALUES (1, 'txt');
+INSERT INTO text_passage(id,content)
+VALUES (2, '저번에 말이야 객체와 인스턴스의 차이점이 뭔지아냐고 병수가 물어보더라고, 아주 재밌었어, 결국 <u>객체</u>도 영어로는 오브젝트니까 별개의 단어인데 우리는 혼용해서 쓰고 있자나? 인스턴스는 특정 클래스로 부터 나온 객체임을 강조하고 싶을때 사용한다고 자바의 정석에서는 그렇게 써있었어, 내가 이런말을 왜하냐면 아무말이나 써야하니까 갑자기 생각나는 내용을 써봤어 복습도 되고 좋다.');
 INSERT INTO question_passage (question_id, passage_id)
 VALUES (2, 2);
 INSERT INTO choice (question_id, content, correct)
@@ -100,10 +100,10 @@ INSERT INTO question (category_id, book_content_id, book_number, query, dtype)
 VALUES (4, 6, 3, '다음 지문을 보고 밑줄에 해당되는 유의어를 고르시오', 'apt');
 INSERT INTO aptitude_question (id, score)
 VALUES (3, 5);
-INSERT INTO passage (type, content, sequence)
-VALUES ('text',
-        'JPA를 쓰면서도 너무 어려워 그리고 스프링에서 JPA셋팅을 직접 해줘야한다며? 우리 스프링으로 할꺼잖아 근데 <u>프로토타입</u>은 그냥 부트로 해보고 있어 셋팅하기가 넘 무서워서 해보긴 해야하는데 JPA 넘 어렵다. 이번에 꼭 마스터 해보자 화이팅 짱짱맨',
-        1);
+INSERT INTO passage (sequence, dtype)
+VALUES (1, 'txt');
+INSERT INTO text_passage(id,content)
+VALUES (3, 'JPA를 쓰면서도 너무 어려워 그리고 스프링에서 JPA셋팅을 직접 해줘야한다며? 우리 스프링으로 할꺼잖아 근데 <u>프로토타입</u>은 그냥 부트로 해보고 있어 셋팅하기가 넘 무서워서 해보긴 해야하는데 JPA 넘 어렵다. 이번에 꼭 마스터 해보자 화이팅 짱짱맨');
 INSERT INTO question_passage (question_id, passage_id)
 VALUES (3, 3);
 INSERT INTO choice (question_id, content, correct)
