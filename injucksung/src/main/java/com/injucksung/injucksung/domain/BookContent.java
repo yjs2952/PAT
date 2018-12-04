@@ -24,8 +24,8 @@ public class BookContent {
     private String name;
 
     @Column
-    private Long superiorId;
+    private Long parentId;
 
     @Column(nullable = false)
-    private int orderBy;
+    private int sequence;
 }

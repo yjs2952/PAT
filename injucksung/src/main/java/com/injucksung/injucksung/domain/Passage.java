@@ -25,5 +25,5 @@ public class Passage {
     private String content;
 
     @Column (nullable = false)//한 문제에 passage가 여러개 일 경우 정렬 순서
-    private int orderBy;
+    private int sequence;
 }

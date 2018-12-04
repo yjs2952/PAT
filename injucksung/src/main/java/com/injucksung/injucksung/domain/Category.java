@@ -20,5 +20,8 @@ public class Category {
     private String name;
 
     @Column
-    private Long superiorId;
+    private Long parentId;
+
+    @Column
+    private int type; //인성(1)인지 적성(2)인지
 }
