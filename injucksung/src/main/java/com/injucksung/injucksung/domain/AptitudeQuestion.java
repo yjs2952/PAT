@@ -6,13 +6,13 @@ import java.util.Set;
 @Entity
 @DiscriminatorValue("apt")
 public class AptitudeQuestion extends Question{
-    @ManyToMany
+    @ManyToMany(cascade = CascadeType.ALL)
     @JoinTable(name = "question_passage",
             joinColumns = @JoinColumn(name = "question_id"),
             inverseJoinColumns = @JoinColumn(name = "passage_id"))
     private Set<Passage> passages;
 
-    @OneToMany
+    @OneToMany(cascade = CascadeType.ALL)
     @JoinColumn(name = "question_id")
     private Set<Choice> choices;
 
