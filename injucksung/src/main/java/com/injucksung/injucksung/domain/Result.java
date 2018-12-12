@@ -4,6 +4,7 @@ import lombok.*;
 
 import javax.persistence.*;
 
+@ToString
 @Entity
 @Table(name = "result")
 @Setter
@@ -24,5 +25,8 @@ public class Result {
     private Question question;
 
     @Column(nullable = false)
-    private Boolean correct;
+    private Boolean isCorrect;
+
+    @Column(length = 1, nullable = false)
+    private int checkedChoice;
 }

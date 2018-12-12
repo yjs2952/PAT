@@ -1,7 +1,5 @@
 package com.injucksung.injucksung.repository;
 
-import com.injucksung.injucksung.domain.Choice;
-import com.injucksung.injucksung.domain.Passage;
 import com.injucksung.injucksung.domain.Question;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -14,10 +12,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.Set;
-
-import static com.injucksung.injucksung.repository.Print.printPage;
-import static com.injucksung.injucksung.repository.Print.printSet;
+import static com.injucksung.injucksung.repository.Print.print;
 
 @RunWith(SpringRunner.class)
 @DataJpaTest
@@ -31,14 +26,14 @@ public class QuestionRepositoryTest {
     public void bookContentId로_문제_조회하기() throws Exception {
         Pageable pageable = PageRequest.of(0, 5);
         Page<Question> questions = questionRepository.findQuestionByBookContentId(6L, pageable);
-        printPage(questions);
+        print(questions);
     }
 
     @Test
     public void bookId로_문제_조회하기() throws Exception {
         Pageable pageable = PageRequest.of(0, 5);
         Page<Question> questions = questionRepository.findQuestionByBookId(1L, pageable);
-        printPage(questions);
+        print(questions);
     }
 
     @Test
@@ -48,19 +43,7 @@ public class QuestionRepositoryTest {
     }
 
     @Test
-    public void questionId로_passage_조회하기() throws Exception {
-        Set<Passage> passages = questionRepository.findQuestionById(2L).getPassages();
-        printSet(passages);
-    }
-
-    @Test
-    public void questionId로_choice_조회하기() throws Exception {
-        Set<Choice> choices = questionRepository.findQuestionById(3L).getChoices();
-        printSet(choices);
-    }
-
-    @Test
-    public void questionId로_catehory_조회하기() throws Exception {
+    public void questionId로_category_조회하기() throws Exception {
         System.out.println(questionRepository.findQuestionById(2L).getCategory());
     }
 }

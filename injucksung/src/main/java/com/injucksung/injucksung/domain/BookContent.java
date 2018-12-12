@@ -4,6 +4,7 @@ import lombok.*;
 
 import javax.persistence.*;
 
+@ToString
 @Entity
 @Table(name = "book_content")
 @Setter
@@ -27,4 +28,10 @@ public class BookContent {
 
     @Column(nullable = false)
     private int sequence;
+
+    @Column(nullable = false)
+    private Boolean isMockTest;
+
+    @Column
+    private Integer recommandTime; //권장시간 (단위 초)
 }

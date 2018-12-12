@@ -5,6 +5,7 @@ import lombok.*;
 import javax.persistence.*;
 import java.util.Date;
 
+@ToString
 @Entity
 @Table(name = "book")
 @Setter
@@ -15,10 +16,6 @@ public class Book {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "publisher_id", nullable = false)
-    private Publisher publisher;
 
     @Column(nullable = false)
     private String name;
@@ -31,4 +28,7 @@ public class Book {
 
     @Column(length = 100)
     private String ISBN; //국제표준도서번호
+
+    @Column(nullable = false)
+    private String publisher;
 }

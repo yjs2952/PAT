@@ -12,7 +12,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.transaction.annotation.Transactional;
 
-import static com.injucksung.injucksung.repository.Print.printPage;
+import static com.injucksung.injucksung.repository.Print.print;
 
 @RunWith(SpringRunner.class)
 @DataJpaTest
@@ -27,7 +27,7 @@ public class BookContentRepositoryTest {
         Pageable pageable = PageRequest.of(0, 5);
 
         Page<BookContent> bookContents = bookContentRepository.findBookContentByBookId(1L, pageable);
-        printPage(bookContents);
+        print(bookContents);
     }
 
     @Test

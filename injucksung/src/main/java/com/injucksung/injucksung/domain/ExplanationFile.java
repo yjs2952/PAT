@@ -1,10 +1,21 @@
 package com.injucksung.injucksung.domain;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
+import lombok.*;
 
+import javax.persistence.*;
+
+@ToString
 @Entity
-public class PassageFile{
+@Table(name = "explanation_file")
+@Setter
+@Getter
+@NoArgsConstructor
+@AllArgsConstructor
+public class ExplanationFile {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
     @Column(nullable = false)
     private String originName;
 

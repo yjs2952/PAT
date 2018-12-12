@@ -4,6 +4,7 @@ import lombok.*;
 
 import javax.persistence.*;
 
+@ToString
 @Entity
 @Table(name = "category")
 @Setter
@@ -22,5 +23,5 @@ public class Category {
     private Long parentId;
 
     @Column
-    private int type; //인성(1)인지 적성(2)인지
+    private String type; //인성 "per" 적성 "apt
 }

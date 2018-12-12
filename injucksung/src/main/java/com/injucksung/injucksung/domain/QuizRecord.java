@@ -5,6 +5,7 @@ import lombok.*;
 import javax.persistence.*;
 import java.util.Date;
 
+@ToString
 @Entity
 @Table(name = "quiz_record")
 @Setter
@@ -23,7 +24,19 @@ public class QuizRecord {
     @Column(nullable = false)
     private Date date;
 
+    @Column(nullable = false)
+    private int correctCount;//맞힌 문제 문항수
+
+    @Column(nullable = false)
+    private int totalCount;//전체 문제 문항수
+
+    @Column(nullable = false)
+    private int time; //실제 걸린 시간 (단위 초)
+
+    @Column (nullable = false)
+    private String title;
+
     @Column
-    private int score;
+    private String book;
 }
 

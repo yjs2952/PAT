@@ -12,7 +12,8 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.transaction.annotation.Transactional;
 
-import static com.injucksung.injucksung.repository.Print.printPage;
+import static com.injucksung.injucksung.repository.Print.print;
+
 
 @RunWith(SpringRunner.class)
 @DataJpaTest
@@ -26,8 +27,8 @@ public class BookRepositoryTest {
     public void 책_모든_목록_조회하기() throws Exception {
         Pageable pageable = PageRequest.of(0, 3);
 
-        Page<Book> books = bookRepository.findBook(pageable);
-        printPage(books);
+        Page<Book> books = bookRepository.findAll(pageable);
+        print(books);
     }
 
     @Test
@@ -35,7 +36,7 @@ public class BookRepositoryTest {
         Pageable pageable = PageRequest.of(0, 3);
 
         Page<Book> books = bookRepository.findBookByNameContaining("마스터", pageable);
-        printPage(books);
+        print(books);
     }
 
     @Test
@@ -44,3 +45,5 @@ public class BookRepositoryTest {
         System.out.println(book.toString());
     }
 }
+
+

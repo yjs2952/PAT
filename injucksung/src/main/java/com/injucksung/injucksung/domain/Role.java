@@ -4,6 +4,7 @@ import lombok.*;
 
 import javax.persistence.*;
 
+@ToString
 @Entity
 @Table(name = "role")
 @Setter
