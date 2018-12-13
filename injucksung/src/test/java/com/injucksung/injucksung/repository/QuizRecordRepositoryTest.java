@@ -13,15 +13,6 @@ import org.springframework.transaction.annotation.Transactional;
 @DataJpaTest
 @Transactional
 public class QuizRecordRepositoryTest {
-    @Autowired
-    private QuizRecordRepository quizRecordRepository;
-
-    @Test
-    public void id로_QuizRecord_한건_조회하기() throws Exception {
-        QuizRecord quizRecordById = quizRecordRepository.findQuizRecordById(1L);
-        System.out.println(quizRecordById);
-    }
-
 
 }
 

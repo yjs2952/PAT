@@ -20,7 +20,9 @@ public class Book {
     @Column(nullable = false)
     private String name;
 
-    @Column(nullable = false)
+    //@Column(nullable = false)
+    @Temporal(TemporalType.TIMESTAMP)
+    @Column(columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
     private Date publicationDate;
 
     @Column(length = 100, nullable = false)

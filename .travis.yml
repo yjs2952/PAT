@@ -1,6 +1,11 @@
 language: java
 jdk:
  - oraclejdk8
+# blacklist
+branches:
+ except:
+  - siyoon210-develop
+# whitelist
 branches:
  only:
   - develop

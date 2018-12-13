@@ -29,8 +29,10 @@ public class ContentFile {
     @Column(nullable = false)
     private String length;
 
-    @Column(nullable = false)
-    private String regDate;
+    // @Column(nullable = false)
+    @Temporal(TemporalType.TIMESTAMP)
+    @Column(columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
+    private Date regDate;
 
     @Column(nullable = false)
     private String path;

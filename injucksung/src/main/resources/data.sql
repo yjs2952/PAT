@@ -1,8 +1,8 @@
 -- 책, 책목차
 INSERT INTO book (name, publication_date, author, ISBN, publisher)
-VALUES ('위포트 인적성 마스터 25대기업 인적성검사 통합 기본서', '20180119', '위포트 연구소', '9791161980140', '위포트');
+VALUES ('위포트 인적성 마스터 25대기업 인적성검사 통합 기본서', null, '위포트 연구소', '9791161980140', '위포트');
 INSERT INTO book (name, publication_date, author, ISBN, publisher)
-VALUES ('2019 인적성검사 통합 기본서', '20181219', '하하하 연구소', '123461980140', '하하');
+VALUES ('2019 인적성검사 통합 기본서', null, '하하하 연구소', '123461980140', '하하');
 INSERT INTO book_content (book_id, name, parent_id, sequence, is_mock_test, recommand_time)
 VALUES (1, 'PART 1 언어능력', null, 1, false, null);
 INSERT INTO book_content (book_id, name, parent_id, sequence, is_mock_test, recommand_time)
