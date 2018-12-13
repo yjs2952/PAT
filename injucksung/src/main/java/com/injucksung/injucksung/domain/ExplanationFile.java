@@ -3,6 +3,7 @@ package com.injucksung.injucksung.domain;
 import lombok.*;
 
 import javax.persistence.*;
+import java.util.Date;
 
 @ToString
 @Entity
@@ -28,8 +29,10 @@ public class ExplanationFile {
     @Column(nullable = false)
     private String length;
 
-    @Column(nullable = false)
-    private String regDate;
+    //@Column(nullable = false)
+    @Temporal(TemporalType.TIMESTAMP)
+    @Column(columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
+    private Date regDate;
 
     @Column(nullable = false)
     private String path;

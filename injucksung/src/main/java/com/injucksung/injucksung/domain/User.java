@@ -3,6 +3,7 @@ package com.injucksung.injucksung.domain;
 import lombok.*;
 
 import javax.persistence.*;
+import java.util.Date;
 import java.util.Set;
 
 @ToString
@@ -34,4 +35,8 @@ public class User {
 
     @Column(length = 100, nullable = false)
     private String phone;
+
+    @Temporal(TemporalType.TIMESTAMP)
+    @Column(columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
+    private Date regDate;
 }
