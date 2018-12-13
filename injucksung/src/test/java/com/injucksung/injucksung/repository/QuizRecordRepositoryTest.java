@@ -1,4 +1,4 @@
 package com.injucksung.injucksung.repository;
 
-public class QuizRecordRepository {
+public class QuizRecordRepositoryTest {
 }
