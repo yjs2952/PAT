@@ -18,7 +18,6 @@ import static com.injucksung.injucksung.repository.Print.print;
 @RunWith(SpringRunner.class)
 @DataJpaTest
 @Transactional
-@AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
 public class BookRepositoryTest {
     @Autowired
     private BookRepository bookRepository;

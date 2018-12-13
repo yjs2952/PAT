@@ -1,6 +1,6 @@
 package com.injucksung.injucksung.repository;
 
-import com.injucksung.injucksung.domain.Category;
+import com.injucksung.injucksung.domain.QuestionCategory;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,20 +16,19 @@ import static com.injucksung.injucksung.repository.Print.print;
 @RunWith(SpringRunner.class)
 @DataJpaTest
 @Transactional
-@AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
-public class CategoryRepositoryTest {
+public class QuestionCategoryRepositoryTest {
     @Autowired
     private CategoryRepository categoryRepository;
 
     @Test
     public void id로_카테고리_한건_조회하기() throws Exception {
-        Category category = categoryRepository.findCategoryById(4L);
-        System.out.println(category.toString());
+        QuestionCategory questionCategory = categoryRepository.findCategoryById(4L);
+        System.out.println(questionCategory.toString());
     }
 
     @Test
     public void parentId로_하위_카테고리_목록_조회하기() throws Exception {
-        Set<Category> categorys = categoryRepository.findCategoryByParentId(1L);
-        print(categorys);
+        Set<QuestionCategory> questionCategories = categoryRepository.findCategoryByParentId(1L);
+        print(questionCategories);
     }
 }

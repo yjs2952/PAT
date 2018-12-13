@@ -17,7 +17,6 @@ import static com.injucksung.injucksung.repository.Print.print;
 @RunWith(SpringRunner.class)
 @DataJpaTest
 @Transactional
-@AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
 public class QuestionRepositoryTest {
     @Autowired
     private QuestionRepository questionRepository;
@@ -44,6 +43,6 @@ public class QuestionRepositoryTest {
 
     @Test
     public void questionId로_category_조회하기() throws Exception {
-        System.out.println(questionRepository.findQuestionById(2L).getCategory());
+        System.out.println(questionRepository.findQuestionById(2L).getQuestionCategory());
     }
 }
