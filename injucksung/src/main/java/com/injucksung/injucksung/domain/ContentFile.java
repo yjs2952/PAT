@@ -3,6 +3,7 @@ package com.injucksung.injucksung.domain;
 import lombok.*;
 
 import javax.persistence.*;
+import java.util.Date;
 
 @ToString
 @Entity
