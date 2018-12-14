@@ -5,32 +5,38 @@ import lombok.*;
 import javax.persistence.*;
 import java.util.Date;
 
-@ToString
+
 @Entity
 @Table(name = "book")
 @Setter
 @Getter
 @NoArgsConstructor
-@AllArgsConstructor
+@RequiredArgsConstructor
+@ToString
+@EqualsAndHashCode
 public class Book {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @NonNull
     @Column(nullable = false)
     private String name;
 
-    //@Column(nullable = false)
+    @NonNull
     @Temporal(TemporalType.TIMESTAMP)
     @Column(columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
     private Date publicationDate;
 
+    @NonNull
     @Column(length = 100, nullable = false)
     private String author;
 
+    @NonNull
     @Column(length = 100)
     private String ISBN; //국제표준도서번호
 
+    @NonNull
     @Column(nullable = false)
     private String publisher;
 }
