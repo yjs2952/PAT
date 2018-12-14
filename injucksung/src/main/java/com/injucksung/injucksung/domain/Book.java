@@ -24,9 +24,8 @@ public class Book {
     private String name;
 
     @NonNull
-    @Temporal(TemporalType.TIMESTAMP)
-    @Column(columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
-    private Date publicationDate;
+    @Column
+    private String publicationDate;
 
     @NonNull
     @Column(length = 100, nullable = false)
