@@ -12,5 +12,9 @@ public interface BookRepository extends JpaRepository<Book, Long> {
 
     //책 id로 책 조회하기
     Book findBookById(Long id);
+
+    //책 한건 새로 저장하기(등록하기)
+    @Override
+    <S extends Book> S saveAndFlush(S s);
 }
 
