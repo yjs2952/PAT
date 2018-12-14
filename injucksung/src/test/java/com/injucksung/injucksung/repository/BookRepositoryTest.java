@@ -46,7 +46,7 @@ public class BookRepositoryTest {
     @Test
     public void 책_한건_저장하기() throws Exception {
         Book book = new Book("인적성의 정석 2019", "2018.12.14", "남궁성", "4949303049", "정석출판사");
-        Book saveAndFlush = bookRepository.saveAndFlush(book);
+        Book saveAndFlush = bookRepository.save(book);
         this.책_모든_목록_조회하기();
     }
 
@@ -54,7 +54,7 @@ public class BookRepositoryTest {
     public void 책_수정하기() throws Exception {
         Book book = new Book("인적성의 정석 2019", "2018.12.14", "남궁성", "4949303049", "정석출판사");
         book.setId(1L);
-        Book saveAndFlush = bookRepository.saveAndFlush(book);
+        Book saveAndFlush = bookRepository.save(book);
         this.책_모든_목록_조회하기();
     }
 
