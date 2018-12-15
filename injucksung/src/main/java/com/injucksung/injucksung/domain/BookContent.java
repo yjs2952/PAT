@@ -16,7 +16,7 @@ public class BookContent {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.REMOVE) //REMOVE 설정은 누가 넣은거지?
     @JoinColumn(name = "book_id", nullable = false)
     private Book book;
 
