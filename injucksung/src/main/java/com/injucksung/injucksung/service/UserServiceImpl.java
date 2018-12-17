@@ -86,6 +86,19 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public int modifyUserRole(Long id, Role role) {
+        User user = userRepository.getOne(id);
+        Set<Role> roles = user.getRoles();
+        roles.add(role);
+        user.setRoles(roles);
+        if(userRepository.save(user) != null){
+            userRepository.flush();
+            return 1;
+        }
+        return 0;
+    }
+
+    @Override
     @Transactional(readOnly = true)
     public Page<User> getUserList(int start, String searchType, String searchWord) {
         PageRequest pageRequest = PageRequest.of(start, PAGE_SIZE);

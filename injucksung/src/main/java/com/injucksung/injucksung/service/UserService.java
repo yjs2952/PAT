@@ -1,5 +1,6 @@
 package com.injucksung.injucksung.service;
 
+import com.injucksung.injucksung.domain.Role;
 import com.injucksung.injucksung.domain.User;
 import org.springframework.data.domain.Page;
 
@@ -24,6 +25,8 @@ public interface UserService {
     void deleteAccount(String email, String password);
 
     int modifyUserInfo(User user);
+
+    int modifyUserRole(Long id, Role role);
 
     Page<User> getUserList(int start, String searchType, String searchWord);
 }
