@@ -58,6 +58,13 @@ public class BookRepositoryTest {
         this.책_모든_목록_조회하기();
     }
 
+    @Test
+    public void 책_삭제하기() throws Exception {
+        bookRepository.deleteById(1L);
+        System.out.println("------------");
+        this.책_모든_목록_조회하기();
+    }
+
 }
 
 
