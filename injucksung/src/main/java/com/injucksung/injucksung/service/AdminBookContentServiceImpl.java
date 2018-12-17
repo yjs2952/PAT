@@ -11,11 +11,11 @@ import java.util.List;
 
 @Service
 @Transactional
-public class BookContentServiceImpl implements BookContentService {
+public class AdminBookContentServiceImpl implements AdminBookContentService {
     private BookContentRepository bookContentRepository;
     private BookRepository bookRepository;
 
-    public BookContentServiceImpl(BookContentRepository bookContentRepository, BookRepository bookRepository) {
+    public AdminBookContentServiceImpl(BookContentRepository bookContentRepository, BookRepository bookRepository) {
         this.bookContentRepository = bookContentRepository;
         this.bookRepository = bookRepository;
     }

@@ -4,7 +4,7 @@ import com.injucksung.injucksung.domain.BookContent;
 
 import java.util.List;
 
-public interface BookContentService {
+public interface AdminBookContentService {
     void addBookContent(BookContent bookContent, Long bookId);
 
     void deleteBookContent(Long id);

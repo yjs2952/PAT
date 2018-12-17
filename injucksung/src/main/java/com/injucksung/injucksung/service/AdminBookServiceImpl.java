@@ -8,11 +8,11 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 @Service
-public class BookServiceImpl implements BookService {
+public class AdminBookServiceImpl implements AdminBookService {
     private BookRepository bookRepository;
     private final int PAGE_SIZE = 5;
 
-    public BookServiceImpl(BookRepository bookRepository) {
+    public AdminBookServiceImpl(BookRepository bookRepository) {
         this.bookRepository = bookRepository;
     }
 

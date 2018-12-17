@@ -2,7 +2,6 @@ package com.injucksung.injucksung.service;
 
 import com.injucksung.injucksung.domain.Book;
 import com.injucksung.injucksung.domain.BookContent;
-import com.injucksung.injucksung.repository.BookContentRepository;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,20 +19,20 @@ import static com.injucksung.injucksung.repository.Print.print;
 @DataJpaTest
 @Transactional
 @ComponentScan
-public class BookContentServiceTest {
+public class AdminBookContentServiceTest {
     @Autowired
-    private BookContentService bookContentService;
+    private AdminBookContentService adminBookContentService;
 
     @Test
     public void 책목차_책ID로_조회하기() throws Exception {
-        List<BookContent> bookContentList = bookContentService.getBookContentList(1L);
+        List<BookContent> bookContentList = adminBookContentService.getBookContentList(1L);
         print(bookContentList);
     }
 
     @Test
     public void 책_목차_한건_저장하기() throws Exception {
         BookContent bookContent = new BookContent(new Book(),"유형3 단어관계", 4L, 1, false);
-        bookContentService.addBookContent(bookContent,1L);
+        adminBookContentService.addBookContent(bookContent,1L);
         this.책목차_책ID로_조회하기();
     }
 //
