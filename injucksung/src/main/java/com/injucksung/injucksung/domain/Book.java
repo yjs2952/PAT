@@ -3,17 +3,12 @@ package com.injucksung.injucksung.domain;
 import lombok.*;
 
 import javax.persistence.*;
-import java.util.Date;
 
 
-@Entity
-@Table(name = "book")
-@Setter
-@Getter
-@NoArgsConstructor
-@RequiredArgsConstructor
-@ToString
-@EqualsAndHashCode
+@Entity @Table(name = "book")
+@Setter @Getter
+@NoArgsConstructor @RequiredArgsConstructor
+@ToString @EqualsAndHashCode
 public class Book {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
