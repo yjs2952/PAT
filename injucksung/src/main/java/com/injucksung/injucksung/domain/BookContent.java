@@ -7,7 +7,7 @@ import javax.persistence.*;
 @Entity @Table(name = "book_content")
 @Setter @Getter
 @NoArgsConstructor @RequiredArgsConstructor
-@ToString @EqualsAndHashCode
+@EqualsAndHashCode
 public class BookContent {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
