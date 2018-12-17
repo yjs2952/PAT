@@ -8,7 +8,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 @Service
-@Transactional
 public class BookServiceImpl implements BookService {
     private BookRepository bookRepository;
     private final int PAGE_SIZE = 5;
@@ -18,21 +17,37 @@ public class BookServiceImpl implements BookService {
     }
 
     @Override
-    public void addBook(Book book) {
-        bookRepository.save(book);
+    @Transactional
+    public int addBook(Book book) {
+        Book addBook = bookRepository.save(book);
+        if (addBook != null) {
+            bookRepository.flush();
+            return 1;
+        }
+
+        return 0;
     }
 
     @Override
+    @Transactional
     public void deleteBook(Long id) {
         bookRepository.deleteById(id);
     }
 
     @Override
-    public void updateBook(Book book) {
-        bookRepository.save(book);
+    @Transactional
+    public int modifyBook(Book book) {
+        Book modifyBook = bookRepository.save(book);
+        if (modifyBook != null) {
+            bookRepository.flush();
+            return 1;
+        }
+
+        return 0;
     }
 
     @Override
+    @Transactional(readOnly = true)
     public Page<Book> getBookList(int start) {
         PageRequest pageRequest = PageRequest.of(start, PAGE_SIZE);
         Page<Book> books = bookRepository.findAll(pageRequest);
@@ -40,6 +55,7 @@ public class BookServiceImpl implements BookService {
     }
 
     @Override
+    @Transactional(readOnly = true)
     public Page<Book> getBookList(int start, String searchType, String searchWord) {
 
         PageRequest pageRequest = PageRequest.of(start, PAGE_SIZE);
