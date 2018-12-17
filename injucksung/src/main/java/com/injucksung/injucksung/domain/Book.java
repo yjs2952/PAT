@@ -33,7 +33,7 @@ public class Book {
 
     @NonNull
     @Column(length = 100)
-    private String ISBN; //국제표준도서번호
+    private String isbn; //국제표준도서번호
 
     @NonNull
     @Column(nullable = false)
