@@ -1,18 +1,15 @@
 package com.injucksung.injucksung.service;
 
-import com.injucksung.injucksung.domain.Book;
-import org.springframework.data.domain.Page;
+import com.injucksung.injucksung.domain.BookContent;
 
-public interface BookService {
-    void addBook(Book book);
+import java.util.List;
 
-    void deleteBook(Long id);
+public interface BookContentService {
+    void addBookContent(BookContent bookContent, Long bookId);
 
-    void updateBook(Book book);
+    void deleteBookContent(Long id);
 
-    Page<Book> getBookList(int start);
+    void updateBookContent(BookContent bookContent);
 
-    Page<Book> getBookList(int start, String searchType, String searchWord);
-
-    Book getBook(Long id);
+    List<BookContent> getBookContentList(Long bookId);
 }
