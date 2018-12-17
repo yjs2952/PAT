@@ -43,6 +43,6 @@ public class QuestionRepositoryTest {
 
     @Test
     public void questionId로_category_조회하기() throws Exception {
-        System.out.println(questionRepository.findQuestionById(2L).getCategory());
+        System.out.println(questionRepository.findQuestionById(2L).getQuestionCategory());
     }
 }
