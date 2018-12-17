@@ -33,7 +33,7 @@ public class AdminBookContentServiceImpl implements AdminBookContentService {
     }
 
     @Override
-    public void updateBookContent(BookContent bookContent) {
+    public void modifyBookContent(BookContent bookContent) {
         bookContentRepository.save(bookContent);
     }
 

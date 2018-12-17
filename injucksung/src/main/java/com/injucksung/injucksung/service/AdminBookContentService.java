@@ -9,7 +9,7 @@ public interface AdminBookContentService {
 
     void deleteBookContent(Long id);
 
-    void updateBookContent(BookContent bookContent);
+    void modifyBookContent(BookContent bookContent);
 
     List<BookContent> getBookContentList(Long bookId);
 }
