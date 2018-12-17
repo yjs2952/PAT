@@ -7,6 +7,8 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -43,5 +45,12 @@ public class UserRepositoryTest {
         User usr = userRepository.findUserByEmail("admin@naver.com");
         log.info(usr.getPassword());
     }
+
+/*    @Test
+    public void 키워드로_유저목록_조회() throws Exception {
+        PageRequest pr = PageRequest.of(0, 5);
+        Page<User> list = userRepository.
+        log.info("사이즈 : {}", list.getContent().size());
+    }*/
 }
 
