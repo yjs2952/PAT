@@ -19,8 +19,8 @@ public abstract class Question{
     private Long id;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "category_id", nullable = false)
-    private Category category; //문제 분류를 위한 카테고리
+    @JoinColumn(name = "question_category_id", nullable = false)
+    private QuestionCategory questionCategory; //문제 분류를 위한 카테고리
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "book_content_id", nullable = false)

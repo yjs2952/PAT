@@ -1,8 +1,8 @@
 -- 책, 책목차
 INSERT INTO book (name, publication_date, author, ISBN, publisher)
-VALUES ('위포트 인적성 마스터 25대기업 인적성검사 통합 기본서', null, '위포트 연구소', '9791161980140', '위포트');
+VALUES ('위포트 인적성 마스터 25대기업 인적성검사 통합 기본서', '2017.12.11', '위포트 연구소', '9791161980140', '위포트');
 INSERT INTO book (name, publication_date, author, ISBN, publisher)
-VALUES ('2019 인적성검사 통합 기본서', null, '하하하 연구소', '123461980140', '하하');
+VALUES ('2019 인적성검사 통합 기본서', '2018.11.31', '하하하 연구소', '123461980140', '하하');
 INSERT INTO book_content (book_id, name, parent_id, sequence, is_mock_test, recommand_time)
 VALUES (1, 'PART 1 언어능력', null, 1, false, null);
 INSERT INTO book_content (book_id, name, parent_id, sequence, is_mock_test, recommand_time)
@@ -20,15 +20,15 @@ VALUES (1, '유형2 다의어', 4, 2, false, null);
 -- 책, 책목차 끝
 
 -- 문제 유형 (카테고리)
-INSERT INTO category (name, parent_id, type)
+INSERT INTO question_category (name, parent_id, type)
 VALUES ('언어능력', null, 'apt');
-INSERT INTO category (name, parent_id, type)
+INSERT INTO question_category (name, parent_id, type)
 VALUES ('수리능력', null, 'apt');
-INSERT INTO category (name, parent_id, type)
+INSERT INTO question_category (name, parent_id, type)
 VALUES ('추리능력', null, 'apt');
-INSERT INTO category (name, parent_id, type)
+INSERT INTO question_category (name, parent_id, type)
 VALUES ('어휘', 1, 'apt');
-INSERT INTO category (name, parent_id, type)
+INSERT INTO question_category (name, parent_id, type)
 VALUES ('독해', 1, 'apt');
 -- 문제 유형 (카테고리) 끝
 
@@ -58,7 +58,7 @@ INSERT INTO content_file (origin_name, saved_name, type, length, reg_date, path)
 VALUES ('위프트 언어 유의어 1번문제.pdf', '1234-5678-1234-5678', 'PDF', '100', now(), '/file/....');
 INSERT INTO explanation_file (origin_name, saved_name, type, length, reg_date, path)
 VALUES ('위프트 언어 유의어 1번문제 해설.pdf', '3456-6678-3456-6678', 'PDF', '120', now(), '/file/....');
-INSERT INTO question (category_id, book_content_id, book_number, dtype)
+INSERT INTO question (question_category_id, book_content_id, book_number, dtype)
 VALUES (4, 6, 1, 'apt');
 INSERT INTO aptitude_question(id, content_file_id, explanation_file_id, correct, choice_count)
 VALUES (1, 1, 1, 3, 5);
@@ -67,7 +67,7 @@ INSERT INTO content_file (origin_name, saved_name, type, length, reg_date, path)
 VALUES ('위프트 언어 유의어 2번문제.pdf', '2334-5678-1234-5678', 'PDF', '100', now(), '/file/....');
 INSERT INTO explanation_file (origin_name, saved_name, type, length, reg_date, path)
 VALUES ('위프트 언어 유의어 2번문제 해설.pdf', '3556-6678-3456-6678', 'PDF', '120', now(), '/file/....');
-INSERT INTO question (category_id, book_content_id, book_number, dtype)
+INSERT INTO question (question_category_id, book_content_id, book_number, dtype)
 VALUES (4, 6, 2, 'apt');
 INSERT INTO aptitude_question(id, content_file_id, explanation_file_id, correct, choice_count)
 VALUES (2, 2, 2, 5, 5);
@@ -76,7 +76,7 @@ INSERT INTO content_file (origin_name, saved_name, type, length, reg_date, path)
 VALUES ('위프트 언어 다의어 1번문제.pdf', '3554-5678-1234-5678', 'PDF', '100', now(), '/file/....');
 INSERT INTO explanation_file (origin_name, saved_name, type, length, reg_date, path)
 VALUES ('위프트 언어 다의어 1번문제 해설.pdf', '6556-6678-3456-6678', 'PDF', '120', now(), '/file/....');
-INSERT INTO question (category_id, book_content_id, book_number, dtype)
+INSERT INTO question (question_category_id, book_content_id, book_number, dtype)
 VALUES (4, 7, 1, 'apt');
 INSERT INTO aptitude_question(id, content_file_id, explanation_file_id, correct, choice_count)
 VALUES (3, 3, 3, 3, 5);
