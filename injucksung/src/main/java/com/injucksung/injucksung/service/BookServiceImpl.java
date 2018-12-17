@@ -40,6 +40,30 @@ public class BookServiceImpl implements BookService {
     }
 
     @Override
+    public Page<Book> getBookList(int start, String searchType, String searchWord) {
+
+        PageRequest pageRequest = PageRequest.of(start, PAGE_SIZE);
+        Page<Book> books = null;
+        switch (searchType) {
+            case "name":
+                books = bookRepository.findBookByNameContaining(searchWord, pageRequest);
+                break;
+            case "author":
+                books = bookRepository.findBookByAuthorContaining(searchWord, pageRequest);
+                break;
+            case "isbn":
+                books = bookRepository.findBookByIsbnContaining(searchWord, pageRequest);
+                break;
+            case "publisher":
+                books = bookRepository.findBookByPublisherContaining(searchWord, pageRequest);
+                break;
+            default:
+                books = bookRepository.findAll(pageRequest);
+        }
+        return books;
+    }
+
+    @Override
     public Book getBook(Long id) {
         Book book = bookRepository.findBookById(id);
         return book;
