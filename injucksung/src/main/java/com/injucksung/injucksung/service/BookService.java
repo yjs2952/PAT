@@ -6,7 +6,7 @@ import org.springframework.data.domain.Page;
 public interface BookService {
     int addBook(Book book);
 
-    int deleteBook(Long id);
+    void deleteBook(Long id);
 
     int modifyBook(Book book);
 
