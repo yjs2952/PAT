@@ -7,7 +7,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.data.domain.Page;
-import org.springframework.stereotype.Component;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -25,17 +24,26 @@ public class BookServiceTest {
     @Test
     public void 책_모든_목록_조회하기() throws Exception {
         int start = 0;
+
         Page<Book> books = bookService.getBookList(start);
         print(books);
     }
-//
-//    @Test
-//    public void name으로_책_검색하여_조회하기() throws Exception {
-//        Pageable pageable = PageRequest.of(0, 3);
-//
-//        Page<Book> books = bookRepository.findBookByNameContaining("마스터", pageable);
-//        print(books);
-//    }
+
+    @Test
+    public void 책_목록_검색하여_조회하기() throws Exception {
+        int start = 0;
+//        String searchType = "name";
+//        String searchWord = "마스터";
+//        String searchType = "author";
+//        String searchWord = "연구소";
+        String searchType = "isbn";
+        String searchWord = "123461";
+//        String searchType = "publisher";
+//        String searchWord = "하하";
+
+        Page<Book> books = bookService.getBookList(start, searchType, searchWord);
+        print(books);
+    }
 
     @Test
     public void id로_책_한건_조회하기() throws Exception {
