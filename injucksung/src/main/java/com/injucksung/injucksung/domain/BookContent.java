@@ -4,31 +4,33 @@ import lombok.*;
 
 import javax.persistence.*;
 
-@ToString
-@Entity
-@Table(name = "book_content")
-@Setter
-@Getter
-@NoArgsConstructor
-@AllArgsConstructor
+@Entity @Table(name = "book_content")
+@Setter @Getter
+@NoArgsConstructor @RequiredArgsConstructor
+@ToString @EqualsAndHashCode
 public class BookContent {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @ManyToOne(fetch = FetchType.LAZY) // (cascade = CascadeType.REMOVE) 설정은 누가 넣은거지?
-    @JoinColumn(name = "book_id", nullable = false)
+    @NonNull
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "book_id")
     private Book book;
 
+    @NonNull
     @Column(length = 100, nullable = false)
     private String name;
 
+    @NonNull
     @Column
     private Long parentId;
 
+    @NonNull
     @Column(nullable = false)
     private int sequence;
 
+    @NonNull
     @Column(nullable = false)
     private Boolean isMockTest;
 
