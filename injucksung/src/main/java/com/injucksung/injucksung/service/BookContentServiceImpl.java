@@ -10,11 +10,11 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 
 @Service
-public class AdminBookContentServiceImpl implements AdminBookContentService {
+public class BookContentServiceImpl implements BookContentService {
     private BookContentRepository bookContentRepository;
     private BookRepository bookRepository;
 
-    public AdminBookContentServiceImpl(BookContentRepository bookContentRepository, BookRepository bookRepository) {
+    public BookContentServiceImpl(BookContentRepository bookContentRepository, BookRepository bookRepository) {
         this.bookContentRepository = bookContentRepository;
         this.bookRepository = bookRepository;
     }

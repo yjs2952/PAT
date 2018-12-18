@@ -19,20 +19,20 @@ import static com.injucksung.injucksung.repository.Print.print;
 @DataJpaTest
 @Transactional
 @ComponentScan
-public class AdminBookContentServiceTest {
+public class BookContentServiceTest {
     @Autowired
-    private AdminBookContentService adminBookContentService;
+    private BookContentService bookContentService;
 
     @Test
     public void 책목차_책ID로_조회하기() throws Exception {
-        List<BookContent> bookContentList = adminBookContentService.getBookContentList(1L);
+        List<BookContent> bookContentList = bookContentService.getBookContentList(1L);
         print(bookContentList);
     }
 
     @Test
     public void 책_목차_한건_저장하기() throws Exception {
         BookContent bookContent = new BookContent(new Book(),"유형3 단어관계", 4L, 1, false);
-        adminBookContentService.addBookContent(bookContent,1L);
+        bookContentService.addBookContent(bookContent,1L);
         this.책목차_책ID로_조회하기();
     }
 //
