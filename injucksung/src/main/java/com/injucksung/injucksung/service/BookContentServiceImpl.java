@@ -21,10 +21,16 @@ public class BookContentServiceImpl implements BookContentService {
 
     @Override
     @Transactional
-    public void addBookContent(BookContent bookContent, Long bookId) {
+    public int addBookContent(BookContent bookContent, Long bookId) {
         Book book = bookRepository.findBookById(bookId);
         bookContent.setBook(book);
-        bookContentRepository.save(bookContent);
+        BookContent addBookContent = bookContentRepository.save(bookContent);
+        if (addBookContent != null) {
+            bookRepository.flush();
+            return 1;
+        }
+
+        return 0;
     }
 
     @Override
@@ -35,8 +41,14 @@ public class BookContentServiceImpl implements BookContentService {
 
     @Override
     @Transactional
-    public void modifyBookContent(BookContent bookContent) {
-        bookContentRepository.save(bookContent);
+    public int modifyBookContent(BookContent bookContent) {
+        BookContent modifyBookContent = bookContentRepository.save(bookContent);
+        if (modifyBookContent != null) {
+            bookContentRepository.flush();
+            return 1;
+        }
+
+        return 0;
     }
 
     @Override
