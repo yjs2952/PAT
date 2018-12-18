@@ -10,7 +10,6 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 
 @Service
-@Transactional
 public class AdminBookContentServiceImpl implements AdminBookContentService {
     private BookContentRepository bookContentRepository;
     private BookRepository bookRepository;
@@ -21,6 +20,7 @@ public class AdminBookContentServiceImpl implements AdminBookContentService {
     }
 
     @Override
+    @Transactional
     public void addBookContent(BookContent bookContent, Long bookId) {
         Book book = bookRepository.findBookById(bookId);
         bookContent.setBook(book);
@@ -28,16 +28,19 @@ public class AdminBookContentServiceImpl implements AdminBookContentService {
     }
 
     @Override
+    @Transactional
     public void deleteBookContent(Long id) {
         bookContentRepository.deleteById(id);
     }
 
     @Override
+    @Transactional
     public void modifyBookContent(BookContent bookContent) {
         bookContentRepository.save(bookContent);
     }
 
     @Override
+    @Transactional(readOnly = true)
     public List<BookContent> getBookContentList(Long bookId) {
         List<BookContent> bookContents = bookContentRepository.findBookContentByBookId(1L);
         return bookContents;

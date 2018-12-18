@@ -80,6 +80,7 @@ public class AdminBookServiceImpl implements AdminBookService {
     }
 
     @Override
+    @Transactional(readOnly = true)
     public Book getBook(Long id) {
         Book book = bookRepository.findBookById(id);
         return book;
