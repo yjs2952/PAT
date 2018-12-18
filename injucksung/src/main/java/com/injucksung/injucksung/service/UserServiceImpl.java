@@ -86,6 +86,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    @Transactional
     public int modifyUserRole(Long id, Long[] roleIds) {
         User user = userRepository.getOne(id);
         Set<Role> roles = user.getRoles();
