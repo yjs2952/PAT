@@ -46,11 +46,5 @@ public class UserRepositoryTest {
         log.info(usr.getPassword());
     }
 
-/*    @Test
-    public void 키워드로_유저목록_조회() throws Exception {
-        PageRequest pr = PageRequest.of(0, 5);
-        Page<User> list = userRepository.
-        log.info("사이즈 : {}", list.getContent().size());
-    }*/
 }
 

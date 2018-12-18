@@ -32,7 +32,7 @@ public class UserServiceImpl implements UserService {
         if (signupUser != null) {
             Set<Role> roles = new HashSet<>();
             roles.add(roleRepository.getOne(2L));
-            user.setRoles(roles);
+            signupUser.setRoles(roles);
             userRepository.flush();
             return 1;
         }
@@ -86,12 +86,18 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public int modifyUserRole(Long id, Role role) {
+    public int modifyUserRole(Long id, Long[] roleIds) {
         User user = userRepository.getOne(id);
         Set<Role> roles = user.getRoles();
-        roles.add(role);
+        roles.clear();
+        if (roles.isEmpty()) {
+            for (Long roleId : roleIds) {
+                Role role = roleRepository.getOne(roleId);
+                roles.add(role);
+            }
+        }
         user.setRoles(roles);
-        if(userRepository.save(user) != null){
+        if (userRepository.save(user) != null) {
             userRepository.flush();
             return 1;
         }
@@ -104,16 +110,16 @@ public class UserServiceImpl implements UserService {
         PageRequest pageRequest = PageRequest.of(start, PAGE_SIZE);
         Page<User> users = null;
         switch (searchType) {
-            case "all" :
+            case "all":
                 users = userRepository.findAll(pageRequest);
                 break;
-            case "email" :
+            case "email":
                 users = userRepository.findAllByEmailContaining(searchWord, pageRequest);
                 break;
-            case "nickname" :
+            case "nickname":
                 users = userRepository.findAllByNicknameContaining(searchWord, pageRequest);
                 break;
-            case "phoneNo" :
+            case "phoneNo":
                 users = userRepository.findAllByPhoneContaining(searchWord, pageRequest);
                 break;
         }

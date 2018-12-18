@@ -26,7 +26,7 @@ public interface UserService {
 
     int modifyUserInfo(User user);
 
-    int modifyUserRole(Long id, Role role);
+    int modifyUserRole(Long id, Long[] roleIds);
 
     Page<User> getUserList(int start, String searchType, String searchWord);
 }
