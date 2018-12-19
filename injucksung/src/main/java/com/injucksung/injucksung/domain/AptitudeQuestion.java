@@ -4,13 +4,9 @@ import lombok.*;
 
 import javax.persistence.*;
 
-@ToString
-@Entity
-@Table(name = "aptitude_question")
-@Setter
-@Getter
-@NoArgsConstructor
-@AllArgsConstructor
+@Entity @Table(name = "aptitude_question")
+@Setter @Getter
+@NoArgsConstructor @AllArgsConstructor
 @DiscriminatorValue("apt")
 public class AptitudeQuestion extends Question {
     @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
