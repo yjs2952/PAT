@@ -18,7 +18,7 @@ public class QuestionCategoryRepositoryTest {
 
     @Test
     public void 카테고리id로_카테고리한건_조회하기() throws Exception {
-        QuestionCategory questionCategoryById = questionCategoryRepository.findQuestionCategoryById(1L);
+        QuestionCategory questionCategoryById = questionCategoryRepository.findQuestionCategoryById(4L);
         Assert.assertNotNull(questionCategoryById);
     }
 
