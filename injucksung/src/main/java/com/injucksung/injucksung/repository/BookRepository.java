@@ -21,8 +21,5 @@ public interface BookRepository extends JpaRepository<Book, Long> {
 
     //책 id로 책 조회하기
     Book findBookById(Long id);
-
-    //문제카테고리 id로 책 조회하기
-    Book findBookByQuestionCategoryId(Long questionCategoryid);
 }
 
