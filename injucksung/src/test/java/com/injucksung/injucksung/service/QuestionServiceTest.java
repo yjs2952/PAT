@@ -17,60 +17,28 @@ import static com.injucksung.injucksung.repository.Print.print;
 @DataJpaTest
 @Transactional
 @ComponentScan
-public class BookServiceTest {
+public class QuestionServiceTest {
     @Autowired
-    private BookService bookService;
+    private QuestionService questionService;
 
     @Test
-    public void 책_모든_목록_조회하기() throws Exception {
-        int start = 0;
-
-        Page<Book> books = bookService.getBookList(start);
-        print(books);
+    public void 문제_하나_추가하기() throws Exception {
+        questionService.addQuestion();
     }
 
     @Test
-    public void 책_목록_검색하여_조회하기() throws Exception {
-        int start = 0;
-//        String searchType = "name";
-//        String searchWord = "마스터";
-//        String searchType = "author";
-//        String searchWord = "연구소";
-        String searchType = "isbn";
-        String searchWord = "123461";
-//        String searchType = "publisher";
-//        String searchWord = "하하";
-
-        Page<Book> books = bookService.getBookList(start, searchType, searchWord);
-        print(books);
+    public void 문제_하나_수정하기() throws Exception {
+        questionService.modifyQuestion();
     }
 
     @Test
-    public void id로_책_한건_조회하기() throws Exception {
-        Book book = bookService.getBook(1L);
-        System.out.println(book.toString());
+    public void 문제_하나_제거하기() throws Exception {
+        questionService.deleteQuestion();
     }
 
     @Test
-    public void 책_한건_저장하기() throws Exception {
-        Book book = new Book("인적성의 정석 2019", "2018.12.14", "남궁성", "4949303049", "정석출판사");
-        bookService.addBook(book);
-        this.책_모든_목록_조회하기();
-    }
-
-    @Test
-    public void 책_수정하기() throws Exception {
-        Book book = new Book("인적성의 신", "2018.12.14", "유어스토리", "4949303049", "신출판사");
-        book.setId(1L);
-        bookService.modifyBook(book);
-        this.책_모든_목록_조회하기();
-    }
-
-    @Test
-    public void 책_삭제하기() throws Exception {
-        bookService.deleteBook(2L);
-        System.out.println("------------");
-        this.책_모든_목록_조회하기();
+    public void 문제_리스트_가져오기() throws Exception {
+        questionService.getQuestionList();
     }
 
 }
