@@ -1,9 +1,18 @@
 package com.injucksung.injucksung.service;
 
 import com.injucksung.injucksung.domain.Question;
+import com.injucksung.injucksung.repository.QuestionRepository;
 import org.springframework.data.domain.Page;
+import org.springframework.stereotype.Service;
 
-public class QuestionServiceImpl implements QuestionService{
+@Service
+public class QuestionServiceImpl implements QuestionService {
+    private QuestionRepository questionService;
+
+    public QuestionServiceImpl(QuestionRepository questionService) {
+        this.questionService = questionService;
+    }
+
     @Override
     public int addQuestion(Question question) {
         return 0;
