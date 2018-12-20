@@ -69,4 +69,14 @@ public class QuestionRepositoryTest {
 
         Assert.assertEquals(4L, questionRepository.findQuestionById(4L).getId().longValue());
     }
+
+    @Test
+    public void Question_한건_삭제하기() throws Exception {
+//        Pageable pageable = PageRequest.of(0, 5);
+//        Page<AptitudeQuestion> questionByBookId = questionRepository.findQuestionByBookId(1L, pageable);
+        questionRepository.deleteById(1L);
+//        Assert.assertEquals(2, questionByBookId.getTotalElements());
+    }
+
+
 }
