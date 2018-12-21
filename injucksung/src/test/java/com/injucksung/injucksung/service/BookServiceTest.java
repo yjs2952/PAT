@@ -62,7 +62,7 @@ public class BookServiceTest {
     public void 책_수정하기() throws Exception {
         Book book = new Book("인적성의 신", "2018.12.14", "유어스토리", "4949303049", "신출판사");
         book.setId(1L);
-        bookService.updateBook(book);
+        bookService.modifyBook(book);
         this.책_모든_목록_조회하기();
     }
 
