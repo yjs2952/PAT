@@ -4,14 +4,9 @@ import lombok.*;
 
 import javax.persistence.*;
 
-@ToString
-@Entity
-@Table(name = "question")
-@Setter
-@Getter
-@NoArgsConstructor
-@Inheritance(strategy = InheritanceType.JOINED)
-@DiscriminatorColumn(name = "dtype")
+@Entity @Table(name = "question")
+@Setter @Getter
+@Inheritance(strategy = InheritanceType.JOINED) @DiscriminatorColumn(name = "dtype")
 public abstract class Question{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
