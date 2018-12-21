@@ -1,6 +1,8 @@
 package com.injucksung.injucksung.service;
 
+import com.injucksung.injucksung.domain.Role;
 import com.injucksung.injucksung.domain.User;
+import com.injucksung.injucksung.repository.Print;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.Assert;
 import org.junit.Test;
@@ -28,6 +30,7 @@ public class UserServiceTest {
         user.setPhone("01012345678");
 
         log.info("성공인가 ?  맞으면 1 {}", userService.signup(user));
+        log.info(userService.login("yjs2952@naver.com", "1234").toString());
     }
 
     @Test
@@ -52,7 +55,7 @@ public class UserServiceTest {
 
     @Test
     public void 회원탈퇴() throws Exception {
-        Assert.assertEquals(userService.deleteAccount("user1234@naver.com", "1234"), 1);
+        //Assert.assertEquals(userService.deleteAccount("user1234@naver.com", "1234"));
     }
 
     @Test
@@ -62,5 +65,12 @@ public class UserServiceTest {
         user.setPhone("01033334444");
         Assert.assertEquals(userService.modifyUserInfo(user), 1);
         log.info(userService.login("user1234@naver.com", "1234").toString());
+    }
+
+    @Test
+    public void 유저권한변경() throws Exception {
+        Assert.assertEquals(userService.modifyUserRole(2L, new Long[]{1L, 2L}), 1);
+        User user = userService.login("user1234@naver.com", "1234");
+        log.info(user.getRoles().toString());
     }
 }

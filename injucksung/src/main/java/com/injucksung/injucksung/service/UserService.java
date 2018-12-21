@@ -1,6 +1,8 @@
 package com.injucksung.injucksung.service;
 
+import com.injucksung.injucksung.domain.Role;
 import com.injucksung.injucksung.domain.User;
+import org.springframework.data.domain.Page;
 
 public interface UserService {
 
@@ -20,7 +22,11 @@ public interface UserService {
      * @param password  입력받은 본인확인용 비밀번호
      * @return  1: 성공 0: 실패
      */
-    int deleteAccount(String email, String password);
+    void deleteAccount(String email, String password);
 
     int modifyUserInfo(User user);
+
+    int modifyUserRole(Long id, Long[] roleIds);
+
+    Page<User> getUserList(int start, String searchType, String searchWord);
 }

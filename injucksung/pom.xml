@@ -75,14 +75,22 @@
 		</dependency>
 
 		<!--Thymeleaf 등 다른 Frontend를 사용할 경우 해당 아래 jstl과 jasper를 주석 처리 하세요-->
-		<dependency>
+		<!--<dependency>
 			<groupId>javax.servlet</groupId>
 			<artifactId>jstl</artifactId>
 		</dependency>
 		<dependency>
 			<groupId>org.apache.tomcat.embed</groupId>
 			<artifactId>tomcat-embed-jasper</artifactId>
+		</dependency>-->
+
+		<!-- Thymeleaf -->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-thymeleaf</artifactId>
+			<version>2.1.1.RELEASE</version>
 		</dependency>
+
 	</dependencies>
 
 	<build>
