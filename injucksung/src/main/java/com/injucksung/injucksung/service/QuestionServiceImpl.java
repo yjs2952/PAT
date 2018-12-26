@@ -36,7 +36,6 @@ public class QuestionServiceImpl implements QuestionService {
     }
 
     @Override
-    @Transactional
     public void deleteQuestion(Long questionId) {
 
     }
