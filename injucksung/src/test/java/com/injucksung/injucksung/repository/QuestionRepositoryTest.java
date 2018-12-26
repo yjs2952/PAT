@@ -75,10 +75,7 @@ public class QuestionRepositoryTest {
     @Test
     public void Question_한건_삭제하기() throws Exception {
         Long bookId = 1L;
-
-        //문제와 연관된 Result 삭제
-//        resultRepository.deleteByQuestionId(bookId);
-
+        
         //문제 삭제
         questionRepository.deleteById(bookId);
 
@@ -93,8 +90,6 @@ public class QuestionRepositoryTest {
         questionRepository.deleteByBookContentId(bookContentId);
 
         Assert.assertEquals(0, questionRepository.findQuestionByBookContentId(bookContentId,PageRequest.of(0, 5)).getTotalElements());
-        //삭제한 아이디로 조회하면 null이 나와야함
-//        Assert.assertNull(questionRepository.findQuestionById(bookId));
     }
 
 
