@@ -18,4 +18,7 @@ public interface QuestionRepository extends JpaRepository<Question, Long> {
 
     //문제 id로 문제 조회하기
     Question findQuestionById(Long id);
+
+    //책 목차 id로 연관된 문제 삭제하기
+    void deleteByBookContentId(Long bookContentId);
 }

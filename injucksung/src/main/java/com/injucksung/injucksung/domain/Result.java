@@ -1,6 +1,8 @@
 package com.injucksung.injucksung.domain;
 
 import lombok.*;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 
 import javax.persistence.*;
 
@@ -22,6 +24,7 @@ public class Result {
 
     @ManyToOne
     @JoinColumn(name = "question_id", nullable = false)
+    @OnDelete(action = OnDeleteAction.CASCADE)
     private Question question;
 
     @Column(nullable = false)
