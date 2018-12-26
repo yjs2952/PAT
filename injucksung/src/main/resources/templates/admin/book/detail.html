@@ -1,0 +1,20 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <title>관리자 페이지 - 책 상세보기</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+
+<body>
+관리자 페이지 - 책 상세보기<br>
+이름 : <span th:text="${book.name}"></span><br>
+출간일자 : <span th:text="${book.publicationDate}"></span><br>
+저자 : <span th:text="${book.author}"></span><br>
+ISBN : <span th:text="${book.isbn}"></span><br>
+출판사 : <span th:text="${book.publisher}"></span><br>
+
+
+<a th:href="@{'/admin/book/delete?id='+${book.id}}" >삭제</a>
+</body>
+</html>

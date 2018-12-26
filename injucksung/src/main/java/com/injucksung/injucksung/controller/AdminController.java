@@ -43,6 +43,23 @@ public class AdminController {
         return "redirect:/admin/book/list";
     }
 
+    //책 정보 보기
+    @GetMapping("/admin/book/detail")
+    public String bookDetail(@RequestParam("id") Long bookId,
+                       Model model) {
+        Book book = bookService.getBook(bookId);
+        model.addAttribute("book", book);
+        return "admin/book/detail";
+    }
+
+    //책 삭제하기
+    @GetMapping("/admin/book/delete")
+    public String deleteBook(@RequestParam("id") Long bookId) {
+        bookService.deleteBook(bookId);
+        return "redirect:admin/book/list";
+    }
+
+    //문제 리스트
     @GetMapping("/admin/question/list")
     public String question() {
         return "admin/question/list";
