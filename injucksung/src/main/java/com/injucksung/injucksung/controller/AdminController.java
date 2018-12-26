@@ -56,7 +56,7 @@ public class AdminController {
     @GetMapping("/admin/book/delete")
     public String deleteBook(@RequestParam("id") Long bookId) {
         bookService.deleteBook(bookId);
-        return "redirect:admin/book/list";
+        return "redirect:/admin/book/list";
     }
 
     //문제 리스트
