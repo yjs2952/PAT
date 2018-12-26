@@ -1,15 +1,22 @@
 package com.injucksung.injucksung.controller;
 
-import lombok.extern.java.Log;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 
 @Controller
-@Log
 public class AdminController {
-    @GetMapping("/admin/")
-    public String main() {
-        log.info("<<<<<Start MainController>>>>>");
-        return "index";
+    @GetMapping("/admin")
+    public String adminMain() {
+        return "admin/index";
+    }
+
+    @GetMapping("/admin/book")
+    public String book() {
+        return "admin/book";
+    }
+
+    @GetMapping("/admin/question")
+    public String question() {
+        return "admin/question";
     }
 }
