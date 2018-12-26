@@ -55,8 +55,9 @@ public class AdminController {
                        Model model) {
         Book book = bookService.getBook(bookId);
         List<BookContent> bookContentList = bookContentService.getBookContentList(bookId);
+
         model.addAttribute("book", book);
-        model.addAttribute("bookContentList", bookContentList);
+        if (bookContentList!=null) model.addAttribute("bookContentList", bookContentList);
         return "admin/book/detail";
     }
 

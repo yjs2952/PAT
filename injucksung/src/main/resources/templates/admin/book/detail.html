@@ -29,6 +29,7 @@ ISBN : <span th:text="${book.isbn}"></span><br>
         <th>groupId</th>
         <th>depth</th>
         <th>sequence</th>
+        <th>bookID</th>
     </tr>
     </thead>
     <tbody>
@@ -42,6 +43,7 @@ ISBN : <span th:text="${book.isbn}"></span><br>
         <td th:text="${bookContent.groupId}"></td>
         <td th:text="${bookContent.depth}"></td>
         <td th:text="${bookContent.sequence}"></td>
+        <td th:text="${bookContent.book.id}"></td>
     </tr>
     </tbody>
     <!--TODO: 페이징기능 -->
