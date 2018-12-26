@@ -16,5 +16,30 @@ ISBN : <span th:text="${book.isbn}"></span><br>
 
 
 <a th:href="@{'/admin/book/delete?id='+${book.id}}" >삭제</a>
+
+<table>
+    <thead>
+    <tr>
+        <th>이름</th>
+        <th>모의고사 여부</th>
+        <th>권장 풀이 시간</th>
+        <th>문제 갯수</th>
+        <th>parentId</th>
+        <th>sequence</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="bookContent : ${bookContentList}">
+        <td><a th:text="${bookContent.name}"></a></td>
+        <td th:text="${bookContent.isMockTest}"></td>
+        <td th:text="${bookContent.recommandTime}"></td>
+        <td th:text="${bookContent.questionCount}"></td>
+        <td th:text="${bookContent.parentId}"></td>
+        <td th:text="${bookContent.sequence}"></td>
+    </tr>
+    </tbody>
+    <!--TODO: 페이징기능 -->
+
+</table>
 </body>
 </html>

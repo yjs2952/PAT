@@ -1,6 +1,8 @@
 package com.injucksung.injucksung.controller;
 
 import com.injucksung.injucksung.domain.Book;
+import com.injucksung.injucksung.domain.BookContent;
+import com.injucksung.injucksung.service.BookContentService;
 import com.injucksung.injucksung.service.BookService;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
@@ -9,12 +11,16 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import java.util.List;
+
 @Controller
 public class AdminController {
     private BookService bookService;
+    private BookContentService bookContentService;
 
-    public AdminController(BookService bookService) {
+    public AdminController(BookService bookService, BookContentService bookContentService) {
         this.bookService = bookService;
+        this.bookContentService = bookContentService;
     }
 
     @GetMapping("/admin")
@@ -48,7 +54,9 @@ public class AdminController {
     public String bookDetail(@RequestParam("id") Long bookId,
                        Model model) {
         Book book = bookService.getBook(bookId);
+        List<BookContent> bookContentList = bookContentService.getBookContentList(bookId);
         model.addAttribute("book", book);
+        model.addAttribute("bookContentList", bookContentList);
         return "admin/book/detail";
     }
 

@@ -40,6 +40,6 @@ public class BookContent {
     @Column
     private Integer recommandTime; //권장시간 (단위 초)
 
-    @Column//Todo:: 설정시 오류(columnDefinition = "default 0")
+    @Column(columnDefinition = "int default 0")
     private Integer questionCount;
 }
