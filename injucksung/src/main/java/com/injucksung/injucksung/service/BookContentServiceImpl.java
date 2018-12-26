@@ -54,7 +54,7 @@ public class BookContentServiceImpl implements BookContentService {
     @Override
     @Transactional(readOnly = true)
     public List<BookContent> getBookContentList(Long bookId) {
-        List<BookContent> bookContents = bookContentRepository.findBookContentByBookIdOrderByParentIdAscSequenceAsc(1L);
+        List<BookContent> bookContents = bookContentRepository.findBookContentByBookIdOrderByGroupIdAscSequenceAsc(1L);
         return bookContents;
     }
 }

@@ -31,7 +31,15 @@ public class BookContent {
 
     @NonNull
     @Column(nullable = false)
+    private int groupId;
+
+    @NonNull
+    @Column(nullable = false)
     private int sequence;
+
+    @NonNull
+    @Column(nullable = false)
+    private int depth;
 
     @NonNull
     @Column(nullable = false)

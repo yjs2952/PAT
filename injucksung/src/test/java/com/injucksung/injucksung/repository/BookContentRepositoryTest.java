@@ -20,7 +20,7 @@ public class BookContentRepositoryTest {
 
     @Test
     public void bookId로_책목차_조회하기() throws Exception {
-        List<BookContent> bookContents = bookContentRepository.findBookContentByBookIdOrderByParentIdAscSequenceAsc(1L);
+        List<BookContent> bookContents = bookContentRepository.findBookContentByBookIdOrderByGroupIdAscSequenceAsc(1L);
 //        print(bookContents);
     }
 
