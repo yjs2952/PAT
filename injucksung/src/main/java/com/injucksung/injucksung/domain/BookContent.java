@@ -1,6 +1,8 @@
 package com.injucksung.injucksung.domain;
 
 import lombok.*;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 
 import javax.persistence.*;
 
@@ -16,6 +18,7 @@ public class BookContent {
     @NonNull
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "book_id")
+    @OnDelete(action = OnDeleteAction.CASCADE)
     private Book book;
 
     @NonNull
