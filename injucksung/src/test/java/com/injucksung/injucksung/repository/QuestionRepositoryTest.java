@@ -77,13 +77,24 @@ public class QuestionRepositoryTest {
         Long bookId = 1L;
 
         //문제와 연관된 Result 삭제
-        resultRepository.deleteByQuestionId(bookId);
+//        resultRepository.deleteByQuestionId(bookId);
 
         //문제 삭제
         questionRepository.deleteById(bookId);
 
         //삭제한 아이디로 조회하면 null이 나와야함
         Assert.assertNull(questionRepository.findQuestionById(bookId));
+    }
+
+    @Test
+    public void 책목차id로_연관된_Question_모두_삭제하기() throws Exception {
+        Long bookContentId = 6L;
+
+        questionRepository.deleteByBookContentId(bookContentId);
+
+        Assert.assertEquals(0, questionRepository.findQuestionByBookContentId(bookContentId,PageRequest.of(0, 5)).getTotalElements());
+        //삭제한 아이디로 조회하면 null이 나와야함
+//        Assert.assertNull(questionRepository.findQuestionById(bookId));
     }
 
 
