@@ -31,8 +31,8 @@ public class BookContentServiceTest {
 
     @Test
     public void 책_목차_한건_저장하기() throws Exception {
-        BookContent bookContent = new BookContent(new Book(),"유형3 단어관계", 4L, 1, false);
-        bookContentService.addBookContent(bookContent,1L);
+//        BookContent bookContent = new BookContent(new Book(),"유형3 단어관계", 4L, 1, false);
+//        bookContentService.addBookContent(bookContent,1L);
         this.책목차_책ID로_조회하기();
     }
 //

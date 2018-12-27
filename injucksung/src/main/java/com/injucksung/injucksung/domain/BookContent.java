@@ -1,6 +1,8 @@
 package com.injucksung.injucksung.domain;
 
 import lombok.*;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 
 import javax.persistence.*;
 
@@ -16,6 +18,7 @@ public class BookContent {
     @NonNull
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "book_id")
+    @OnDelete(action = OnDeleteAction.CASCADE)
     private Book book;
 
     @NonNull
@@ -27,16 +30,24 @@ public class BookContent {
     private Long parentId;
 
     @NonNull
+    @Column
+    private Long groupId;
+
+    @NonNull
     @Column(nullable = false)
     private int sequence;
 
     @NonNull
     @Column(nullable = false)
-    private Boolean isMockTest;
+    private int depth;
+
+    @NonNull
+    @Column(nullable = false)
+    private Boolean isMockTest; //모의고사 인지 일반 문제인지
 
     @Column
     private Integer recommandTime; //권장시간 (단위 초)
 
-    @Column//Todo:: 설정시 오류(columnDefinition = "default 0")
-    private Integer questionCount;
+    @Column(columnDefinition = "int default 0")
+    private Integer questionCount; //이 목차에 해당하는 문제 갯수
 }

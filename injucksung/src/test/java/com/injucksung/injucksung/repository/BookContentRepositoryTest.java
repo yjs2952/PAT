@@ -11,8 +11,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
-import static jdk.nashorn.internal.objects.Global.print;
-
 @RunWith(SpringRunner.class)
 @DataJpaTest
 @Transactional
@@ -22,8 +20,8 @@ public class BookContentRepositoryTest {
 
     @Test
     public void bookId로_책목차_조회하기() throws Exception {
-        List<BookContent> bookContents = bookContentRepository.findBookContentByBookId(1L);
-        print(bookContents);
+        List<BookContent> bookContents = bookContentRepository.findBookContentByBookIdOrderByGroupIdAscSequenceAsc(1L);
+//        print(bookContents);
     }
 
     @Test

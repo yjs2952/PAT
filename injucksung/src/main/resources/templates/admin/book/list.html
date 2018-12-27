@@ -1,0 +1,37 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <title>관리자 페이지 - 책관리</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+
+<body>
+관리자 페이지 - 책관리<br>
+<table>
+    <thead>
+    <tr>
+        <th>이름</th>
+        <th>출간일자</th>
+        <th>저자</th>
+        <th>ISBN</th>
+        <th>출판사</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="book : ${bookList}">
+        <td><a th:text="${book.name}" th:href="@{'/admin/book/detail?id='+${book.id}}" ></a></td>
+        <td th:text="${book.publicationDate}"></td>
+        <td th:text="${book.author}"></td>
+        <td th:text="${book.isbn}"></td>
+        <td th:text="${book.publisher}"></td>
+    </tr>
+    </tbody>
+    <!--TODO: 페이징기능 -->
+
+</table>
+<form method="get" action="/admin/book/add">
+    <button type="submit">추가하기</button>
+</form>
+</body>
+</html>

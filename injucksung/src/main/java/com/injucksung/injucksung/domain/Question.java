@@ -1,13 +1,14 @@
 package com.injucksung.injucksung.domain;
 
 import lombok.*;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 
 import javax.persistence.*;
 
 @Entity @Table(name = "question")
 @Setter @Getter
-@Inheritance(strategy = InheritanceType.JOINED) @DiscriminatorColumn(name = "dtype")
-public abstract class Question{
+public class Question{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -18,8 +19,29 @@ public abstract class Question{
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "book_content_id", nullable = false)
+    @OnDelete(action = OnDeleteAction.CASCADE)
     private BookContent bookContent; //책 목차
 
     @Column(nullable = false)
     private int bookNumber;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "content_file_id")
+    private ContentFile contentFile; //지문
+
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "explanation_file_id")
+    private ExplanationFile explanataionFile; //해설
+
+    @Column(nullable = false)
+    private int correct; //정답인 보기
+
+    @Column(nullable = false, columnDefinition = "int default 0")
+    private int tryCount; //문제를 시도한 횟수
+
+    @Column(nullable = false, columnDefinition = "int default 0")
+    private int correctCount; //문제를 맞춘 횟수
+
+    @Column(nullable = false)
+    private int choiceCount; //4지선다인지 5지선다인지
 }
