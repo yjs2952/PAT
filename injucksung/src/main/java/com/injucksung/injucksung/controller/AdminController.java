@@ -9,6 +9,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -42,7 +43,7 @@ public class AdminController {
     }
 
     @PostMapping("/admin/book/add")
-    public String addBook(Book book) {
+    public String addBook(@ModelAttribute Book book) {
         bookService.addBook(book);
         return "redirect:/admin/book/list";
     }
@@ -72,7 +73,7 @@ public class AdminController {
 
     //책 목차 추가하기
     @PostMapping("/admin/bookcontent/add")
-    public String addBookContent(BookContent bookContent,
+    public String addBookContent(@ModelAttribute BookContent bookContent,
                                  @RequestParam("bookid") Long bookId) {
         bookContentService.addBookContent(bookContent, bookId);
         return "redirect:/admin/book/detail?id=" + bookId;
@@ -86,7 +87,8 @@ public class AdminController {
     }
 
     @PostMapping("/admin/bookcontent/addsub")
-    public String addBookContent(@RequestParam("bookId") Long bookId, BookContent bookContent) {
+    public String addBookContent(@RequestParam("bookId") Long bookId,
+                                 @ModelAttribute BookContent bookContent) {
         bookContentService.addBookContent(bookContent, bookId);
         return "redirect:/admin/book/detail?id=" + bookId;
     }
