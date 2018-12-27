@@ -4,20 +4,17 @@ import com.injucksung.injucksung.domain.Book;
 import com.injucksung.injucksung.domain.BookContent;
 import com.injucksung.injucksung.repository.BookContentRepository;
 import com.injucksung.injucksung.repository.BookRepository;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
 @Service
+@RequiredArgsConstructor
 public class BookContentServiceImpl implements BookContentService {
-    private BookContentRepository bookContentRepository;
-    private BookRepository bookRepository;
-
-    public BookContentServiceImpl(BookContentRepository bookContentRepository, BookRepository bookRepository) {
-        this.bookContentRepository = bookContentRepository;
-        this.bookRepository = bookRepository;
-    }
+    private final BookContentRepository bookContentRepository;
+    private final BookRepository bookRepository;
 
     @Override
     @Transactional

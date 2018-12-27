@@ -4,6 +4,7 @@ import com.injucksung.injucksung.domain.Book;
 import com.injucksung.injucksung.domain.BookContent;
 import com.injucksung.injucksung.service.BookContentService;
 import com.injucksung.injucksung.service.BookService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -14,14 +15,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 import java.util.List;
 
 @Controller
+@RequiredArgsConstructor
 public class AdminController {
-    private BookService bookService;
-    private BookContentService bookContentService;
-
-    public AdminController(BookService bookService, BookContentService bookContentService) {
-        this.bookService = bookService;
-        this.bookContentService = bookContentService;
-    }
+    private final BookService bookService;
+    private final BookContentService bookContentService;
 
     @GetMapping("/admin")
     public String adminMain() {

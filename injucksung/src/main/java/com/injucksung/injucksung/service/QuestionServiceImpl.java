@@ -4,21 +4,17 @@ import com.injucksung.injucksung.domain.Question;
 import com.injucksung.injucksung.repository.BookContentRepository;
 import com.injucksung.injucksung.repository.QuestionCategoryRepository;
 import com.injucksung.injucksung.repository.QuestionRepository;
+import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 @Service
+@RequiredArgsConstructor
 public class QuestionServiceImpl implements QuestionService {
-    private QuestionRepository questionRepository;
-    private QuestionCategoryRepository questionCategoryRepository;
-    private BookContentRepository bookContentRepository;
-
-    public QuestionServiceImpl(QuestionRepository questionRepository, QuestionCategoryRepository questionCategoryRepository, BookContentRepository bookContentRepository) {
-        this.questionRepository = questionRepository;
-        this.questionCategoryRepository = questionCategoryRepository;
-        this.bookContentRepository = bookContentRepository;
-    }
+    private final QuestionRepository questionRepository;
+    private final QuestionCategoryRepository questionCategoryRepository;
+    private final BookContentRepository bookContentRepository;
 
     @Override
     @Transactional
