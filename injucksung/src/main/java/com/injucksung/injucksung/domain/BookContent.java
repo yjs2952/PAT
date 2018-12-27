@@ -30,8 +30,8 @@ public class BookContent {
     private Long parentId;
 
     @NonNull
-    @Column(nullable = false)
-    private int groupId;
+    @Column
+    private Long groupId;
 
     @NonNull
     @Column(nullable = false)
@@ -43,11 +43,11 @@ public class BookContent {
 
     @NonNull
     @Column(nullable = false)
-    private Boolean isMockTest;
+    private Boolean isMockTest; //모의고사 인지 일반 문제인지
 
     @Column
     private Integer recommandTime; //권장시간 (단위 초)
 
     @Column(columnDefinition = "int default 0")
-    private Integer questionCount;
+    private Integer questionCount; //이 목차에 해당하는 문제 갯수
 }

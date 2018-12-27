@@ -52,12 +52,15 @@ public class AdminController {
     //책 정보 보기
     @GetMapping("/admin/book/detail")
     public String bookDetail(@RequestParam("id") Long bookId,
+                       @RequestParam(value = "addhighestbookcontent", defaultValue = "false") boolean addHighestBookContent,
                        Model model) {
         Book book = bookService.getBook(bookId);
         List<BookContent> bookContentList = bookContentService.getBookContentList(bookId);
 
         model.addAttribute("book", book);
         if (bookContentList!=null) model.addAttribute("bookContentList", bookContentList);
+        //대분류 추가 폼 표시 여부
+        model.addAttribute("addHighestBookContent", addHighestBookContent);
         return "admin/book/detail";
     }
 
@@ -68,6 +71,13 @@ public class AdminController {
         return "redirect:/admin/book/list";
     }
 
+    //책 목차 추가하기
+    @PostMapping("/admin/bookcontent/add")
+    public String addBookContent(BookContent bookContent,
+                                 @RequestParam("bookid") Long bookId) {
+        bookContentService.addBookContent(bookContent, bookId);
+        return "redirect:/admin/book/detail?id="+bookId;
+    }
     //문제 리스트
     @GetMapping("/admin/question/list")
     public String question() {
