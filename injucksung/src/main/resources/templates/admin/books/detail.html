@@ -15,7 +15,7 @@ ISBN : <span th:text="${book.isbn}"></span><br>
 출판사 : <span th:text="${book.publisher}"></span><br>
 
 
-<a th:href="@{'/admin/book/delete?id='+${book.id}}" >삭제</a>
+<a th:href="@{'/admin/books/delete?id='+${book.id}}" >삭제</a>
 
 <table>
     <thead>
@@ -50,7 +50,7 @@ ISBN : <span th:text="${book.isbn}"></span><br>
     </tbody>
 </table>
 
-<br><a th:href="@{'/admin/book/detail?id='+${book.id}}+'&addhighestbookcontent=true'" >대분류 추가하기</a>
+<br><a th:href="@{'/admin/books/detail?id='+${book.id}}+'&addhighestbookcontent=true'" >대분류 추가하기</a>
 <form method="post" th:if="${addHighestBookContent}" th:action="@{/admin/bookcontent/add}" th:object="${bookContent}">
     <label>목차 이름</label>
     <input type="text" placeholder="목차 이름을 입력해주세요." name="name" required><br>

@@ -20,7 +20,7 @@
     </thead>
     <tbody>
     <tr th:each="book : ${bookList}">
-        <td><a th:text="${book.name}" th:href="@{'/admin/book/detail?id='+${book.id}}"></a></td>
+        <td><a th:text="${book.name}" th:href="@{'/admin/books/detail?id='+${book.id}}"></a></td>
         <td th:text="${book.publicationDate}"></td>
         <td th:text="${book.author}"></td>
         <td th:text="${book.isbn}"></td>
@@ -30,7 +30,7 @@
     <!--TODO: 페이징기능 -->
 
 </table>
-<form method="get" action="/admin/book/add">
+<form method="get" action="/admin/books/add">
     <button type="submit">추가하기</button>
 </form>
 </body>
