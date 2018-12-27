@@ -161,3 +161,5 @@ database.properties
 .idea/compiler.xml
 .idea/
 PAT.iml
+
+*.properties
