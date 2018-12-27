@@ -43,6 +43,7 @@ public class AdminController {
     public String addBook() {
         return "/admin/book/add";
     }
+
     @PostMapping("/admin/book/add")
     public String addBook(Book book) {
         bookService.addBook(book);
@@ -52,17 +53,18 @@ public class AdminController {
     //책 정보 보기
     @GetMapping("/admin/book/detail")
     public String bookDetail(@RequestParam("id") Long bookId,
-                       @RequestParam(value = "addhighestbookcontent", defaultValue = "false") boolean addHighestBookContent,
-                       Model model) {
+                             @RequestParam(value = "addhighestbookcontent", defaultValue = "false") boolean addHighestBookContent,
+                             Model model) {
         Book book = bookService.getBook(bookId);
         List<BookContent> bookContentList = bookContentService.getBookContentList(bookId);
 
         model.addAttribute("book", book);
-        if (bookContentList!=null) model.addAttribute("bookContentList", bookContentList);
+        if (bookContentList != null) model.addAttribute("bookContentList", bookContentList);
         //대분류 추가 폼 표시 여부
         model.addAttribute("addHighestBookContent", addHighestBookContent);
         return "admin/book/detail";
     }
+
 
     //책 삭제하기
     @GetMapping("/admin/book/delete")
@@ -76,8 +78,22 @@ public class AdminController {
     public String addBookContent(BookContent bookContent,
                                  @RequestParam("bookid") Long bookId) {
         bookContentService.addBookContent(bookContent, bookId);
-        return "redirect:/admin/book/detail?id="+bookId;
+        return "redirect:/admin/book/detail?id=" + bookId;
     }
+
+    //책 하위 목차 추가하기
+    @GetMapping("/admin/bookcontent/addsub")
+    public String addBookContent(@RequestParam("bookcontentid") Long bookContentId, Model model) {
+        model.addAttribute("parentBookContent", bookContentService.getBookContent(bookContentId));
+        return "/admin/book/addSubBookContent";
+    }
+
+    @PostMapping("/admin/bookcontent/addsub")
+    public String addBookContent(@RequestParam("bookId") Long bookId, BookContent bookContent) {
+        bookContentService.addBookContent(bookContent, bookId);
+        return "redirect:/admin/book/detail?id=" + bookId;
+    }
+
     //문제 리스트
     @GetMapping("/admin/question/list")
     public String question() {

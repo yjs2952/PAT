@@ -26,7 +26,7 @@ public class BookContentServiceImpl implements BookContentService {
         bookContent.setBook(book);
 
         BookContent addBookContent = bookContentRepository.save(bookContent);
-        
+
         //그룹id가 없는 경우 대분류일 경우라서 자신의 id를 그룹id로 갖는다.
         if (bookContent.getGroupId() == null) {
             bookContent.setGroupId(addBookContent.getId());
@@ -63,5 +63,11 @@ public class BookContentServiceImpl implements BookContentService {
     public List<BookContent> getBookContentList(Long bookId) {
         List<BookContent> bookContents = bookContentRepository.findBookContentByBookIdOrderByGroupIdAscSequenceAsc(bookId);
         return bookContents;
+    }
+
+    @Override
+    @Transactional(readOnly = true)
+    public BookContent getBookContent(Long bookContentId) {
+        return bookContentRepository.findBookContentById(bookContentId);
     }
 }

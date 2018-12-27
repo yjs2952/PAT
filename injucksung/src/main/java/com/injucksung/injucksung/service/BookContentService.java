@@ -12,4 +12,6 @@ public interface BookContentService {
     int modifyBookContent(BookContent bookContent);
 
     List<BookContent> getBookContentList(Long bookId);
+
+    BookContent getBookContent(Long bookContentId);
 }

@@ -24,6 +24,7 @@ ISBN : <span th:text="${book.isbn}"></span><br>
         <th>모의고사 여부</th>
         <th>권장 풀이 시간</th>
         <th>문제 갯수</th>
+        <th>하위 목차 추가</th>
         <th>Id</th>
         <th>parentId</th>
         <th>groupId</th>
@@ -38,6 +39,7 @@ ISBN : <span th:text="${book.isbn}"></span><br>
         <td th:text="${bookContent.isMockTest}"></td>
         <td th:text="${bookContent.recommandTime}"></td>
         <td th:text="${bookContent.questionCount}"></td>
+        <td><a th:href="@{'/admin/bookcontent/addsub?bookcontentid='+${bookContent.id}}">+</a></td>
         <td th:text="${bookContent.id}"></td>
         <td th:text="${bookContent.parentId}"></td>
         <td th:text="${bookContent.groupId}"></td>
