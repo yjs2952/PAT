@@ -1,6 +1,7 @@
 package com.injucksung.injucksung.service;
 
 import com.injucksung.injucksung.domain.QuestionCategory;
+import com.injucksung.injucksung.enums.PageSize;
 import com.injucksung.injucksung.repository.QuestionCategoryRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
@@ -12,7 +13,6 @@ import org.springframework.transaction.annotation.Transactional;
 @RequiredArgsConstructor
 public class QuestionCategoryServiceImpl implements QuestionCategoryService {
     private final QuestionCategoryRepository questionCategoryRepository;
-    private final int PAGE_SIZE = 20;
 
     @Override
     @Transactional
@@ -41,7 +41,7 @@ public class QuestionCategoryServiceImpl implements QuestionCategoryService {
     @Override
     @Transactional(readOnly = true)
     public Page<QuestionCategory> getQuestionCategoryList(int start) {
-        PageRequest pageRequest = PageRequest.of(start, PAGE_SIZE);
+        PageRequest pageRequest = PageRequest.of(start, PageSize.QUESTION_CATEGORY.getSize());
         Page<QuestionCategory> questionCategories = questionCategoryRepository.findAll(pageRequest);
         return questionCategories;
     }

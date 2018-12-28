@@ -1,6 +1,7 @@
 package com.injucksung.injucksung.service;
 
 import com.injucksung.injucksung.domain.Question;
+import com.injucksung.injucksung.enums.PageSize;
 import com.injucksung.injucksung.repository.BookContentRepository;
 import com.injucksung.injucksung.repository.QuestionCategoryRepository;
 import com.injucksung.injucksung.repository.QuestionRepository;
@@ -17,7 +18,6 @@ public class QuestionServiceImpl implements QuestionService {
     private final QuestionRepository questionRepository;
     private final QuestionCategoryRepository questionCategoryRepository;
     private final BookContentRepository bookContentRepository;
-    private final int PAGE_SIZE = 10;
 
     @Override
     @Transactional
@@ -50,7 +50,7 @@ public class QuestionServiceImpl implements QuestionService {
     @Override
     @Transactional(readOnly = true)
     public Page<Question> getQuestionList(int start) {
-        Pageable pageable = PageRequest.of(start, PAGE_SIZE);
+        Pageable pageable = PageRequest.of(start, PageSize.QUESTION.getSize());
         return questionRepository.findAll(pageable);
     }
 }
