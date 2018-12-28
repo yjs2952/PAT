@@ -1,6 +1,6 @@
 package com.injucksung.injucksung.controller.admin.question;
 
-import com.injucksung.injucksung.service.QuestionCategoryService;
+import com.injucksung.injucksung.service.QuestionService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -11,4 +11,13 @@ import org.springframework.web.bind.annotation.RequestParam;
 @Controller
 @RequiredArgsConstructor
 @RequestMapping("/admin/questions")
-public class QuestionController {}
+public class QuestionController {
+    private final QuestionService questionService;
+
+    //문제 목록 가져오기
+    @GetMapping
+    public String questionList(@RequestParam(value = "start", defaultValue = "0") int start, Model model) {
+        model.addAttribute("questionPage",questionService.getQuestionList(start));
+        return "admin/questions/list";
+    }
+}

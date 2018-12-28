@@ -31,7 +31,7 @@ public class Question{
 
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "explanation_file_id")
-    private ExplanationFile explanataionFile; //해설
+    private ExplanationFile explanationFile; //해설
 
     @Column(nullable = false)
     private int correct; //정답인 보기
