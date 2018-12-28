@@ -25,4 +25,11 @@ public class AdminBookContentController {
         bookContentService.deleteBookContent(bookContentId);
         return "redirect:/admin/books/" + bookId;
     }
+
+    //책 목차 수정하기
+    @PutMapping("/{bookContentId}")
+    public String modifyBookContent(@PathVariable Long bookContentId) {
+        // TODO : 미구현
+        return null;
+    }
 }
