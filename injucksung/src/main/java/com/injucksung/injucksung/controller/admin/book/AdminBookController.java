@@ -33,7 +33,7 @@ public class AdminBookController {
     //책 등록하기
     @GetMapping("/edit")
     public String addBook() {
-        return "/admin/books/add";
+        return "/admin/books/edit";
     }
 
     @PostMapping("/edit")
