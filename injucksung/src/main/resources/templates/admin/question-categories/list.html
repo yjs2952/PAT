@@ -7,7 +7,7 @@
 </head>
 
 <body>
-관리자 페이지 - 문제 관리<br>
+관리자 페이지 - 문제 카테고리 관리<br>
 <table>
     <thead>
     <tr>
@@ -17,7 +17,7 @@
     </tr>
     </thead>
     <tbody>
-    <tr th:each="questionCategory : ${questionCategoryList}">
+    <tr th:each="questionCategory : ${questionCategoryPage.content}">
         <td><a th:text="${questionCategory.name}"></a></td>
         <td th:text="${questionCategory.type}"></td>
         <td th:text="${questionCategory.parentId}"></td>
@@ -26,7 +26,7 @@
     <!--TODO: 페이징기능 -->
 
 </table>
-<form method="get" action="/admin/questions/edit">
+<form method="get" action="/admin/question-categories/edit">
     <button type="submit">추가하기</button>
 </form>
 </body>
