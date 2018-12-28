@@ -60,10 +60,11 @@ public class AdminBookController {
     public String bookDetail(@PathVariable Long bookId,
                              @ModelAttribute BookDetail bookDetail,
                              Model model) {
-        Book book = bookService.getBook(bookId);
-        List<BookContent> bookContentList = bookContentService.getBookContentList(bookId);
+        //책 데이터
+        model.addAttribute("book", bookService.getBook(bookId));
 
-        model.addAttribute("book", book);
+        //책의 책목차 데이터
+        List<BookContent> bookContentList = bookContentService.getBookContentList(bookId);
         if (bookContentList != null) model.addAttribute("bookContentList", bookContentList);
 
         //대분류 추가 폼 표시 여부
