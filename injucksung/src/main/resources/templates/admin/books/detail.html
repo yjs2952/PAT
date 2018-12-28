@@ -15,7 +15,9 @@ ISBN : <span th:text="${book.isbn}"></span><br>
 출판사 : <span th:text="${book.publisher}"></span><br>
 
 
-<form th:action="@{'/admin/books/'+${book.id}}" th:method="delete"><button type="submit">삭제</button></form>
+<form th:action="@{'/admin/books/'+${book.id}}" th:method="delete">
+    <button type="submit">삭제</button>
+</form>
 
 <table>
     <thead>
@@ -33,13 +35,18 @@ ISBN : <span th:text="${book.isbn}"></span><br>
         <th>bookID</th>
     </tr>
     </thead>
-    <tbody>
-    <tr th:each="bookContent : ${bookContentList}">
+    <tbody th:each="bookContent : ${bookContentList}">
+    <tr>
         <td><a th:text="${bookContent.name}"></a></td>
         <td th:text="${bookContent.isMockTest}"></td>
         <td th:text="${bookContent.recommandTime}"></td>
         <td th:text="${bookContent.questionCount}"></td>
-        <td><a th:href="@{'/admin/books/'+${book.id}}" th:name="addSubBookContentParentId" th:value="${bookContent.id}">+</a></td>
+        <td>
+            <form method="get" th:action="@{'/admin/books/'+${book.id}}">
+                <input type="hidden" name="addSubBookContentId" th:value="${bookContent.id}"/>
+                <button type="submit">+</button>
+            </form>
+        </td>
         <td th:text="${bookContent.id}"></td>
         <td th:text="${bookContent.parentId}"></td>
         <td th:text="${bookContent.groupId}"></td>
@@ -47,11 +54,12 @@ ISBN : <span th:text="${book.isbn}"></span><br>
         <td th:text="${bookContent.sequence}"></td>
         <td th:text="${bookContent.book.id}"></td>
     </tr>
+    <tr th:if="${addSubBookContentId} == ${bookContent.id}"><td><p>짜잔 수정폼</p></td></tr>
     </tbody>
 </table>
 
 <br>
-<form method="get" th:action="@{'/admin/books/'+${book.id}}" >
+<form method="get" th:action="@{'/admin/books/'+${book.id}}">
     <input type="hidden" name="editTopBookContent" value="true"/>
     <button type="submit">대분류 추가하기</button>
 </form>
