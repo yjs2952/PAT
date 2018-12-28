@@ -2,6 +2,7 @@ package com.injucksung.injucksung.controller.admin.book;
 
 import com.injucksung.injucksung.domain.Book;
 import com.injucksung.injucksung.domain.BookContent;
+import com.injucksung.injucksung.dto.BookDetail;
 import com.injucksung.injucksung.service.BookContentService;
 import com.injucksung.injucksung.service.BookService;
 import lombok.RequiredArgsConstructor;
@@ -57,15 +58,16 @@ public class AdminBookController {
     //책 정보 상세 보기
     @GetMapping("/{bookId}")
     public String bookDetail(@PathVariable Long bookId,
-                             @RequestParam(value = "addhighestbookcontent", defaultValue = "false") boolean addHighestBookContent,
+                             @ModelAttribute BookDetail bookDetail,
                              Model model) {
         Book book = bookService.getBook(bookId);
         List<BookContent> bookContentList = bookContentService.getBookContentList(bookId);
 
         model.addAttribute("book", book);
         if (bookContentList != null) model.addAttribute("bookContentList", bookContentList);
+
         //대분류 추가 폼 표시 여부
-        model.addAttribute("addHighestBookContent", addHighestBookContent);
+        model.addAttribute("editTopBookContent", bookDetail.isEditTopBookContent());
         return "admin/books/detail";
     }
 

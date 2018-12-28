@@ -16,8 +16,6 @@ ISBN : <span th:text="${book.isbn}"></span><br>
 
 
 <form th:action="@{'/admin/books/'+${book.id}}" th:method="delete"><button type="submit">삭제</button></form>
-<!--<a th:href="@{'/admin/books/'+${book.id}}" th:method="delete">삭제</a>제-->
-<input type="button" th:href="@{'/admin/books/'+${book.id}}" th:method="delete" th:text="삭제"/>
 
 <table>
     <thead>
@@ -52,8 +50,13 @@ ISBN : <span th:text="${book.isbn}"></span><br>
     </tbody>
 </table>
 
-<br><a th:href="@{'/admin/books/detail?id='+${book.id}}+'&addhighestbookcontent=true'" >대분류 추가하기</a>
-<form method="post" th:if="${addHighestBookContent}" th:action="@{/admin/bookcontent/add}" th:object="${bookContent}">
+<br>
+<form method="get" th:action="@{'/admin/books/'+${book.id}}" >
+    <input type="hidden" name="editTopBookContent" value="true"/>
+    <button type="submit">대분류 추가하기</button>
+</form>
+
+<form method="post" th:if="${editTopBookContent}" th:action="@{/admin/bookcontent/add}" th:object="${bookContent}">
     <label>목차 이름</label>
     <input type="text" placeholder="목차 이름을 입력해주세요." name="name" required><br>
 
