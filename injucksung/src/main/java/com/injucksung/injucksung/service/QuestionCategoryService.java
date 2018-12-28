@@ -4,7 +4,7 @@ import com.injucksung.injucksung.domain.QuestionCategory;
 import org.springframework.data.domain.Page;
 
 public interface QuestionCategoryService {
-    int addQuestionCategory(QuestionCategory questionCategory);
+    QuestionCategory addQuestionCategory(QuestionCategory questionCategory);
 
     void deleteQuestionCategory(Long id);
 

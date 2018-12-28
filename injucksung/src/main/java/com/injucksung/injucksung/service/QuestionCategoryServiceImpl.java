@@ -16,13 +16,9 @@ public class QuestionCategoryServiceImpl implements QuestionCategoryService {
 
     @Override
     @Transactional
-    public int addQuestionCategory(QuestionCategory questionCategory) {
+    public QuestionCategory addQuestionCategory(QuestionCategory questionCategory) {
         QuestionCategory addQuestionCategory = questionCategoryRepository.save(questionCategory);
-        if (addQuestionCategory!=null) {
-            questionCategoryRepository.flush();
-            return 1;
-        }
-        return 0;
+        return addQuestionCategory;
     }
 
     @Override
