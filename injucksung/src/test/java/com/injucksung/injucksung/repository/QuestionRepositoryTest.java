@@ -1,11 +1,10 @@
 package com.injucksung.injucksung.repository;
 
-import com.injucksung.injucksung.domain.*;
+import com.injucksung.injucksung.domain.Question;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -21,12 +20,6 @@ import static com.injucksung.injucksung.repository.Print.print;
 public class QuestionRepositoryTest {
     @Autowired
     private QuestionRepository questionRepository;
-    @Autowired
-    private ResultRepository resultRepository;
-    @Autowired
-    private QuestionCategoryRepository questionCategoryRepository;
-    @Autowired
-    private BookContentRepository bookContentRepository;
 
     @Test
     public void bookContentId로_문제_조회하기() throws Exception {
