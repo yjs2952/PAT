@@ -39,7 +39,7 @@ ISBN : <span th:text="${book.isbn}"></span><br>
     <tr>
         <td><a th:text="${bookContent.name}"></a></td>
         <td th:text="${bookContent.isMockTest}"></td>
-        <td th:text="${bookContent.recommandTime}"></td>
+        <td th:text="${bookContent.recommendTime}"></td>
         <td th:text="${bookContent.questionCount}"></td>
         <td>
             <form method="get" th:action="@{'/admin/books/'+${book.id}}">
@@ -54,7 +54,27 @@ ISBN : <span th:text="${book.isbn}"></span><br>
         <td th:text="${bookContent.sequence}"></td>
         <td th:text="${bookContent.book.id}"></td>
     </tr>
-    <tr th:if="${addSubBookContentId} == ${bookContent.id}"><td><p>짜잔 수정폼</p></td></tr>
+    <tr th:if="${addSubBookContentId} == ${bookContent.id}">
+        <td colspan="11">
+            <form method="post" th:action="@{/admin/book-contents/edit}" th:object="${BookContentForm}">
+                <label>목차 이름</label>
+                <input type="text" placeholder="목차 이름을 입력해주세요." name="name" required>
+
+                <label>모의고사 여부</label>
+                <input type="radio" name="isMockTest" value="true">모의고사 O
+                <input type="radio" name="isMockTest" value="false" checked="checked">모의고사 X <br>
+
+                <label>권장시간 (초) - 옵션</label>
+                <input type="number" placeholder="권장 풀이 시간" name="recommendTime">
+
+                <input type="hidden" name="bookId" th:value="${book.id}">
+                <input type="hidden" name="groupId" th:value="${bookContent.groupId}">
+                <input type="hidden" name="sequence" th:value="${bookContent.sequence}">
+                <input type="hidden" name="depth" th:value="${bookContent.depth}">
+                <button type="submit">등록</button>
+            </form>
+        </td>
+    </tr>
     </tbody>
 </table>
 
@@ -64,7 +84,8 @@ ISBN : <span th:text="${book.isbn}"></span><br>
     <button type="submit">대분류 추가하기</button>
 </form>
 
-<form method="post" th:if="${editTopBookContent}" th:action="@{/admin/bookcontent/add}" th:object="${bookContent}">
+<form method="post" th:if="${editTopBookContent}" th:action="@{/admin/book-contents/edit}"
+      th:object="${BookContentForm}">
     <label>목차 이름</label>
     <input type="text" placeholder="목차 이름을 입력해주세요." name="name" required><br>
 
@@ -73,9 +94,9 @@ ISBN : <span th:text="${book.isbn}"></span><br>
     <input type="radio" name="isMockTest" value="false" checked="checked"> 모의고사 X <br>
 
     <label>권장시간 (초) - 옵션</label>
-    <input type="number" placeholder="권장 풀이 시간" name="recommandTime"><br>
+    <input type="number" placeholder="권장 풀이 시간" name="recommendTime"><br>
 
-    <input type="hidden" name="bookid" th:value="${book.id}">
+    <input type="hidden" name="bookId" th:value="${book.id}">
     <button type="submit">등록</button>
 </form>
 </body>

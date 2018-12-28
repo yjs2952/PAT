@@ -72,7 +72,6 @@ public class AdminBookController {
 
         //특정 책목차의 하위 목차 추가 폼 표시 여부
         model.addAttribute("addSubBookContentId", bookDetail.getAddSubBookContentId());
-        System.out.println("넘어온 북 목차 아이디 : "+bookDetail.getAddSubBookContentId());
         return "admin/books/detail";
     }
 
