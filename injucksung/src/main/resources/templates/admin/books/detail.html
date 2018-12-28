@@ -39,7 +39,7 @@ ISBN : <span th:text="${book.isbn}"></span><br>
         <td th:text="${bookContent.isMockTest}"></td>
         <td th:text="${bookContent.recommandTime}"></td>
         <td th:text="${bookContent.questionCount}"></td>
-        <td><a th:href="@{'/admin/bookcontent/addsub?bookcontentid='+${bookContent.id}}">+</a></td>
+        <td><a th:href="@{'/admin/books/'+${book.id}}" th:name="addSubBookContentParentId" th:value="${bookContent.id}">+</a></td>
         <td th:text="${bookContent.id}"></td>
         <td th:text="${bookContent.parentId}"></td>
         <td th:text="${bookContent.groupId}"></td>
