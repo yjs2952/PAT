@@ -30,20 +30,20 @@ public class AdminBookController {
     }
 
     //책 등록하기
-    @GetMapping("/add")
+    @GetMapping("/edit")
     public String addBook() {
         return "/admin/books/add";
     }
 
-    @PostMapping("/add")
+    @PostMapping("/edit")
     public String addBook(@ModelAttribute Book book) {
         bookService.addBook(book);
         return "redirect:/admin/books";
     }
 
     //책 정보 보기
-    @GetMapping("/detail")
-    public String bookDetail(@RequestParam("id") Long bookId,
+    @GetMapping("/{bookId}")
+    public String bookDetail(@PathVariable Long bookId,
                              @RequestParam(value = "addhighestbookcontent", defaultValue = "false") boolean addHighestBookContent,
                              Model model) {
         Book book = bookService.getBook(bookId);
@@ -57,9 +57,15 @@ public class AdminBookController {
     }
 
     //책 삭제하기
-    @GetMapping("/delete")
-    public String deleteBook(@RequestParam("id") Long bookId) {
+    @DeleteMapping("/{bookId}")
+    public String deleteBook(@PathVariable Long bookId) {
         bookService.deleteBook(bookId);
         return "redirect:/admin/books";
+    }
+
+    //책 수정하기
+    @PutMapping("/{bookId")
+    public String modifyBook(@PutMapping Long bookId) {
+        return null;
     }
 }

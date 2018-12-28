@@ -15,7 +15,9 @@ ISBN : <span th:text="${book.isbn}"></span><br>
 출판사 : <span th:text="${book.publisher}"></span><br>
 
 
-<a th:href="@{'/admin/books/delete?id='+${book.id}}" >삭제</a>
+<form th:action="@{'/admin/books/'+${book.id}}" th:method="delete"><button type="submit">삭제</button></form>
+<!--<a th:href="@{'/admin/books/'+${book.id}}" th:method="delete">삭제</a>제-->
+<input type="button" th:href="@{'/admin/books/'+${book.id}}" th:method="delete" th:text="삭제"/>
 
 <table>
     <thead>
