@@ -4,12 +4,10 @@ import lombok.*;
 
 import javax.persistence.*;
 
-@ToString
 @Entity
-@Setter
-@Getter
-@NoArgsConstructor
-@AllArgsConstructor
+@Setter @Getter
+@NoArgsConstructor @AllArgsConstructor @Builder
+@EqualsAndHashCode
 public class ArticleContent {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

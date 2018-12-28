@@ -5,10 +5,10 @@ import lombok.*;
 import javax.persistence.*;
 import java.util.Date;
 
-
 @Entity @Table(name = "explanation_file")
 @Setter @Getter
-@NoArgsConstructor @RequiredArgsConstructor
+@NoArgsConstructor @AllArgsConstructor @Builder
+@EqualsAndHashCode
 public class ExplanationFile {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

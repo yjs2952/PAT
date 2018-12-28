@@ -6,13 +6,10 @@ import org.hibernate.annotations.OnDeleteAction;
 
 import javax.persistence.*;
 
-@ToString
-@Entity
-@Table(name = "result")
-@Setter
-@Getter
-@NoArgsConstructor
-@AllArgsConstructor
+@Entity @Table(name = "result")
+@Setter @Getter
+@NoArgsConstructor @AllArgsConstructor @Builder
+@EqualsAndHashCode
 public class Result {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

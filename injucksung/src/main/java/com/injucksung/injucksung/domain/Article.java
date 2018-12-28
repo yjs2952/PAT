@@ -5,12 +5,10 @@ import lombok.*;
 import javax.persistence.*;
 import java.util.Date;
 
-@ToString
-@Entity
-@Setter
-@Getter
-@NoArgsConstructor
-@AllArgsConstructor
+@Entity @Table(name = "article")
+@Setter @Getter
+@NoArgsConstructor @AllArgsConstructor @Builder
+@EqualsAndHashCode
 public class Article {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

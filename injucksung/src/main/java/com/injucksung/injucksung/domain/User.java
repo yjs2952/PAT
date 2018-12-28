@@ -6,13 +6,10 @@ import javax.persistence.*;
 import java.util.Date;
 import java.util.Set;
 
-@ToString
-@Entity
-@Table(name = "user")
-@Setter
-@Getter
-@NoArgsConstructor
-@AllArgsConstructor
+@Entity @Table(name = "user")
+@Setter @Getter
+@NoArgsConstructor @AllArgsConstructor @Builder
+@EqualsAndHashCode
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
