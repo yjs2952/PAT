@@ -12,6 +12,8 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+
 import static com.injucksung.injucksung.repository.Print.print;
 
 @RunWith(SpringRunner.class)
@@ -20,6 +22,13 @@ import static com.injucksung.injucksung.repository.Print.print;
 public class QuestionRepositoryTest {
     @Autowired
     private QuestionRepository questionRepository;
+
+    @Test
+    public void 모든_문제_조회하기() {
+        Pageable pageable = PageRequest.of(0, 10);
+        Page<Question> all = questionRepository.findAll(pageable);
+        Assert.assertNotNull(all);
+    }
 
     @Test
     public void bookContentId로_문제_조회하기() throws Exception {
