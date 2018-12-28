@@ -34,4 +34,11 @@ public class QuestionCategoryController {
         return "redirect:/admin/question-categories";
     }
 
+    //문제 카테고리 삭제하기
+    @DeleteMapping("/{questionCategoryId}")
+    public String deleteQuestionCategory(@PathVariable Long questionCategoryId) {
+        questionCategoryService.deleteQuestionCategory(questionCategoryId);
+        return "redirect:/admin/question-categories";
+    }
+
 }

@@ -13,6 +13,7 @@
     <tr>
         <th>이름</th>
         <th>타입</th>
+        <th>삭제</th>
         <th>parentId</th>
     </tr>
     </thead>
@@ -20,6 +21,11 @@
     <tr th:each="questionCategory : ${questionCategoryPage.content}">
         <td><a th:text="${questionCategory.name}"></a></td>
         <td th:text="${questionCategory.type}"></td>
+        <td>
+            <form th:action="@{'/admin/question-categories/'+${questionCategory.id}}" th:method="delete">
+                <button type="submit">삭제</button>
+            </form>
+        </td>
         <td th:text="${questionCategory.parentId}"></td>
     </tr>
     </tbody>
