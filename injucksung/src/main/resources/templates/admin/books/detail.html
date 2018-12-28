@@ -63,7 +63,7 @@ ISBN : <span th:text="${book.isbn}"></span><br>
     </tr>
     <tr th:if="${bookDetail.addSubBookContentId} == ${bookContent.id}">
         <td colspan="11">
-            <form method="post" th:action="@{/admin/book-contents/edit}" th:object="${BookContentForm}">
+            <form method="post" th:action="@{/admin/book-contents}" th:object="${BookContentForm}">
                 <label>목차 이름</label>
                 <input type="text" placeholder="목차 이름을 입력해주세요." name="name" required>
 
@@ -91,7 +91,7 @@ ISBN : <span th:text="${book.isbn}"></span><br>
     <button type="submit">대분류 추가하기</button>
 </form>
 
-<form method="post" th:if="${bookDetail.editTopBookContent}" th:action="@{/admin/book-contents/edit}"
+<form method="post" th:if="${bookDetail.editTopBookContent}" th:action="@{/admin/book-contents}"
       th:object="${BookContentForm}">
     <label>목차 이름</label>
     <input type="text" placeholder="목차 이름을 입력해주세요." name="name" required><br>

@@ -13,7 +13,7 @@ public class AdminBookContentController {
     private final BookContentService bookContentService;
 
     //책 목차 추가하기
-    @PostMapping("/edit")
+    @PostMapping
     public String addBookContent(@ModelAttribute BookContentForm bookContentForm) {
         bookContentService.addBookContent(bookContentForm);
         return "redirect:/admin/books/" + bookContentForm.getBookId();
