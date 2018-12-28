@@ -67,11 +67,9 @@ public class AdminBookController {
         List<BookContent> bookContentList = bookContentService.getBookContentList(bookId);
         if (bookContentList != null) model.addAttribute("bookContentList", bookContentList);
 
-        //대분류 추가 폼 표시 여부
-        model.addAttribute("editTopBookContent", bookDetail.isEditTopBookContent());
+        //대분류 추가 폼 표시 여부 & 특정 책목차의 하위 목차 추가 폼 표시 여부
+        model.addAttribute("bookDetail", bookDetail);
 
-        //특정 책목차의 하위 목차 추가 폼 표시 여부
-        model.addAttribute("addSubBookContentId", bookDetail.getAddSubBookContentId());
         return "admin/books/detail";
     }
 

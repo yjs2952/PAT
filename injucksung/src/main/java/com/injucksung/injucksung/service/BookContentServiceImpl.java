@@ -28,9 +28,9 @@ public class BookContentServiceImpl implements BookContentService {
         bookContent.setRecommendTime(bookContentForm.getRecommendTime());
         bookContent.setGroupId(bookContentForm.getGroupId());
         Integer depth = bookContentForm.getDepth();
-        bookContent.setDepth(depth == null ? 0 : depth+1);
+        bookContent.setDepth(depth == null ? 0 : depth + 1);
         Integer sequence = bookContentForm.getSequence();
-        bookContent.setSequence(sequence == null ? 0: sequence+1);
+        bookContent.setSequence(sequence == null ? 0 : sequence + 1);
         bookContent.setQuestionCount(0);
         BookContent addBookContent = bookContentRepository.save(bookContent);
 
