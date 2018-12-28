@@ -27,12 +27,13 @@ ISBN : <span th:text="${book.isbn}"></span><br>
         <th>권장 풀이 시간</th>
         <th>문제 갯수</th>
         <th>하위 목차 추가</th>
+        <th>삭제</th>
         <th>Id</th>
         <th>parentId</th>
         <th>groupId</th>
         <th>depth</th>
         <th>sequence</th>
-        <th>bookID</th>
+        <!--<th>bookID</th>-->
     </tr>
     </thead>
     <tbody th:each="bookContent : ${bookContentList}">
@@ -47,12 +48,18 @@ ISBN : <span th:text="${book.isbn}"></span><br>
                 <button type="submit">+</button>
             </form>
         </td>
+        <td>
+            <form th:method="delete" th:action="@{'/admin/book-contents/'+${bookContent.id}}">
+                <input type="hidden" name="bookId" th:value="${book.id}"/>
+                <button type="submit">삭제</button>
+            </form>
+        </td>
         <td th:text="${bookContent.id}"></td>
         <td th:text="${bookContent.parentId}"></td>
         <td th:text="${bookContent.groupId}"></td>
         <td th:text="${bookContent.depth}"></td>
         <td th:text="${bookContent.sequence}"></td>
-        <td th:text="${bookContent.book.id}"></td>
+        <!--<td th:text="${bookContent.book.id}"></td>-->
     </tr>
     <tr th:if="${bookDetail.addSubBookContentId} == ${bookContent.id}">
         <td colspan="11">

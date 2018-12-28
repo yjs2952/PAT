@@ -25,7 +25,7 @@ public class Book {
 
     @Column(length = 100)
     private String isbn; //국제표준도서번호
-    
+
     @Column(nullable = false)
     private String publisher;
 }
