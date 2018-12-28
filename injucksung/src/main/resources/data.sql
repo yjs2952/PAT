@@ -3,19 +3,19 @@ INSERT INTO book (name, publication_date, author, ISBN, publisher)
 VALUES ('위포트 인적성 마스터 25대기업 인적성검사 통합 기본서', '2017.12.11', '위포트 연구소', '9791161980140', '위포트');
 INSERT INTO book (name, publication_date, author, ISBN, publisher)
 VALUES ('2019 인적성검사 통합 기본서', '2018.11.31', '하하하 연구소', '123461980140', '하하');
-INSERT INTO book_content (book_id, name, parent_id, group_id, sequence, depth, is_mock_test, recommand_time)
+INSERT INTO book_content (book_id, name, parent_id, group_id, sequence, depth, is_mock_test, recommend_time)
 VALUES (1, 'PART 1 언어능력', null, 1, 1, 0, false, null);
-INSERT INTO book_content (book_id, name, parent_id, group_id, sequence, depth, is_mock_test, recommand_time)
+INSERT INTO book_content (book_id, name, parent_id, group_id, sequence, depth, is_mock_test, recommend_time)
 VALUES (1, 'PART 2 수리능력', null, 2, 1, 0, false, null);
-INSERT INTO book_content (book_id, name, parent_id, group_id, sequence, depth, is_mock_test, recommand_time)
+INSERT INTO book_content (book_id, name, parent_id, group_id, sequence, depth, is_mock_test, recommend_time)
 VALUES (1, 'PART 3 추리능력', null, 3, 1, 0, false, null);
-INSERT INTO book_content (book_id, name, parent_id, group_id, sequence, depth, is_mock_test, recommand_time)
+INSERT INTO book_content (book_id, name, parent_id, group_id, sequence, depth, is_mock_test, recommend_time)
 VALUES (1, 'CHAPTER 01 어휘', 1, 1, 2, 1, false, null);
-INSERT INTO book_content (book_id, name, parent_id, group_id, sequence, depth, is_mock_test, recommand_time)
+INSERT INTO book_content (book_id, name, parent_id, group_id, sequence, depth, is_mock_test, recommend_time)
 VALUES (1, 'CHAPTER 02 독해', 1, 1, 3, 1, false, null);
-INSERT INTO book_content (book_id, name, parent_id, group_id, sequence, depth, is_mock_test, recommand_time)
+INSERT INTO book_content (book_id, name, parent_id, group_id, sequence, depth, is_mock_test, recommend_time)
 VALUES (1, '유형1 유의어', 4, 1, 4, 2, false, null);
-INSERT INTO book_content (book_id, name, parent_id, group_id, sequence, depth, is_mock_test, recommand_time)
+INSERT INTO book_content (book_id, name, parent_id, group_id, sequence, depth, is_mock_test, recommend_time)
 VALUES (1, '유형2 다의어', 4, 1, 5, 2, false, null);
 -- 책, 책목차 끝
 

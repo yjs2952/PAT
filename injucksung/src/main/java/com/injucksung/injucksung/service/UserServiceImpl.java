@@ -2,8 +2,10 @@ package com.injucksung.injucksung.service;
 
 import com.injucksung.injucksung.domain.Role;
 import com.injucksung.injucksung.domain.User;
+import com.injucksung.injucksung.enums.PageSize;
 import com.injucksung.injucksung.repository.RoleRepository;
 import com.injucksung.injucksung.repository.UserRepository;
+import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
@@ -13,16 +15,10 @@ import java.util.HashSet;
 import java.util.Set;
 
 @Service
+@RequiredArgsConstructor
 public class UserServiceImpl implements UserService {
-
-    private UserRepository userRepository;
-    private RoleRepository roleRepository;
-    private static final int PAGE_SIZE = 10;
-
-    public UserServiceImpl(UserRepository userRepository, RoleRepository roleRepository) {
-        this.userRepository = userRepository;
-        this.roleRepository = roleRepository;
-    }
+    private final UserRepository userRepository;
+    private final RoleRepository roleRepository;
 
     @Override
     @Transactional
@@ -108,7 +104,7 @@ public class UserServiceImpl implements UserService {
     @Override
     @Transactional(readOnly = true)
     public Page<User> getUserList(int start, String searchType, String searchWord) {
-        PageRequest pageRequest = PageRequest.of(start, PAGE_SIZE);
+        PageRequest pageRequest = PageRequest.of(start, PageSize.USER.getSize());
         Page<User> users = null;
         switch (searchType) {
             case "all":

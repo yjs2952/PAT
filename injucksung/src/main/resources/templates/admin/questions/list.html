@@ -1,0 +1,45 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <title>관리자 페이지 - 문제 관리</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+
+<body>
+관리자 페이지 - 문제 관리<br>
+<table>
+    <thead>
+    <tr>
+        <th>카테고리</th>
+        <th>책 목차</th>
+        <th>책 번호</th>
+        <th>지문 파일</th>
+        <th>해설 파일</th>
+        <th>정답 보기</th>
+        <th>문제 시도 횟수</th>
+        <th>문제 맞춘 횟수</th>
+        <th>선지 갯수</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr></tr>
+    <tr th:each="question : ${questionPage.content}">
+        <td th:text="${question.questionCategory.name}"></td>
+        <td th:text="${question.bookContent.name}"></td>
+        <td th:text="${question.contentFile.originName}"></td>
+        <td th:text="${question.explanationFile.originName}"></td>
+        <td th:text="${question.correct}"></td>
+        <td th:text="${question.tryCount}"></td>
+        <td th:text="${question.correctCount}"></td>
+        <td th:text="${question.choiceCount}"></td>
+    </tr>
+    </tbody>
+    <!--TODO: 페이징기능 -->
+
+</table>
+<form method="get" action="/admin/questions/edit">
+    <button type="submit">추가하기</button>
+</form>
+</body>
+</html>

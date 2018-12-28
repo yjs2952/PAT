@@ -2,42 +2,42 @@ package com.injucksung.injucksung.service;
 
 import com.injucksung.injucksung.domain.Book;
 import com.injucksung.injucksung.domain.BookContent;
+import com.injucksung.injucksung.dto.BookContentForm;
 import com.injucksung.injucksung.repository.BookContentRepository;
 import com.injucksung.injucksung.repository.BookRepository;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
 @Service
+@RequiredArgsConstructor
 public class BookContentServiceImpl implements BookContentService {
-    private BookContentRepository bookContentRepository;
-    private BookRepository bookRepository;
-
-    public BookContentServiceImpl(BookContentRepository bookContentRepository, BookRepository bookRepository) {
-        this.bookContentRepository = bookContentRepository;
-        this.bookRepository = bookRepository;
-    }
+    private final BookContentRepository bookContentRepository;
+    private final BookRepository bookRepository;
 
     @Override
     @Transactional
-    public int addBookContent(BookContent bookContent, Long bookId) {
-        Book book = bookRepository.findBookById(bookId);
-        bookContent.setBook(book);
-
+    public BookContent addBookContent(BookContentForm bookContentForm) {
+        BookContent bookContent = new BookContent();
+        // TODO: 한번에 옮겨주는 거 있었어
+        bookContent.setBook(bookRepository.findBookById(bookContentForm.getBookId()));
+        bookContent.setIsMockTest(bookContentForm.isMockTest());
+        bookContent.setName(bookContentForm.getName());
+        bookContent.setRecommendTime(bookContentForm.getRecommendTime());
+        bookContent.setGroupId(bookContentForm.getGroupId());
+        Integer depth = bookContentForm.getDepth();
+        bookContent.setDepth(depth == null ? 0 : depth + 1);
+        Integer sequence = bookContentForm.getSequence();
+        bookContent.setSequence(sequence == null ? 0 : sequence + 1);
+        bookContent.setQuestionCount(0);
         BookContent addBookContent = bookContentRepository.save(bookContent);
 
-        //그룹id가 없는 경우 대분류일 경우라서 자신의 id를 그룹id로 갖는다.
-        if (bookContent.getGroupId() == null) {
-            bookContent.setGroupId(addBookContent.getId());
-        }
+        //그룹id가 없는 경우 대분류일 경우다.
+        if (bookContent.getGroupId() == null) bookContent.setGroupId(addBookContent.getId());
 
-        if (addBookContent != null) {
-            bookRepository.flush();
-            return 1;
-        }
-
-        return 0;
+        return bookContent;
     }
 
     @Override

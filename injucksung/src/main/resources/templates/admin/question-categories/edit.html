@@ -1,0 +1,32 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <title>문제 카테고리 에딧페이지</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+<body>
+관리자 페이지 - 문제 카테고리 -문제카테고리 추가하기
+<form method="post" th:action="@{/admin/question-categories/edit}" th:object="${QuestionCategory}">
+    <label>문제 카테고리 이름</label>
+    <input type="text" placeholder="책이름을 입력해주세요." name="name" required><br>
+
+    <label>카테고리 타입</label>
+    <select name="type">
+        <option value="apt">적성문제</option>
+        <option value="per">인성문제</option>
+    </select><br>
+
+    <label>상위카테고리</label>
+    <select name="parentId">
+        <option th:each="questionCategory : ${questionCategoryPage.content}"
+                th:value="${questionCategory.id}"
+                th:text="${questionCategory.name}">
+        </option>
+    </select>
+
+    <button type="submit">등록</button>
+    <button type="button" onclick="window.location.href='/admin/question-categories'">취소</button>
+</form>
+</body>
+</html>
