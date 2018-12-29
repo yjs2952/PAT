@@ -16,8 +16,14 @@
     </select><br>
 
     <label>책</label>
-    <select name="bookId">
-        <option th:each="book : ${bookPage.content}" th:value="${book.id}" th:text="${book.name}" onchange="javascript:document.location.reload()"></option>
+    <select name="bookId" onchange="location.reload()">
+        <option th:each="book : ${bookPage.content}" th:value="${book.id}" th:text="${book.name}"></option>
+    </select><br>
+
+    <!--TODO: 책 누르면 리로드 되어서 책에 맞는 책목차만 불러오기 구현하기 현재는 아이디 1만 불러옴 -->
+    <label>책 목차</label>
+    <select name="bookContentId">
+        <option th:each="bookContent : ${bookContentList}" th:value="${bookContent.id}" th:text="${bookContent.name}"></option>
     </select><br>
 
     <label>상위카테고리</label>

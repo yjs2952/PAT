@@ -32,6 +32,7 @@ public class QuestionController {
     public String addQuestion(Model model) {
         model.addAttribute("questionCategoryPage", questionCategoryService.getQuestionCategoryList(0));
         model.addAttribute("bookPage", bookService.getBookList(0));
+        model.addAttribute("bookContentList", bookContentService.getBookContentList(1L));
         return "admin/questions/edit";
     }
 
