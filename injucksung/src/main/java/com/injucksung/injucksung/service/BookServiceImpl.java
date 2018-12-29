@@ -18,8 +18,7 @@ public class BookServiceImpl implements BookService {
     @Override
     @Transactional
     public Book addBook(Book book) {
-        Book addBook = bookRepository.save(book);
-        return addBook;
+        return bookRepository.save(book);
     }
 
     @Override
@@ -40,8 +39,7 @@ public class BookServiceImpl implements BookService {
     @Transactional(readOnly = true)
     public Page<Book> getBookList(int start) {
         PageRequest pageRequest = PageRequest.of(start, PageSize.BOOK.getSize());
-        Page<Book> books = bookRepository.findAll(pageRequest);
-        return books;
+        return bookRepository.findAll(pageRequest);
     }
 
     @Override
@@ -49,7 +47,7 @@ public class BookServiceImpl implements BookService {
     public Page<Book> getBookList(int start, String searchType, String searchWord) {
 
         PageRequest pageRequest = PageRequest.of(start, PageSize.BOOK.getSize());
-        Page<Book> books = null;
+        Page<Book> books;
         switch (searchType) {
             case "name":
                 books = bookRepository.findBookByNameContaining(searchWord, pageRequest);
@@ -72,7 +70,6 @@ public class BookServiceImpl implements BookService {
     @Override
     @Transactional(readOnly = true)
     public Book getBook(Long id) {
-        Book book = bookRepository.findBookById(id);
-        return book;
+        return bookRepository.findBookById(id);
     }
 }
