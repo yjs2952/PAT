@@ -8,7 +8,7 @@
 <body th:with="isPost=${book}==null ? true : false">
 관리자 페이지 - 책 관리 - 책 편집<br>
 <form th:method="${isPost} ? 'POST' : 'PUT'"
-      th:action="@{${isPost} ? '/admin/books/edit' : '/admin/books/edit/'+${book.id}}" th:object="${Book}">
+      th:action="@{${isPost} ? '/admin/books/edit' : '/admin/books/edit/'+${book.id}}">
     <label>책이름</label>
     <input type="text" th:value="${isPost} ? '' : ${book.name}" placeholder="책이름을 입력해주세요." name="name" required><br>
 
