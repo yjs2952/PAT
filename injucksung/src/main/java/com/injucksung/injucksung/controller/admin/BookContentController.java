@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.*;
 @Controller
 @RequiredArgsConstructor
 @RequestMapping("/admin/book-contents")
-public class AdminBookContentController {
+public class BookContentController {
     private final BookContentService bookContentService;
 
     //책 목차 추가하기

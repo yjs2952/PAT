@@ -16,7 +16,7 @@ import java.util.List;
 @Controller
 @RequiredArgsConstructor
 @RequestMapping("/admin/books")
-public class AdminBookController {
+public class BookController {
     private final BookService bookService;
     private final BookContentService bookContentService;
 
