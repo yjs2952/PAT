@@ -15,7 +15,7 @@ public class BookContentForm {
     private Integer depth;
     private Integer questionCount;
 
-    public BookContentForm(String name, Boolean isMockTest, Integer recommendTime, Long bookId, Long groupId, Integer sequence, Integer depth, Integer questionCount) {
+    public BookContentForm(String name, Boolean isMockTest, Integer recommendTime, Long bookId, Long groupId, Integer sequence, Integer depth) {
         this.name = name;
         this.isMockTest = isMockTest;
         this.recommendTime = recommendTime;
@@ -23,10 +23,9 @@ public class BookContentForm {
         this.groupId = groupId;
         this.sequence = sequence;
         this.depth = depth;
-        this.questionCount = questionCount;
+        this.questionCount = 0;
 
         if (sequence == null) this.sequence = 0;
         if (depth == null) this.depth = 0;
-        if (questionCount == null) this.questionCount = 0;
     }
 }

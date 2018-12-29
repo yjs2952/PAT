@@ -17,7 +17,7 @@ public class QuestionController {
     //문제 목록 가져오기
     @GetMapping
     public String questionList(@RequestParam(value = "start", defaultValue = "0") int start, Model model) {
-        model.addAttribute("questionPage",questionService.getQuestionList(start));
+        model.addAttribute("questionPage", questionService.getQuestionList(start));
         return "admin/questions/list";
     }
 }
