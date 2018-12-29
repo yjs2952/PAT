@@ -44,9 +44,9 @@ public class BookController {
 
     //책 수정하기
     @GetMapping("/edit/{bookId}")
-    public String modifyBook(@PathVariable Long bookId) {
-        //TODO:미구현
-        return null;
+    public String modifyBook(@PathVariable Long bookId, Model model) {
+        model.addAttribute("book", bookService.getBook(bookId));
+        return "/admin/books/edit";
     }
 
     @PutMapping("/edit/{bookId}")
