@@ -1,11 +1,11 @@
 package com.injucksung.injucksung.service;
 
-import com.injucksung.injucksung.domain.Book;
 import com.injucksung.injucksung.domain.BookContent;
 import com.injucksung.injucksung.dto.BookContentForm;
 import com.injucksung.injucksung.repository.BookContentRepository;
 import com.injucksung.injucksung.repository.BookRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -21,17 +21,9 @@ public class BookContentServiceImpl implements BookContentService {
     @Transactional
     public BookContent addBookContent(BookContentForm bookContentForm) {
         BookContent bookContent = new BookContent();
-        // TODO: 한번에 옮겨주는 거 있었어
+        BeanUtils.copyProperties(bookContentForm, bookContent);
+
         bookContent.setBook(bookRepository.findBookById(bookContentForm.getBookId()));
-        bookContent.setIsMockTest(bookContentForm.isMockTest());
-        bookContent.setName(bookContentForm.getName());
-        bookContent.setRecommendTime(bookContentForm.getRecommendTime());
-        bookContent.setGroupId(bookContentForm.getGroupId());
-        Integer depth = bookContentForm.getDepth();
-        bookContent.setDepth(depth == null ? 0 : depth + 1);
-        Integer sequence = bookContentForm.getSequence();
-        bookContent.setSequence(sequence == null ? 0 : sequence + 1);
-        bookContent.setQuestionCount(0);
         BookContent addBookContent = bookContentRepository.save(bookContent);
 
         //그룹id가 없는 경우 대분류일 경우다.
