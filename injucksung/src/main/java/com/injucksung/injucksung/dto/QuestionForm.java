@@ -9,6 +9,7 @@ import lombok.Setter;
 @Setter
 public class QuestionForm {
     private Long questionCategoryId; //문제 분류를 위한 카테고리
+    private Long bookId; //책
     private Long bookContentId; //책 목차
     private Integer bookNumber;
     private ContentFile contentFile; //지문
