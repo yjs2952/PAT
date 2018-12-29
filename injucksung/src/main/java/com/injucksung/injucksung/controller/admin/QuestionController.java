@@ -1,12 +1,11 @@
 package com.injucksung.injucksung.controller.admin;
 
+import com.injucksung.injucksung.domain.Question;
 import com.injucksung.injucksung.service.QuestionService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 @Controller
 @RequiredArgsConstructor
@@ -19,5 +18,16 @@ public class QuestionController {
     public String questionList(@RequestParam(value = "start", defaultValue = "0") int start, Model model) {
         model.addAttribute("questionPage", questionService.getQuestionList(start));
         return "admin/questions/list";
+    }
+
+    //문제 등록하기
+    @GetMapping("/edit")
+    public String addQuestion() {
+        return "admin/questions/edit";
+    }
+
+    @PostMapping("/edit")
+    public String addQuestion(@ModelAttribute Question question) {
+        return "admin/questions/" + question.getId();
     }
 }
