@@ -1,4 +1,4 @@
-package com.injucksung.injucksung.controller.admin.book;
+package com.injucksung.injucksung.controller.admin;
 
 import com.injucksung.injucksung.domain.Book;
 import com.injucksung.injucksung.domain.BookContent;

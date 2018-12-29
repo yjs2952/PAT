@@ -1,4 +1,4 @@
-package com.injucksung.injucksung.controller.admin.question;
+package com.injucksung.injucksung.controller.admin;
 
 import com.injucksung.injucksung.service.QuestionService;
 import lombok.RequiredArgsConstructor;

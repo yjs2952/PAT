@@ -1,4 +1,4 @@
-package com.injucksung.injucksung.controller.admin.questioncategory;
+package com.injucksung.injucksung.controller.admin;
 
 import com.injucksung.injucksung.domain.QuestionCategory;
 import com.injucksung.injucksung.service.QuestionCategoryService;
