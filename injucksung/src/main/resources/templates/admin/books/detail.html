@@ -15,8 +15,11 @@ ISBN : <span th:text="${book.isbn}"></span><br>
 출판사 : <span th:text="${book.publisher}"></span><br>
 
 
-<form th:action="@{'/admin/books/'+${book.id}}" th:method="delete">
+<form th:action="@{'/admin/books/'+${book.id}}" th:method="DELETE">
     <button type="submit">삭제</button>
+</form>
+<form th:action="@{'/admin/books/edit/'+${book.id}}">
+    <button type="submit">수정</button>
 </form>
 
 <table>

@@ -4,6 +4,7 @@ import com.injucksung.injucksung.domain.Book;
 import com.injucksung.injucksung.enums.PageSize;
 import com.injucksung.injucksung.repository.BookRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.BeanUtils;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
@@ -16,34 +17,23 @@ public class BookServiceImpl implements BookService {
 
     @Override
     @Transactional
-    public int addBook(Book book) {
+    public Book addBook(Book book) {
         Book addBook = bookRepository.save(book);
-        if (addBook != null) {
-            bookRepository.flush();
-            return 1;
-        }
-
-        return 0;
+        return addBook;
     }
 
     @Override
     @Transactional
     public void deleteBook(Long id) {
-
-
         bookRepository.deleteById(id);
     }
 
     @Override
     @Transactional
-    public int modifyBook(Book book) {
-        Book modifyBook = bookRepository.save(book);
-        if (modifyBook != null) {
-            bookRepository.flush();
-            return 1;
-        }
-
-        return 0;
+    public Book modifyBook(Book book) {
+        Book bookById = bookRepository.findBookById(book.getId());
+        BeanUtils.copyProperties(book, bookById);
+        return bookById;
     }
 
     @Override

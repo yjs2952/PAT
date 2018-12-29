@@ -5,25 +5,27 @@
     <title>관리자 페이지 - 책 관리 - 책 편집</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
-<body th:with="isPost=${book} == null ? true : false">
+<body th:with="isPost=${book}==null ? true : false">
 관리자 페이지 - 책 관리 - 책 편집<br>
-<form th:method="isPost ? POST : PUT"
-      th:action="@{isPost ? '/admin/books/edit' : '/admin/books/edit/{bookId}'}" th:object="${Book}">
+<form th:method="${isPost} ? 'POST' : 'PUT'"
+      th:action="@{${isPost} ? '/admin/books/edit' : '/admin/books/edit/'+${book.id}}" th:object="${Book}">
     <label>책이름</label>
-    <input type="text" th:value="isPost ? '' : ${book.name}" placeholder="책이름을 입력해주세요." name="name" required><br>
+    <input type="text" th:value="${isPost} ? '' : ${book.name}" placeholder="책이름을 입력해주세요." name="name" required><br>
 
     <label>출간일자</label>
-    <input type="date" th:value="isPost ? '' : ${book.publicationDate}" placeholder="출간일자" name="publicationDate" required><br>
+    <input type="date" th:value="${isPost} ? '' : ${book.publicationDate}" placeholder="출간일자" name="publicationDate"
+           required><br>
 
     <label>저자</label>
-    <input type="text" th:value="isPost ? '' : ${book.author}" placeholder="저자 이름을 입력해주세요." name="author" required><br>
+    <input type="text" th:value="${isPost} ? '' : ${book.author}" placeholder="저자 이름을 입력해주세요." name="author" required><br>
 
     <label>ISBN</label>
-    <input type="number" th:value="isPost ? '' : ${book.isbn}" placeholder="ISBN을 입력해주세요." name="isbn" required><br>
+    <input type="number" th:value="${isPost} ? '' : ${book.isbn}" placeholder="ISBN을 입력해주세요." name="isbn" required><br>
 
     <label>출판사</label>
-    <input type="text" th:value="isPost ? '' : ${book.publisher}" placeholder="출판사명을 입력해주세요." name="publisher" required><br>
+    <input type="text" th:value="${isPost} ? '' : ${book.publisher}" placeholder="출판사명을 입력해주세요." name="publisher" required><br>
 
+    <input type="hidden"  th:value="${isPost} ? null : ${book.id}" name="id">
     <button type="submit">등록</button>
     <button type="button" onclick="window.location.href='/admin/books'">취소</button>
 </form>

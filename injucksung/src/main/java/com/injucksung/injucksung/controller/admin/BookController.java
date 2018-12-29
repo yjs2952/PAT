@@ -51,8 +51,8 @@ public class BookController {
 
     @PutMapping("/edit/{bookId}")
     public String modifyBook(@ModelAttribute Book book) {
-        //TODO:미구현
-        return null;
+        bookService.modifyBook(book);
+        return "redirect:/admin/books/"+book.getId();
     }
 
     //책 정보 상세 보기
