@@ -36,10 +36,10 @@ ISBN : <span th:text="${book.isbn}"></span><br>
         <th>groupId</th>
         <th>depth</th>
         <th>sequence</th>
-        <!--<th>bookID</th>-->
     </tr>
     </thead>
-    <tbody th:each="bookContent : ${bookContentList}">
+    <tbody>
+    <th:block th:each="bookContent : ${bookContentList}">
     <tr>
         <td><a th:text="${bookContent.name}"></a></td>
         <td th:text="${bookContent.isMockTest}"></td>
@@ -62,7 +62,6 @@ ISBN : <span th:text="${book.isbn}"></span><br>
         <td th:text="${bookContent.groupId}"></td>
         <td th:text="${bookContent.depth}"></td>
         <td th:text="${bookContent.sequence}"></td>
-        <!--<td th:text="${bookContent.book.id}"></td>-->
     </tr>
     <tr th:if="${bookDetail.addSubBookContentId} == ${bookContent.id}">
         <td colspan="11">
@@ -85,7 +84,9 @@ ISBN : <span th:text="${book.isbn}"></span><br>
             </form>
         </td>
     </tr>
+    </th:block>
     </tbody>
+
 </table>
 
 <br>
