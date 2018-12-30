@@ -1,10 +1,9 @@
 package com.injucksung.injucksung.service;
 
 import com.injucksung.injucksung.domain.QuestionCategory;
-import com.injucksung.injucksung.enums.PageSize;
+import com.injucksung.injucksung.enums.Page;
 import com.injucksung.injucksung.repository.QuestionCategoryRepository;
 import lombok.RequiredArgsConstructor;
-import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -40,9 +39,9 @@ public class QuestionCategoryServiceImpl implements QuestionCategoryService {
 
     @Override
     @Transactional(readOnly = true)
-    public Page<QuestionCategory> getQuestionCategoryList(int start) {
-        PageRequest pageRequest = PageRequest.of(start, PageSize.QUESTION_CATEGORY.getSize());
-        Page<QuestionCategory> questionCategories = questionCategoryRepository.findAll(pageRequest);
+    public org.springframework.data.domain.Page getQuestionCategoryList(int start) {
+        PageRequest pageRequest = PageRequest.of(start, Page.QUESTION_CATEGORY.getSize());
+        org.springframework.data.domain.Page questionCategories = questionCategoryRepository.findAll(pageRequest);
         return questionCategories;
     }
 }

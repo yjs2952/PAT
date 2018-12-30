@@ -1,12 +1,11 @@
 package com.injucksung.injucksung.service;
 
 import com.injucksung.injucksung.domain.Question;
-import com.injucksung.injucksung.enums.PageSize;
+import com.injucksung.injucksung.enums.Page;
 import com.injucksung.injucksung.repository.BookContentRepository;
 import com.injucksung.injucksung.repository.QuestionCategoryRepository;
 import com.injucksung.injucksung.repository.QuestionRepository;
 import lombok.RequiredArgsConstructor;
-import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -43,14 +42,14 @@ public class QuestionServiceImpl implements QuestionService {
 
     @Override
     @Transactional(readOnly = true)
-    public Page<Question> getQuestionList(Long bookContentId) {
+    public org.springframework.data.domain.Page getQuestionList(Long bookContentId) {
         return null;
     }
 
     @Override
     @Transactional(readOnly = true)
-    public Page<Question> getQuestionList(int start) {
-        Pageable pageable = PageRequest.of(start, PageSize.QUESTION.getSize());
+    public org.springframework.data.domain.Page getQuestionList(int start) {
+        Pageable pageable = PageRequest.of(start, Page.QUESTION.getSize());
         return questionRepository.findAll(pageable);
     }
 }
