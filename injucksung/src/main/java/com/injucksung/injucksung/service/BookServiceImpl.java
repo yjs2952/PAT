@@ -1,10 +1,11 @@
 package com.injucksung.injucksung.service;
 
 import com.injucksung.injucksung.domain.Book;
-import com.injucksung.injucksung.enums.Page;
+import com.injucksung.injucksung.enums.PageSize;
 import com.injucksung.injucksung.repository.BookRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.BeanUtils;
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -36,17 +37,16 @@ public class BookServiceImpl implements BookService {
 
     @Override
     @Transactional(readOnly = true)
-    public org.springframework.data.domain.Page getBookList(int start) {
-        PageRequest pageRequest = PageRequest.of(start, Page.BOOK.getSize());
+    public Page<Book> getBookList(int start) {
+        PageRequest pageRequest = PageRequest.of(start, PageSize.BOOK.getLimit());
         return bookRepository.findAll(pageRequest);
     }
 
     @Override
     @Transactional(readOnly = true)
-    public org.springframework.data.domain.Page getBookList(int start, String searchType, String searchWord) {
-
-        PageRequest pageRequest = PageRequest.of(start, Page.BOOK.getSize());
-        org.springframework.data.domain.Page books;
+    public Page<Book> getBookList(int start, String searchType, String searchWord) {
+        PageRequest pageRequest = PageRequest.of(start, PageSize.BOOK.getLimit());
+        Page<Book> books;
         switch (searchType) {
             case "name":
                 books = bookRepository.findBookByNameContaining(searchWord, pageRequest);

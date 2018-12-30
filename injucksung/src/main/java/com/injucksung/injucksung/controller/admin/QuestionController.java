@@ -1,7 +1,6 @@
 package com.injucksung.injucksung.controller.admin;
 
-import com.injucksung.injucksung.domain.Question;
-import com.injucksung.injucksung.domain.QuestionCategory;
+import com.injucksung.injucksung.dto.QuestionForm;
 import com.injucksung.injucksung.service.BookContentService;
 import com.injucksung.injucksung.service.BookService;
 import com.injucksung.injucksung.service.QuestionCategoryService;
@@ -37,7 +36,8 @@ public class QuestionController {
     }
 
     @PostMapping
-    public String addQuestion(@ModelAttribute Question question) {
-        return "admin/questions/" + question.getId();
+    public String addQuestion(@ModelAttribute QuestionForm questionForm) {
+        questionService.addQuestion(questionForm);
+        return "redirect:admin/questions";
     }
 }

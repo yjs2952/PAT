@@ -64,7 +64,7 @@ public class QuestionServiceTest {
 
     @Test
     public void 문제_리스트_가져오기() throws Exception {
-//        Page<Question> questionList = questionService.getQuestionList(6L);
+//        PageSize<Question> questionList = questionService.getQuestionList(6L);
 //        Assert.assertEquals(2, questionList.getTotalElements());
     }
 

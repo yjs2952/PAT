@@ -2,10 +2,11 @@ package com.injucksung.injucksung.service;
 
 import com.injucksung.injucksung.domain.Role;
 import com.injucksung.injucksung.domain.User;
-import com.injucksung.injucksung.enums.Page;
+import com.injucksung.injucksung.enums.PageSize;
 import com.injucksung.injucksung.repository.RoleRepository;
 import com.injucksung.injucksung.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -71,11 +72,11 @@ public class UserServiceImpl implements UserService {
     @Override
     @Transactional
     public int modifyUserInfo(User user) {
-        User modifyUser = userRepository.save(user);
-        if (modifyUser != null) {
-            userRepository.flush();
-            return 1;
-        }
+//        User modifyUser = userRepository.save(user);
+//        if (modifyUser != null) {
+//            userRepository.flush();
+//            return 1;
+//        }
 
         return 0;
     }
@@ -102,8 +103,8 @@ public class UserServiceImpl implements UserService {
 
     @Override
     @Transactional(readOnly = true)
-    public org.springframework.data.domain.Page getUserList(int start, String searchType, String searchWord) {
-        PageRequest pageRequest = PageRequest.of(start, Page.USER.getSize());
+    public Page<User> getUserList(int start, String searchType, String searchWord) {
+        PageRequest pageRequest = PageRequest.of(start, PageSize.USER.getLimit());
         org.springframework.data.domain.Page users = null;
         switch (searchType) {
             case "all":
