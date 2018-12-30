@@ -36,7 +36,7 @@ public class BookController {
         return "/admin/books/edit";
     }
 
-    @PostMapping("/edit")
+    @PostMapping
     public String addBook(@ModelAttribute Book book) {
         bookService.addBook(book);
         return "redirect:/admin/books";
@@ -49,7 +49,7 @@ public class BookController {
         return "/admin/books/edit";
     }
 
-    @PutMapping("/edit/{bookId}")
+    @PutMapping("/{bookId}")
     public String modifyBook(@ModelAttribute Book book) {
         bookService.modifyBook(book);
         return "redirect:/admin/books/"+book.getId();

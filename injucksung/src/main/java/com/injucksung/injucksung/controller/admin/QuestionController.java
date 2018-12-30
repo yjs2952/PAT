@@ -36,7 +36,7 @@ public class QuestionController {
         return "admin/questions/edit";
     }
 
-    @PostMapping("/edit")
+    @PostMapping
     public String addQuestion(@ModelAttribute Question question) {
         return "admin/questions/" + question.getId();
     }

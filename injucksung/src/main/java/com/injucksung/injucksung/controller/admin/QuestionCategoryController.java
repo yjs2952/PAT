@@ -28,10 +28,21 @@ public class QuestionCategoryController {
         return "admin/question-categories/edit";
     }
 
-    @PostMapping("/edit")
+    @PostMapping
     public String addQuestionCategory(@ModelAttribute QuestionCategory questionCategory) {
         questionCategoryService.addQuestionCategory(questionCategory);
         return "redirect:/admin/question-categories";
+    }
+
+    // TODO: 문제 카테고리 수정하기
+    @GetMapping("/edit/{questionCategoryId}")
+    public String modifyQuestionCategory() {
+        return null;
+    }
+
+    @PutMapping
+    public String modifyQuestionCategory(@ModelAttribute QuestionCategory questionCategory) {
+        return null;
     }
 
     //문제 카테고리 삭제하기
