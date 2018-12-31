@@ -12,7 +12,7 @@ public class SessionController {
     //로그인하기
     @GetMapping
     public String getLoginForm() {
-        return "/users/login";
+        return "/session/login";
     }
 
     @PostMapping
