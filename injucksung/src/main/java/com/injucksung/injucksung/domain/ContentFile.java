@@ -14,19 +14,15 @@ public class ContentFile {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @NonNull
     @Column(nullable = false)
     private String originName;
 
-    @NonNull
     @Column(nullable = false)
     private String savedName;
 
-    @NonNull
     @Column(nullable = false)
     private String type;
 
-    @NonNull
     @Column(nullable = false)
     private String length;
     

@@ -38,6 +38,6 @@ public class QuestionController {
     @PostMapping
     public String addQuestion(@ModelAttribute QuestionForm questionForm) {
         questionService.addQuestion(questionForm);
-        return "redirect:admin/questions";
+        return "redirect:/admin/questions";
     }
 }

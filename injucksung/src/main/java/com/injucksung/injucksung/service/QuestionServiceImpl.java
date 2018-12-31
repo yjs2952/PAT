@@ -7,6 +7,7 @@ import com.injucksung.injucksung.repository.BookContentRepository;
 import com.injucksung.injucksung.repository.QuestionCategoryRepository;
 import com.injucksung.injucksung.repository.QuestionRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.BeanUtils;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -23,13 +24,15 @@ public class QuestionServiceImpl implements QuestionService {
     @Override
     @Transactional
     public Question addQuestion(QuestionForm questionForm) {
-        //실제로 들어온 정보는 아이디 뿐이라고 생각되어서,id로 실제 데이터 조회 후 set해주는 과정
-//        question.setBookContent(bookContentRepository.findBookContentById(question.getBookContent().getId()));
-//        question.setQuestionCategory(questionCategoryRepository.findQuestionCategoryById(question.getBookContent().getId()));
+        //TODO: 파일 업로드 구현
 
-//        Question save = questionRepository.save(question);
-//        return save;
-        return null;
+        Question question = new Question();
+        BeanUtils.copyProperties(questionForm, question);
+
+        question.setBookContent(bookContentRepository.findBookContentById(questionForm.getBookContentId()));
+        question.setQuestionCategory(questionCategoryRepository.findQuestionCategoryById(questionForm.getQuestionCategoryId()));
+
+        return questionRepository.save(question);
     }
 
     @Override
