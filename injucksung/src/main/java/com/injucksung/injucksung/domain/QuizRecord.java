@@ -5,13 +5,10 @@ import lombok.*;
 import javax.persistence.*;
 import java.util.Date;
 
-@ToString
-@Entity
-@Table(name = "quiz_record")
-@Setter
-@Getter
-@NoArgsConstructor
-@AllArgsConstructor
+@Entity @Table(name = "quiz_record")
+@Setter @Getter
+@NoArgsConstructor @AllArgsConstructor @Builder
+@EqualsAndHashCode
 public class QuizRecord {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

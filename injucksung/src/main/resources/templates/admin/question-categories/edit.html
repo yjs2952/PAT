@@ -7,7 +7,7 @@
 </head>
 <body>
 관리자 페이지 - 문제 카테고리 -문제카테고리 추가하기
-<form method="post" th:action="@{/admin/question-categories/edit}" th:object="${QuestionCategory}">
+<form method="post" th:action="@{/admin/question-categories/edit}">
     <label>문제 카테고리 이름</label>
     <input type="text" placeholder="책이름을 입력해주세요." name="name" required><br>
 

@@ -1,4 +1,4 @@
-package com.injucksung.injucksung.controller.admin.bookcontent;
+package com.injucksung.injucksung.controller.admin;
 
 import com.injucksung.injucksung.dto.BookContentForm;
 import com.injucksung.injucksung.service.BookContentService;
@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.*;
 @Controller
 @RequiredArgsConstructor
 @RequestMapping("/admin/book-contents")
-public class AdminBookContentController {
+public class BookContentController {
     private final BookContentService bookContentService;
 
     //책 목차 추가하기

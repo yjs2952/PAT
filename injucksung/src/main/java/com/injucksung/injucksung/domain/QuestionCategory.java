@@ -7,6 +7,7 @@ import javax.persistence.*;
 @Entity @Table(name = "question_category")
 @Setter @Getter
 @NoArgsConstructor @AllArgsConstructor @Builder
+@EqualsAndHashCode
 public class QuestionCategory {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

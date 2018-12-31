@@ -4,11 +4,11 @@ import com.injucksung.injucksung.domain.Book;
 import org.springframework.data.domain.Page;
 
 public interface BookService {
-    int addBook(Book book);
+    Book addBook(Book book);
 
     void deleteBook(Long id);
 
-    int modifyBook(Book book);
+    Book modifyBook(Book book);
 
     Page<Book> getBookList(int start);
 

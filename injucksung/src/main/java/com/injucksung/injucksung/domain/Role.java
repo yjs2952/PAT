@@ -4,13 +4,11 @@ import lombok.*;
 
 import javax.persistence.*;
 
-@ToString
 @Entity
 @Table(name = "role")
-@Setter
-@Getter
-@NoArgsConstructor
-@RequiredArgsConstructor
+@Setter @Getter
+@NoArgsConstructor @AllArgsConstructor @Builder
+@EqualsAndHashCode
 public class Role {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

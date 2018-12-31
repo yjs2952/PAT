@@ -8,6 +8,8 @@ import javax.persistence.*;
 
 @Entity @Table(name = "question")
 @Setter @Getter
+@NoArgsConstructor @AllArgsConstructor @Builder
+@EqualsAndHashCode
 public class Question{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

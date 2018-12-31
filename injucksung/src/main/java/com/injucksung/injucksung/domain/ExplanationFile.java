@@ -5,28 +5,24 @@ import lombok.*;
 import javax.persistence.*;
 import java.util.Date;
 
-
 @Entity @Table(name = "explanation_file")
 @Setter @Getter
-@NoArgsConstructor @RequiredArgsConstructor
+@NoArgsConstructor @AllArgsConstructor @Builder
+@EqualsAndHashCode
 public class ExplanationFile {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @NonNull
     @Column(nullable = false)
     private String originName;
 
-    @NonNull
     @Column(nullable = false)
     private String savedName;
 
-    @NonNull
     @Column(nullable = false)
     private String type;
 
-    @NonNull
     @Column(nullable = false)
     private String length;
 
@@ -34,7 +30,6 @@ public class ExplanationFile {
     @Column(columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
     private Date regDate;
 
-    @NonNull
     @Column(nullable = false)
     private String path;
 }

@@ -1,4 +1,4 @@
-package com.injucksung.injucksung.controller.admin.questioncategory;
+package com.injucksung.injucksung.controller.admin;
 
 import com.injucksung.injucksung.domain.QuestionCategory;
 import com.injucksung.injucksung.service.QuestionCategoryService;
@@ -15,7 +15,7 @@ public class QuestionCategoryController {
 
     //문제 카테고리 리스트 가져오기
     @GetMapping
-    public String questionCateogryList(@RequestParam(value = "start", defaultValue = "0") int start,
+    public String getQuestionCateogryList(@RequestParam(value = "start", defaultValue = "0") int start,
                                Model model) {
         model.addAttribute("questionCategoryPage", questionCategoryService.getQuestionCategoryList(start));
         return "admin/question-categories/list";
@@ -28,10 +28,21 @@ public class QuestionCategoryController {
         return "admin/question-categories/edit";
     }
 
-    @PostMapping("/edit")
+    @PostMapping
     public String addQuestionCategory(@ModelAttribute QuestionCategory questionCategory) {
         questionCategoryService.addQuestionCategory(questionCategory);
         return "redirect:/admin/question-categories";
+    }
+
+    // TODO: 문제 카테고리 수정하기
+    @GetMapping("/edit/{questionCategoryId}")
+    public String modifyQuestionCategory() {
+        return null;
+    }
+
+    @PutMapping
+    public String modifyQuestionCategory(@ModelAttribute QuestionCategory questionCategory) {
+        return null;
     }
 
     //문제 카테고리 삭제하기

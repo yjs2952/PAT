@@ -6,7 +6,7 @@ import org.springframework.data.domain.Page;
 
 public interface UserService {
 
-    int signup(User user);
+    int signUp(User user);
 
     User login(String email, String password);
 

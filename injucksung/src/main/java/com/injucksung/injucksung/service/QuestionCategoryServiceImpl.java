@@ -17,8 +17,7 @@ public class QuestionCategoryServiceImpl implements QuestionCategoryService {
     @Override
     @Transactional
     public QuestionCategory addQuestionCategory(QuestionCategory questionCategory) {
-        QuestionCategory addQuestionCategory = questionCategoryRepository.save(questionCategory);
-        return addQuestionCategory;
+        return questionCategoryRepository.save(questionCategory);
     }
 
     @Override
@@ -30,19 +29,18 @@ public class QuestionCategoryServiceImpl implements QuestionCategoryService {
     @Override
     @Transactional
     public int modifyQuestionCategory(QuestionCategory questionCategory) {
-        QuestionCategory modifyQuestionCategory = questionCategoryRepository.save(questionCategory);
-        if (modifyQuestionCategory!=null) {
-            questionCategoryRepository.flush();
-            return 1;
-        }
+//        QuestionCategory modifyQuestionCategory = questionCategoryRepository.save(questionCategory);
+//        if (modifyQuestionCategory!=null) {
+//            questionCategoryRepository.flush();
+//            return 1;
+//        }
         return 0;
     }
 
     @Override
     @Transactional(readOnly = true)
     public Page<QuestionCategory> getQuestionCategoryList(int start) {
-        PageRequest pageRequest = PageRequest.of(start, PageSize.QUESTION_CATEGORY.getSize());
-        Page<QuestionCategory> questionCategories = questionCategoryRepository.findAll(pageRequest);
-        return questionCategories;
+        PageRequest pageRequest = PageRequest.of(start, PageSize.QUESTION_CATEGORY.getLimit());
+        return questionCategoryRepository.findAll(pageRequest);
     }
 }

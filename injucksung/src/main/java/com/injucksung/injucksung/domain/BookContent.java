@@ -8,7 +8,8 @@ import javax.persistence.*;
 
 @Entity @Table(name = "book_content")
 @Setter @Getter
-@NoArgsConstructor @EqualsAndHashCode
+@NoArgsConstructor @AllArgsConstructor @Builder
+@EqualsAndHashCode
 public class BookContent {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

@@ -1,0 +1,50 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <title>문제 에딧페이지</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+</head>
+<body>
+관리자 페이지 - 문제 에딧
+
+<form method="post" th:action="@{/admin/questions}">
+    <label>문제 카테고리</label>
+    <select name="questionCategoryId">
+        <option th:each="questionCategory : ${questionCategoryPage.content}" th:value="${questionCategory.id}"
+                th:text="${questionCategory.name}"></option>
+    </select><br>
+
+    <label>책</label>
+    <select name="bookId" onchange="location.reload()">
+        <option th:each="book : ${bookPage.content}" th:value="${book.id}" th:text="${book.name}"></option>
+    </select><br>
+
+    <!--TODO: 책 누르면 리로드 되어서 책에 맞는 책목차만 불러오기 구현하기 (현재는 아이디 1만 불러옴) -->
+    <label>책 목차</label>
+    <select name="bookContentId">
+        <option th:each="bookContent : ${bookContentList}" th:value="${bookContent.id}" th:text="${bookContent.name}"></option>
+    </select><br>
+
+    <label>책 문제 번호</label>
+    <input type="number" name="bookNumber"><br>
+
+    <!--TODO: 파일 업로드 구현 -->
+    <!--<label>지문 파일</label>-->
+    <!--<input type="file" name="contentFile"><br>-->
+
+    <!--<label>해설 파일</label>-->
+    <!--<input type="file" name="explanationFile"><br>-->
+
+    <label>정답 보기</label>
+    <input type="number" name="bookNumber"><br>
+
+    <label>4지 선다인지 5지선다인지</label>
+    <input type="number" name="choiceCount"><br>
+
+    <button type="submit">등록</button>
+    <button type="button" onclick="window.location.href='/admin/questions'">취소</button>
+</form>
+</body>
+</html>

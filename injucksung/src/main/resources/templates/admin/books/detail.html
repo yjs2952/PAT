@@ -15,8 +15,11 @@ ISBN : <span th:text="${book.isbn}"></span><br>
 출판사 : <span th:text="${book.publisher}"></span><br>
 
 
-<form th:action="@{'/admin/books/'+${book.id}}" th:method="delete">
+<form th:action="@{'/admin/books/'+${book.id}}" th:method="DELETE">
     <button type="submit">삭제</button>
+</form>
+<form th:action="@{'/admin/books/edit/'+${book.id}}">
+    <button type="submit">수정</button>
 </form>
 
 <table>
@@ -33,10 +36,10 @@ ISBN : <span th:text="${book.isbn}"></span><br>
         <th>groupId</th>
         <th>depth</th>
         <th>sequence</th>
-        <!--<th>bookID</th>-->
     </tr>
     </thead>
-    <tbody th:each="bookContent : ${bookContentList}">
+    <tbody>
+    <th:block th:each="bookContent : ${bookContentList}">
     <tr>
         <td><a th:text="${bookContent.name}"></a></td>
         <td th:text="${bookContent.isMockTest}"></td>
@@ -59,11 +62,10 @@ ISBN : <span th:text="${book.isbn}"></span><br>
         <td th:text="${bookContent.groupId}"></td>
         <td th:text="${bookContent.depth}"></td>
         <td th:text="${bookContent.sequence}"></td>
-        <!--<td th:text="${bookContent.book.id}"></td>-->
     </tr>
     <tr th:if="${bookDetail.addSubBookContentId} == ${bookContent.id}">
         <td colspan="11">
-            <form method="post" th:action="@{/admin/book-contents}" th:object="${BookContentForm}">
+            <form method="post" th:action="@{/admin/book-contents}">
                 <label>목차 이름</label>
                 <input type="text" placeholder="목차 이름을 입력해주세요." name="name" required>
 
@@ -82,7 +84,9 @@ ISBN : <span th:text="${book.isbn}"></span><br>
             </form>
         </td>
     </tr>
+    </th:block>
     </tbody>
+
 </table>
 
 <br>
@@ -91,8 +95,7 @@ ISBN : <span th:text="${book.isbn}"></span><br>
     <button type="submit">대분류 추가하기</button>
 </form>
 
-<form method="post" th:if="${bookDetail.editTopBookContent}" th:action="@{/admin/book-contents}"
-      th:object="${BookContentForm}">
+<form method="post" th:if="${bookDetail.editTopBookContent}" th:action="@{/admin/book-contents}">
     <label>목차 이름</label>
     <input type="text" placeholder="목차 이름을 입력해주세요." name="name" required><br>
 

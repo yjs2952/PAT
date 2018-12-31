@@ -8,6 +8,7 @@ import com.injucksung.injucksung.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -22,18 +23,17 @@ public class UserServiceImpl implements UserService {
 
     @Override
     @Transactional
-    public int signup(User user) {
+    public int signUp(User user) {
         // TODO: 18. 12. 17 보라색 밑줄이 매우 거슬리니 나중에 modify와 합칠지 고민해 보세
         User signupUser = userRepository.save(user);
-        if (signupUser != null) {
-            Set<Role> roles = new HashSet<>();
-            roles.add(roleRepository.getOne(2L));
-            signupUser.setRoles(roles);
-            userRepository.flush();
-            return 1;
-        }
+        BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+        signupUser.setPassword(passwordEncoder.encode(signupUser.getPassword()));
 
-        return 0;
+        Set<Role> roles = new HashSet<>();
+        roles.add(roleRepository.getOne(2L));
+        signupUser.setRoles(roles);
+
+        return 1;
     }
 
     @Override
@@ -72,11 +72,11 @@ public class UserServiceImpl implements UserService {
     @Override
     @Transactional
     public int modifyUserInfo(User user) {
-        User modifyUser = userRepository.save(user);
-        if (modifyUser != null) {
-            userRepository.flush();
-            return 1;
-        }
+//        User modifyUser = userRepository.save(user);
+//        if (modifyUser != null) {
+//            userRepository.flush();
+//            return 1;
+//        }
 
         return 0;
     }
@@ -104,8 +104,8 @@ public class UserServiceImpl implements UserService {
     @Override
     @Transactional(readOnly = true)
     public Page<User> getUserList(int start, String searchType, String searchWord) {
-        PageRequest pageRequest = PageRequest.of(start, PageSize.USER.getSize());
-        Page<User> users = null;
+        PageRequest pageRequest = PageRequest.of(start, PageSize.USER.getLimit());
+        org.springframework.data.domain.Page users = null;
         switch (searchType) {
             case "all":
                 users = userRepository.findAll(pageRequest);

@@ -17,7 +17,7 @@ public interface BookContentRepository extends JpaRepository<BookContent, Long> 
 
     //현재 입력할려고 하는 책 목차의 sequece와 같거나 큰 sequence만 1씩 증가 (업데이트용)
 //    @Query(value = "update BookContent bc set bc.sequence = bc.sequence+1 where bc.book.id = :bookId and bc.groupId = :groupId and bc.sequence >= :sequence")
-    @Modifying
+//    @Modifying
 //    @Query("update BookContent bc set bc.sequence = bc.sequence+1 where bc.groupId = 1 and bc.sequence > 2")
     @Query(value = "UPDATE book_content SET sequence = sequence+1", nativeQuery = true)
     void arrangeSequence();
