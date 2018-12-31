@@ -1,10 +1,8 @@
 package com.injucksung.injucksung.controller;
 
+import com.injucksung.injucksung.domain.User;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 @Controller
 @RequestMapping("/session")
@@ -15,10 +13,10 @@ public class SessionController {
         return "/session/login";
     }
 
-    @PostMapping
-    public String login() {
-        return null;
-    }
+//    @PostMapping
+//    public String login(@ModelAttribute User user) {
+//        return null;
+//    }
 
     //로그아웃
     @DeleteMapping

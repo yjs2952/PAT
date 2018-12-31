@@ -1,12 +1,11 @@
 package com.injucksung.injucksung.service;
 
-import com.injucksung.injucksung.domain.Role;
 import com.injucksung.injucksung.domain.User;
 import org.springframework.data.domain.Page;
 
 public interface UserService {
 
-    int signUp(User user);
+    User signUp(User user);
 
     User login(String email, String password);
 
@@ -29,4 +28,6 @@ public interface UserService {
     int modifyUserRole(Long id, Long[] roleIds);
 
     Page<User> getUserList(int start, String searchType, String searchWord);
+
+    public User getUser(String email);
 }
