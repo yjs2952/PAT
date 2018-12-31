@@ -1,20 +1,27 @@
 package com.injucksung.injucksung.controller;
 
+import com.injucksung.injucksung.domain.User;
+import com.injucksung.injucksung.service.UserService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 @Controller
 @RequestMapping("/users")
+@RequiredArgsConstructor
 public class UserController {
+    private final UserService userService;
+
     //회원가입하기
     @GetMapping
     public String getRegisterForm() {
-        return null;
+        return "/users/register";
     }
 
     @PostMapping
-    public String register() {
-        return null;
+    public String register(@ModelAttribute User user) {
+        userService.signup(user);
+        return "redirect:/session";
     }
 
     //유저 정보보기
@@ -34,5 +41,4 @@ public class UserController {
     public String deleteUser() {
         return null;
     }
-
 }
