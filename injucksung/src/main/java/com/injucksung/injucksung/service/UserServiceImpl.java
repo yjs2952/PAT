@@ -8,6 +8,7 @@ import com.injucksung.injucksung.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -25,15 +26,14 @@ public class UserServiceImpl implements UserService {
     public int signup(User user) {
         // TODO: 18. 12. 17 보라색 밑줄이 매우 거슬리니 나중에 modify와 합칠지 고민해 보세
         User signupUser = userRepository.save(user);
-        if (signupUser != null) {
-            Set<Role> roles = new HashSet<>();
-            roles.add(roleRepository.getOne(2L));
-            signupUser.setRoles(roles);
-            userRepository.flush();
-            return 1;
-        }
+        BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+        signupUser.setPassword(passwordEncoder.encode(signupUser.getPassword()));
 
-        return 0;
+        Set<Role> roles = new HashSet<>();
+        roles.add(roleRepository.getOne(2L));
+        signupUser.setRoles(roles);
+
+        return 1;
     }
 
     @Override
