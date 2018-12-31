@@ -20,7 +20,7 @@ public class UserController {
 
     @PostMapping
     public String signUp(@ModelAttribute User user) {
-        userService.signup(user);
+        userService.signUp(user);
         return "redirect:/session";
     }
 

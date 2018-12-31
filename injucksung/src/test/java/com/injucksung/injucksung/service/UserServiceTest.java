@@ -29,7 +29,7 @@ public class UserServiceTest {
         user.setNickname("플스사고싶다");
         user.setPhone("01012345678");
 
-        log.info("성공인가 ?  맞으면 1 {}", userService.signup(user));
+        log.info("성공인가 ?  맞으면 1 {}", userService.signUp(user));
         log.info(userService.login("yjs2952@naver.com", "1234").toString());
     }
 
