@@ -15,7 +15,7 @@ public class QuestionCategoryController {
 
     //문제 카테고리 리스트 가져오기
     @GetMapping
-    public String questionCateogryList(@RequestParam(value = "start", defaultValue = "0") int start,
+    public String getQuestionCateogryList(@RequestParam(value = "start", defaultValue = "0") int start,
                                Model model) {
         model.addAttribute("questionCategoryPage", questionCategoryService.getQuestionCategoryList(start));
         return "admin/question-categories/list";

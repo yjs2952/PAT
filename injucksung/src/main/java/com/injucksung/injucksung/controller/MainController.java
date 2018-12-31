@@ -10,6 +10,6 @@ public class MainController {
     @GetMapping("/")
     public String main() {
         log.info("<<<<<Start MainController>>>>>");
-        return "index";
+        return "/index";
     }
 }
