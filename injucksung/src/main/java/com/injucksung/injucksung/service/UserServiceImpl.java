@@ -23,7 +23,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     @Transactional
-    public int signup(User user) {
+    public int signUp(User user) {
         // TODO: 18. 12. 17 보라색 밑줄이 매우 거슬리니 나중에 modify와 합칠지 고민해 보세
         User signupUser = userRepository.save(user);
         BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();

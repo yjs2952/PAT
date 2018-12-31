@@ -14,12 +14,12 @@ public class UserController {
 
     //회원가입하기
     @GetMapping
-    public String getRegisterForm() {
-        return "/users/register";
+    public String getSignUpForm() {
+        return "/users/signUp";
     }
 
     @PostMapping
-    public String register(@ModelAttribute User user) {
+    public String signUp(@ModelAttribute User user) {
         userService.signup(user);
         return "redirect:/session";
     }
