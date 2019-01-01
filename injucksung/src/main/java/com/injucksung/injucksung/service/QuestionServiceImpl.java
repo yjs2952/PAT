@@ -2,7 +2,7 @@ package com.injucksung.injucksung.service;
 
 import com.injucksung.injucksung.domain.Question;
 import com.injucksung.injucksung.dto.QuestionForm;
-import com.injucksung.injucksung.enums.PageSize;
+import com.injucksung.injucksung.domain.enums.PageSize;
 import com.injucksung.injucksung.repository.BookContentRepository;
 import com.injucksung.injucksung.repository.QuestionCategoryRepository;
 import com.injucksung.injucksung.repository.QuestionRepository;

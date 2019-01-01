@@ -1,7 +1,7 @@
 package com.injucksung.injucksung.service;
 
 import com.injucksung.injucksung.domain.Book;
-import com.injucksung.injucksung.enums.PageSize;
+import com.injucksung.injucksung.domain.enums.PageSize;
 import com.injucksung.injucksung.repository.BookRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.BeanUtils;
