@@ -96,9 +96,10 @@ ISBN : <span th:text="${book.isbn}"></span><br>
 </form>
 
 <input type="button" value="fetch" onclick="
-      fetch('bookContentForm', {
-  method: 'GET',
-  credentials: 'include'}).then(function(response){
+      fetch('bookContentForm?bookId=1', {
+         method: 'GET',
+         credentials: 'include',
+}).then(function(response){
         response.text().then(function(text){
           document.querySelector('#bookContentForm').innerHTML = text;
         })

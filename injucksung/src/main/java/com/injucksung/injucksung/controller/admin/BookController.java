@@ -80,9 +80,10 @@ public class BookController {
         return "redirect:/admin/books";
     }
 
-    //fetch 테스트
+    //대분류 추가 폼 보여주기
     @GetMapping("/bookContentForm")
-    public String showBookContentForm(Model model) {
-        return "fragments/bookContentForm";
+    public String showBookContentForm(@RequestParam(value = "bookId") Long bookId, Model model) {
+        model.addAttribute("bookId", bookId);
+        return "/fragments/books/bookContentForm";
     }
 }
