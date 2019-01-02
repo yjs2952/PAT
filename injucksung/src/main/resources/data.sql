@@ -41,14 +41,14 @@ VALUES ('독해', 1, 'apt');
 
 -- 유저
 INSERT INTO user (email, password, nickname, phone)
-VALUES ('admin@naver.com', '$2a$10$aVcagsl6.WH81vz39E8Y2eOQZkJcz9qncqqVxFVc54VHcm02/7RPe', 'admin', '01077777777');
+VALUES ('admin@naver.com', '$2a$10$lPU6ud6tbGz45MTYfgWlruzOTrKyr4gmaKRmPObyMLHxO2BYEQUzm', 'admin', '01077777777');
 INSERT INTO user_role (user_id, role_id)
 VALUES (1, 1);
 INSERT INTO user_role (user_id, role_id)
 VALUES (1, 2);
 
 INSERT INTO user (email, password, nickname, phone)
-VALUES ('user1234@naver.com', '$2a$10$aVcagsl6.WH81vz39E8Y2eOQZkJcz9qncqqVxFVc54VHcm02/7RPe', '김유저', '01012345678');
+VALUES ('user1234@naver.com', '$2a$10$XGr4fst0cJCFoi2vl2zDAO0F9RyLJUmYiNO8afhoEYkzAkQFjreLK', '김유저', '01012345678');
 INSERT INTO user_role (user_id, role_id)
 VALUES (2, 2);
 -- 유저 끝

@@ -20,13 +20,13 @@ import java.util.Set;
 public class UserServiceImpl implements UserService {
     private final UserRepository userRepository;
     private final RoleRepository roleRepository;
-//    private final BCryptPasswordEncoder bCryptPasswordEncoder;
+    private final BCryptPasswordEncoder bCryptPasswordEncoder;
 
     @Override
     @Transactional
     public User signUp(User user) {
         User signUpUser = userRepository.save(user);
-//        signUpUser.setPassword(bCryptPasswordEncoder.encode(signUpUser.getPassword()));
+        signUpUser.setPassword(bCryptPasswordEncoder.encode(signUpUser.getPassword()));
 
         Set<Role> roles = new HashSet<>();
         roles.add(roleRepository.findByName("USER"));
