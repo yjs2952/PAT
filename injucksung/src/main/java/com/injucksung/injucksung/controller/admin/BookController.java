@@ -86,4 +86,12 @@ public class BookController {
         model.addAttribute("bookId", bookId);
         return "/fragments/books/bookContentForm";
     }
+
+    @GetMapping("/subBookContentForm")
+    public String showSubBookContentForm(@RequestParam(value = "bookContentId") Long bookContentId, Model model) {
+        System.out.println("아이디"+bookContentId);
+        model.addAttribute("bookContentId", bookContentId);
+        return "/fragments/books/subBookContentForm";
+//        return null;
+    }
 }
