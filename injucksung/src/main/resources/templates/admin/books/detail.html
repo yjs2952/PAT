@@ -40,50 +40,50 @@ ISBN : <span th:text="${book.isbn}"></span><br>
     </thead>
     <tbody>
     <th:block th:each="bookContent : ${bookContentList}">
-    <tr>
-        <td><a th:text="${bookContent.name}"></a></td>
-        <td th:text="${bookContent.isMockTest}"></td>
-        <td th:text="${bookContent.recommendTime}"></td>
-        <td th:text="${bookContent.questionCount}"></td>
-        <td>
-            <form method="get" th:action="@{'/admin/books/'+${book.id}}">
-                <input type="hidden" name="addSubBookContentId" th:value="${bookContent.id}"/>
-                <button type="submit">+</button>
-            </form>
-        </td>
-        <td>
-            <form th:method="delete" th:action="@{'/admin/book-contents/'+${bookContent.id}}">
-                <input type="hidden" name="bookId" th:value="${book.id}"/>
-                <button type="submit">삭제</button>
-            </form>
-        </td>
-        <td th:text="${bookContent.id}"></td>
-        <td th:text="${bookContent.parentId}"></td>
-        <td th:text="${bookContent.groupId}"></td>
-        <td th:text="${bookContent.depth}"></td>
-        <td th:text="${bookContent.sequence}"></td>
-    </tr>
-    <tr th:if="${bookDetail.addSubBookContentId} == ${bookContent.id}">
-        <td colspan="11">
-            <form method="post" th:action="@{/admin/book-contents}">
-                <label>목차 이름</label>
-                <input type="text" placeholder="목차 이름을 입력해주세요." name="name" required>
+        <tr>
+            <td><a th:text="${bookContent.name}"></a></td>
+            <td th:text="${bookContent.isMockTest}"></td>
+            <td th:text="${bookContent.recommendTime}"></td>
+            <td th:text="${bookContent.questionCount}"></td>
+            <td>
+                <form method="get" th:action="@{'/admin/books/'+${book.id}}">
+                    <input type="hidden" name="addSubBookContentId" th:value="${bookContent.id}"/>
+                    <button type="submit">+</button>
+                </form>
+            </td>
+            <td>
+                <form th:method="delete" th:action="@{'/admin/book-contents/'+${bookContent.id}}">
+                    <input type="hidden" name="bookId" th:value="${book.id}"/>
+                    <button type="submit">삭제</button>
+                </form>
+            </td>
+            <td th:text="${bookContent.id}"></td>
+            <td th:text="${bookContent.parentId}"></td>
+            <td th:text="${bookContent.groupId}"></td>
+            <td th:text="${bookContent.depth}"></td>
+            <td th:text="${bookContent.sequence}"></td>
+        </tr>
+        <tr th:if="${bookDetail.addSubBookContentId} == ${bookContent.id}">
+            <td colspan="11">
+                <form method="post" th:action="@{/admin/book-contents}">
+                    <label>목차 이름</label>
+                    <input type="text" placeholder="목차 이름을 입력해주세요." name="name" required>
 
-                <label>모의고사 여부</label>
-                <input type="radio" name="isMockTest" value="true">모의고사 O
-                <input type="radio" name="isMockTest" value="false" checked="checked">모의고사 X <br>
+                    <label>모의고사 여부</label>
+                    <input type="radio" name="isMockTest" value="true">모의고사 O
+                    <input type="radio" name="isMockTest" value="false" checked="checked">모의고사 X <br>
 
-                <label>권장시간 (초) - 옵션</label>
-                <input type="number" placeholder="권장 풀이 시간" name="recommendTime">
+                    <label>권장시간 (초) - 옵션</label>
+                    <input type="number" placeholder="권장 풀이 시간" name="recommendTime">
 
-                <input type="hidden" name="bookId" th:value="${book.id}">
-                <input type="hidden" name="groupId" th:value="${bookContent.groupId}">
-                <input type="hidden" name="sequence" th:value="${bookContent.sequence}">
-                <input type="hidden" name="depth" th:value="${bookContent.depth}">
-                <button type="submit">등록</button>
-            </form>
-        </td>
-    </tr>
+                    <input type="hidden" name="bookId" th:value="${book.id}">
+                    <input type="hidden" name="groupId" th:value="${bookContent.groupId}">
+                    <input type="hidden" name="sequence" th:value="${bookContent.sequence}">
+                    <input type="hidden" name="depth" th:value="${bookContent.depth}">
+                    <button type="submit">등록</button>
+                </form>
+            </td>
+        </tr>
     </th:block>
     </tbody>
 
@@ -95,6 +95,17 @@ ISBN : <span th:text="${book.isbn}"></span><br>
     <button type="submit">대분류 추가하기</button>
 </form>
 
+<input type="button" value="fetch" onclick="
+      fetch('bookContentForm', {
+  method: 'GET',
+  credentials: 'include'}).then(function(response){
+        response.text().then(function(text){
+          document.querySelector('#bookContentForm').innerHTML = text;
+        })
+      })
+    ">
+
+<div id="bookContentForm"></div>
 <form method="post" th:if="${bookDetail.editTopBookContent}" th:action="@{/admin/book-contents}">
     <label>목차 이름</label>
     <input type="text" placeholder="목차 이름을 입력해주세요." name="name" required><br>

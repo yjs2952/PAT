@@ -79,4 +79,10 @@ public class BookController {
         bookService.deleteBook(bookId);
         return "redirect:/admin/books";
     }
+
+    //fetch 테스트
+    @GetMapping("/bookContentForm")
+    public String showBookContentForm(Model model) {
+        return "fragments/bookContentForm";
+    }
 }
