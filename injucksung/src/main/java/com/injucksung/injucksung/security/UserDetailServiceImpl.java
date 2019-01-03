@@ -33,8 +33,6 @@ public class UserDetailServiceImpl implements UserDetailsService {
             authorities.add(new SimpleGrantedAuthority("ROLE_" + role.getName()));
         }
 
-        //TODO 삭제
-        System.out.println("비번:"+user.getPassword());
         CustomUserDetails userDetails = new CustomUserDetails(email, user.getPassword(), authorities);
         userDetails.setNickname(user.getNickname());
         userDetails.setId(user.getId());
