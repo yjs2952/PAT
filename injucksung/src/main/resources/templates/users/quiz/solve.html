@@ -1,0 +1,42 @@
+<!DOCTYPE HTML>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <th:block th:insert="fragments/header :: common-header"></th:block>
+    <th:block th:insert="fragments/header :: ajax-jquery"></th:block>
+    <title>책 목차 선택하기</title>
+</head>
+<body>
+책 목차 선택하기 - 책 상세보기<br>
+이름 : <span th:text="${book.name}"></span><br>
+출간일자 : <span th:text="${book.publicationDate}"></span><br>
+저자 : <span th:text="${book.author}"></span><br>
+ISBN : <span th:text="${book.isbn}"></span><br>
+출판사 : <span th:text="${book.publisher}"></span><br>
+
+<h1>책 목차 선택하기 selection</h1>
+
+<form method="GET" th:action="@{/quiz}">
+    <th:block th:each="bookContent : ${bookContentList}">
+        <h1 th:if="${bookContent.depth}<=0" th:text="${bookContent.name}"></h1>
+        <h2 th:if="${bookContent.depth}==1" th:text="${bookContent.name}"></h2>
+        <th:block th:if="${bookContent.depth}>=2">
+            <label th:text="${bookContent.name}"></label><input type="checkbox" name="bookContentId"
+                                                                th:value="${bookContent.id}">
+        </th:block>
+    </th:block>
+    <input type="submit" name="action" value="채점하기"/>
+    <input type="submit" name="action" value="문제풀기"/>
+</form>
+
+</body>
+<script type="text/javascript">
+    $(document).ready(function(){
+        $("form").submit(function(){
+            if ($('input:checkbox').filter(':checked').length < 1){
+                alert("적어도 하나의 목차는 선택하세요!");
+                return false;
+            }
+        });
+    });
+</script>
+</html>
