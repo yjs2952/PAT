@@ -8,6 +8,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -21,7 +22,7 @@ public class QuizController {
     private final QuestionService questionService;
 
     //문제 리스트 가져오기
-    @GetMapping
+    @PostMapping
     public ModelAndView getQuestionList(@ModelAttribute BookContentSelectForm bookContentSelectForm,
                                         ModelAndView modelAndView) {
         // TODO: checkbox를 하나도 선택 안한 경우의 예외처리
@@ -34,7 +35,6 @@ public class QuizController {
             }
         }
         modelAndView.addObject("questions", questions);
-
         if (bookContentSelectForm.getAction().equals("문제풀기")) modelAndView.setViewName("/users/quiz/solve");
         else modelAndView.setViewName("/users/quiz/grade");
         return modelAndView;
