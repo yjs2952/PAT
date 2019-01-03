@@ -29,29 +29,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-//        http
-//            .logout()
-//                .logoutRequestMatcher(new AntPathRequestMatcher("/session"))
-//                .logoutSuccessUrl("/")
-//                .permitAll().and()
-//            .authorizeRequests()
-//                .antMatchers("/errors/**").permitAll()
-//                .antMatchers("/").permitAll()
-//                .antMatchers("/admin").hasRole("ADMIN")
-//                .antMatchers("/users").permitAll()
-//                .antMatchers("/users/**").hasRole("USER")
-//                .anyRequest().fullyAuthenticated().and()
-//            .formLogin()
-//                .loginPage("/session")
-//                .usernameParameter("email").passwordParameter("password")
-//                .loginProcessingUrl("/session")
-//                .failureUrl("/session")
-//                .permitAll();
-
-
         http
             .authorizeRequests()
                 .antMatchers("/","/users").permitAll()
+                .antMatchers("/books").hasRole("USER")
                 .antMatchers("/admin").hasRole("ADMIN")
                 .anyRequest().authenticated()
                 .and()
