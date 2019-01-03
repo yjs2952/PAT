@@ -2,99 +2,29 @@
 <html lang="ko" xmlns:th="http://www.thymeleaf.org">
 <head>
     <th:block th:insert="fragments/header :: common-header"></th:block>
-    <th:block th:insert="fragments/header :: ajax-jquery"></th:block>
-    <title>관리자 페이지 - 책 상세보기</title>
+    <title>책 목차 선택하기</title>
 </head>
 <body>
-관리자 페이지 - 책 상세보기<br>
+책 목차 선택하기 - 책 상세보기<br>
 이름 : <span th:text="${book.name}"></span><br>
 출간일자 : <span th:text="${book.publicationDate}"></span><br>
 저자 : <span th:text="${book.author}"></span><br>
 ISBN : <span th:text="${book.isbn}"></span><br>
 출판사 : <span th:text="${book.publisher}"></span><br>
 
+<h1>책 목차 선택하기 selection</h1>
 
-<form th:action="@{'/admin/books/'+${book.id}}" th:method="DELETE">
-    <button type="submit">삭제</button>
-</form>
-<form th:action="@{'/admin/books/edit/'+${book.id}}">
-    <button type="submit">수정</button>
-</form>
-
-<table>
-    <thead>
-    <tr>
-        <th>이름</th>
-        <th>모의고사 여부</th>
-        <th>권장 풀이 시간</th>
-        <th>문제 갯수</th>
-        <th>하위 목차 추가</th>
-        <th>삭제</th>
-        <th>Id</th>
-        <th>parentId</th>
-        <th>groupId</th>
-        <th>depth</th>
-        <th>sequence</th>
-    </tr>
-    </thead>
-    <tbody>
+<form method="get" th:action="@{/quiz}">
     <th:block th:each="bookContent : ${bookContentList}">
-        <tr th:id="'bookContent'+${bookContent.id}">
-            <td><a th:text="${bookContent.name}"></a></td>
-            <td th:text="${bookContent.isMockTest}"></td>
-            <td th:text="${bookContent.recommendTime}"></td>
-            <td th:text="${bookContent.questionCount}"></td>
-            <td>
-                <input type="button"
-                       th:onclick="'fetchSubBookContentForm('+${bookContent.id}+','+${bookContent.groupId}+','
-                       +${bookContent.sequence}+','+${bookContent.depth}+','+${book.id}+')'"
-                       th:value="추가"/>
-            </td>
-            <td>
-                <form th:method="delete" th:action="@{'/admin/book-contents/'+${bookContent.id}}">
-                    <input type="hidden" name="bookId" th:value="${book.id}"/>
-                    <button type="submit">삭제</button>
-                </form>
-            </td>
-            <td th:text="${bookContent.id}"></td>
-            <td th:text="${bookContent.parentId}"></td>
-            <td th:text="${bookContent.groupId}"></td>
-            <td th:text="${bookContent.depth}"></td>
-            <td th:text="${bookContent.sequence}"></td>
-        </tr>
+        <h1 th:if="${bookContent.depth}<=0" th:text="${bookContent.name}"></h1>
+        <h2 th:if="${bookContent.depth}==1" th:text="${bookContent.name}"></h2>
+        <th:block th:if="${bookContent.depth}>=2">
+            <label th:text="${bookContent.name}"></label><input type="checkbox" name="checked"
+                                                                th:value="${bookContent.id}">
+        </th:block>
     </th:block>
-    </tbody>
+    <input type="button" value="채점하기"/>
+</form>
 
-</table>
-
-<br>
-<input type="button" value="대분류 추가하기" th:onclick="'fetchBookContentForm('+${book.id}+')'"/>
-
-<div id="bookContentForm"></div>
-<script>
-    function fetchBookContentForm(bookId) {
-        fetch('bookContentForm?' + $.param({bookId: bookId}), {
-            method: 'GET',
-            credentials: 'include'
-        }).then(function (response) {
-            response.text().then(function (text) {
-                document.querySelector('#bookContentForm').innerHTML = text;
-            })
-        }) //TODO: catch문
-    }
-
-    // TODO: 값을 객체로 넘기는 방법이 있지 않을까?
-    function fetchSubBookContentForm(bookContentId, groupId, sequence, depth, bookId) {
-        fetch('subBookContentForm?' + $.param({bookContentId: bookContentId, groupId: groupId, sequence: sequence,
-                depth: depth, bookId: bookId}), {
-            method: 'GET',
-            credentials: 'include'
-        }).then(function (response) {
-            response.text().then(function (text) {
-                document.querySelector('#bookContent' + bookContentId).insertAdjacentHTML("afterend", text);
-            })//TODO: catch문
-        })
-    }
-</script>
 </body>
 </html>
