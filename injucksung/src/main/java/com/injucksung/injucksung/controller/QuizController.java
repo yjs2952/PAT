@@ -25,15 +25,18 @@ public class QuizController {
     public ModelAndView getQuestionList(@ModelAttribute BookContentSelectForm bookContentSelectForm,
                                         ModelAndView modelAndView) {
         // TODO: checkbox를 하나도 선택 안한 경우의 예외처리
-        // TODO: for문 말고 JPA에서 해결하도록 하자
+        // TODO: for문 말고 JPA에서 해결하도록 하자 (임시용)
         List<Question> questions = new ArrayList<>();
         for (Long bookContentId : bookContentSelectForm.getBookContentId()) {
-             questions.addAll(questionService.getQuestionList(bookContentId).getContent());
+            List<Question> content = questionService.getQuestionList(bookContentId);
+            if (content != null) {
+                questions.addAll(content);
+            }
         }
         modelAndView.addObject("questions", questions);
 
-        if (bookContentSelectForm.getAction().equals("문제풀기")) modelAndView.setViewName("/quiz/grade");
-        else modelAndView.setViewName("/quiz/solve");
+        if (bookContentSelectForm.getAction().equals("문제풀기")) modelAndView.setViewName("/users/quiz/grade");
+        else modelAndView.setViewName("/users/quiz/solve");
         return modelAndView;
     }
 

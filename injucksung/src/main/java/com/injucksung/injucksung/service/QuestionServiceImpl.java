@@ -14,6 +14,8 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+
 @Service
 @RequiredArgsConstructor
 public class QuestionServiceImpl implements QuestionService {
@@ -48,8 +50,8 @@ public class QuestionServiceImpl implements QuestionService {
 
     @Override
     @Transactional(readOnly = true)
-    public Page<Question> getQuestionList(Long bookContentId) {
-        return null;
+    public List<Question> getQuestionList(Long bookContentId) {
+        return questionRepository.findQuestionByBookContentId(bookContentId);
     }
 
     @Override
