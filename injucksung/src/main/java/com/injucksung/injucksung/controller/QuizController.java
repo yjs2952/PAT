@@ -35,8 +35,8 @@ public class QuizController {
         }
         modelAndView.addObject("questions", questions);
 
-        if (bookContentSelectForm.getAction().equals("문제풀기")) modelAndView.setViewName("/users/quiz/grade");
-        else modelAndView.setViewName("/users/quiz/solve");
+        if (bookContentSelectForm.getAction().equals("문제풀기")) modelAndView.setViewName("/users/quiz/solve");
+        else modelAndView.setViewName("/users/quiz/grade");
         return modelAndView;
     }
 

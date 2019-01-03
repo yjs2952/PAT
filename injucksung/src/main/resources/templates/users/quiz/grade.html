@@ -3,15 +3,15 @@
 <head>
     <th:block th:insert="fragments/header :: common-header"></th:block>
     <th:block th:insert="fragments/header :: ajax-jquery"></th:block>
-    <title>문풀</title>
+    <title>채점하기</title>
 </head>
 <body>
-<h1>문풀</h1>
+<h1>채점하기</h1>
 
 <th:block th:each="question : ${questions}">
     <p>
-        <span th:text="${question.questionCategory}"></span>
-        <span th:text="${question.bookContent}"></span>
+        <span th:text="${question.questionCategory.name}"></span>
+        <span th:text="${question.bookContent.name}"></span>
         <span th:text="${question.bookNumber}"></span>
     </p>
 </th:block>
