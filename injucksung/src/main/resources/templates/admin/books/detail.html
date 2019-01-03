@@ -66,15 +66,12 @@ ISBN : <span th:text="${book.isbn}"></span><br>
 
 <!--<th:block th:replace="fragments/books/subBookContentForm :: sub-book-content-form"></th:block>-->
 <br>
-<th:block>
-    <input type="hidden" id="bookId" th:value="${book.id}"/>
-    <input type="button" value="대분류 추가하기" onclick="fetchBookContentForm()"/>
-</th:block>
+<input type="button" value="대분류 추가하기" th:onclick="'fetchBookContentForm(\''+${book.id}+'\')'"/>
 
 <div id="bookContentForm"></div>
 <script>
-    function fetchBookContentForm() {
-        fetch('bookContentForm?' + $.param({bookId: document.getElementById('bookId').getAttribute('value')}), {
+    function fetchBookContentForm(bookId) {
+        fetch('bookContentForm?' + $.param({bookId: bookId}), {
             method: 'GET',
             credentials: 'include'
         }).then(function (response) {
@@ -91,7 +88,7 @@ ISBN : <span th:text="${book.isbn}"></span><br>
             credentials: 'include'
         }).then(function (response) {
             response.text().then(function (text) {
-                document.querySelector('#test'+bookContentId).insertAdjacentHTML("afterend", text);
+                document.querySelector('#test' + bookContentId).insertAdjacentHTML("afterend", text);
             })
         })
     }
