@@ -27,7 +27,7 @@ public class UserBookController {
                               Model model) {
         Page<Book> bookList = bookService.getBookList(start);
         model.addAttribute("bookList", bookList.getContent());
-        return "/list";
+        return "/users/books/list";
     }
 
     //책 정보 상세 보기
