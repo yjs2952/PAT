@@ -6,7 +6,7 @@
 </head>
 
 <body>
-Hello world<br>
+<p th:inline="text">Hello [[${#httpServletRequest.remoteUser}]]</p>
 <a th:href="@{/admin}">관리자페이지</a><br>
 <a th:href="@{/session}">로그인</a>
 <a th:href="@{/users}">회원가입</a>
