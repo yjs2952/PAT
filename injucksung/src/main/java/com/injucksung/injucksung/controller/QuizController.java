@@ -6,14 +6,13 @@ import com.injucksung.injucksung.service.QuestionService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 @Controller
 @RequiredArgsConstructor
@@ -22,7 +21,7 @@ public class QuizController {
     private final QuestionService questionService;
 
     //문제 리스트 가져오기
-    @PostMapping
+    @GetMapping
     public ModelAndView getQuestionList(@ModelAttribute BookContentSelectForm bookContentSelectForm,
                                         ModelAndView modelAndView) {
         // TODO: checkbox를 하나도 선택 안한 경우의 예외처리
@@ -38,6 +37,14 @@ public class QuizController {
         if (bookContentSelectForm.getAction().equals("문제풀기")) modelAndView.setViewName("/users/quiz/solve");
         else modelAndView.setViewName("/users/quiz/grade");
         return modelAndView;
+    }
+
+    //퀴즈 종료 후 결과
+    @PostMapping
+    public String submitQuiz(@RequestParam Map<Integer, Integer> choices, Model model) {
+        choices.remove("_csrf");
+        model.addAttribute("choices", choices);
+        return "/users/quiz/record";
     }
 
 }

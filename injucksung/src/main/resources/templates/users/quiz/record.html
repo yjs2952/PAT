@@ -1,0 +1,16 @@
+<!DOCTYPE HTML>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <th:block th:insert="fragments/header :: common-header"></th:block>
+    <title>결과페이지</title>
+</head>
+<body>
+<h3>결과 페이지</h3>
+<th:block th:each="choice : ${choices}">
+    <p>
+        <span th:text="'문제 ID: '+${choice.key}"></span><br>
+        <span th:text="'선택한 보기: '+${choice.value}"></span>
+    </p>
+</th:block>
+</body>
+</html>

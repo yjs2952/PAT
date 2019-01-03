@@ -7,13 +7,22 @@
 </head>
 <body>
 <h1>채점하기</h1>
-
-<th:block th:each="question : ${questions}">
-    <p>
-        <span th:text="${question.questionCategory.name}"></span>
-        <span th:text="${question.bookContent.name}"></span>
-        <span th:text="${question.bookNumber}"></span>
-    </p>
-</th:block>
+<form method="POST" th:action="@{/quiz}">
+    <th:block th:each="question : ${questions}">
+        <div>
+            <span th:text="${question.questionCategory.name}"></span>
+            <span th:text="${question.bookContent.name}"></span>
+            <span th:text="${question.bookNumber}"></span><br>
+        </div>
+        <div>
+            <input type="radio" th:name="${question.id}" th:value="1"/>1
+            <input type="radio" th:name="${question.id}" th:value="2"/>2
+            <input type="radio" th:name="${question.id}" th:value="3"/>3
+            <input type="radio" th:name="${question.id}" th:value="4"/>4
+            <input type="radio" th:if="${question.choiceCount}==5" th:name="${question.id}" th:value="5"/>5
+        </div>
+    </th:block>
+    <input type="submit" value="제출하기"/>
+</form>
 </body>
 </html>

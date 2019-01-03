@@ -7,13 +7,21 @@
 </head>
 <body>
 <h1>문풀</h1>
-
+<form>
 <th:block th:each="question : ${questions}">
-    <p>
+    <div>
         <span th:text="${question.questionCategory.name}"></span>
         <span th:text="${question.bookContent.name}"></span>
-        <span th:text="${question.bookNumber}"></span>
-    </p>
+        <span th:text="${question.bookNumber}"></span><br>
+    </div>
+    <div>
+        <input type="radio" th:name="choice+${question.id}" value="1번"/>
+        <input type="radio" th:name="choice+${question.id}" value="2번"/>
+        <input type="radio" th:name="choice+${question.id}" value="3번"/>
+        <input type="radio" th:name="choice+${question.id}" value="4번"/>
+        <input type="radio" th:if="${question.choiceCount}==5" th:name="choice+${question.id}" value="5번"/>
+    </div>
 </th:block>
+</form>
 </body>
 </html>
