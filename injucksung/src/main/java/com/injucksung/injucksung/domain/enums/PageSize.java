@@ -1,4 +1,4 @@
-package com.injucksung.injucksung.enums;
+package com.injucksung.injucksung.domain.enums;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

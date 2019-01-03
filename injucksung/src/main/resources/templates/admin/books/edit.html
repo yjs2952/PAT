@@ -1,9 +1,8 @@
 <!DOCTYPE HTML>
-<html xmlns:th="http://www.thymeleaf.org">
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="utf-8">
+    <th:block th:insert="fragments/header :: common-header"></th:block>
     <title>관리자 페이지 - 책 관리 - 책 편집</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
 <body th:with="isPost=${book}==null ? true : false">
 관리자 페이지 - 책 관리 - 책 편집<br>
@@ -26,6 +25,7 @@
     <input type="text" th:value="${isPost} ? '' : ${book.publisher}" placeholder="출판사명을 입력해주세요." name="publisher" required><br>
 
     <input type="hidden"  th:value="${isPost} ? null : ${book.id}" name="id">
+    <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
     <button type="submit">등록</button>
     <button type="button" onclick="window.location.href='/admin/books'">취소</button>
 </form>

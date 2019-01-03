@@ -1,0 +1,27 @@
+<!DOCTYPE HTML>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <th:block th:insert="fragments/header :: common-header"></th:block>
+    <th:block th:insert="fragments/header :: ajax-jquery"></th:block>
+    <title>문풀</title>
+</head>
+<body>
+<h1>문풀</h1>
+<form>
+<th:block th:each="question : ${questions}">
+    <div>
+        <span th:text="${question.questionCategory.name}"></span>
+        <span th:text="${question.bookContent.name}"></span>
+        <span th:text="${question.bookNumber}"></span><br>
+    </div>
+    <div>
+        <input type="radio" th:name="choice+${question.id}" value="1번"/>
+        <input type="radio" th:name="choice+${question.id}" value="2번"/>
+        <input type="radio" th:name="choice+${question.id}" value="3번"/>
+        <input type="radio" th:name="choice+${question.id}" value="4번"/>
+        <input type="radio" th:if="${question.choiceCount}==5" th:name="choice+${question.id}" value="5번"/>
+    </div>
+</th:block>
+</form>
+</body>
+</html>

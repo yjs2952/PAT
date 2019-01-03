@@ -2,7 +2,7 @@ package com.injucksung.injucksung.controller.admin;
 
 import com.injucksung.injucksung.domain.Book;
 import com.injucksung.injucksung.domain.BookContent;
-import com.injucksung.injucksung.dto.BookDetail;
+import com.injucksung.injucksung.dto.SubBookContentForm;
 import com.injucksung.injucksung.service.BookContentService;
 import com.injucksung.injucksung.service.BookService;
 import lombok.RequiredArgsConstructor;
@@ -23,8 +23,8 @@ public class BookController {
     //책 리스트 가져오기
     @GetMapping
     public String getBookList(@RequestParam(value = "start", defaultValue = "0") int start,
-                           @RequestParam(value = "searchWord", defaultValue = "") String searchWord,
-                           Model model) {
+                              @RequestParam(value = "searchWord", defaultValue = "") String searchWord,
+                              Model model) {
         Page<Book> bookList = bookService.getBookList(start);
         model.addAttribute("bookList", bookList.getContent());
         return "/admin/books/list";
@@ -52,23 +52,19 @@ public class BookController {
     @PutMapping("/{bookId}")
     public String modifyBook(@ModelAttribute Book book) {
         bookService.modifyBook(book);
-        return "redirect:/admin/books/"+book.getId();
+        return "redirect:/admin/books/" + book.getId();
     }
 
     //책 정보 상세 보기
     @GetMapping("/{bookId}")
     public String getBookDetail(@PathVariable Long bookId,
-                             @ModelAttribute BookDetail bookDetail,
-                             Model model) {
+                                Model model) {
         //책 데이터
         model.addAttribute("book", bookService.getBook(bookId));
 
         //책의 책목차 데이터
         List<BookContent> bookContentList = bookContentService.getBookContentList(bookId);
         if (bookContentList != null) model.addAttribute("bookContentList", bookContentList);
-
-        //대분류 추가 폼 표시 여부 & 특정 책목차의 하위 목차 추가 폼 표시 여부
-        model.addAttribute("bookDetail", bookDetail);
 
         return "/admin/books/detail";
     }
@@ -78,5 +74,19 @@ public class BookController {
     public String deleteBook(@PathVariable Long bookId) {
         bookService.deleteBook(bookId);
         return "redirect:/admin/books";
+    }
+
+    //대분류 추가 폼 보여주기
+    @GetMapping("/bookContentForm")
+    public String showBookContentForm(@RequestParam(value = "bookId") Long bookId, Model model) {
+        model.addAttribute("bookId", bookId);
+        return "/fragments/books/bookContentForm";
+    }
+
+    //하위분류 추가 폼 보여주기
+    @GetMapping("/subBookContentForm")
+    public String showSubBookContentForm(@ModelAttribute SubBookContentForm subBookContentForm, Model model) {
+        model.addAttribute("subBookContentForm", subBookContentForm);
+        return "/fragments/books/subBookContentForm";
     }
 }

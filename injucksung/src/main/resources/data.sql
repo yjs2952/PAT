@@ -33,22 +33,22 @@ VALUES ('독해', 1, 'apt');
 -- 문제 유형 (카테고리) 끝
 
 -- 유저 권한
-INSERT INTO role (name)
-VALUES ('admin');
-INSERT INTO role (name)
-VALUES ('user');
+# INSERT INTO role (name)
+# VALUES ('ADMIN');
+# INSERT INTO role (name)
+# VALUES ('USER');
 -- 유저 권한 끝
 
 -- 유저
 INSERT INTO user (email, password, nickname, phone)
-VALUES ('admin@naver.com', '1234', 'admin', '01077777777');
+VALUES ('admin@naver.com', '$2a$10$lPU6ud6tbGz45MTYfgWlruzOTrKyr4gmaKRmPObyMLHxO2BYEQUzm', 'admin', '01077777777');
 INSERT INTO user_role (user_id, role_id)
 VALUES (1, 1);
 INSERT INTO user_role (user_id, role_id)
 VALUES (1, 2);
 
 INSERT INTO user (email, password, nickname, phone)
-VALUES ('user1234@naver.com', '1234', '김유저', '01012345678');
+VALUES ('user1234@naver.com', '$2a$10$XGr4fst0cJCFoi2vl2zDAO0F9RyLJUmYiNO8afhoEYkzAkQFjreLK', '김유저', '01012345678');
 INSERT INTO user_role (user_id, role_id)
 VALUES (2, 2);
 -- 유저 끝

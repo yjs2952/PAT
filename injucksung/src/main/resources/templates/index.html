@@ -1,15 +1,16 @@
 <!DOCTYPE HTML>
-<html xml:th="http:/www.thymeleaf.org">
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="utf-8">
+    <th:block th:insert="fragments/header :: common-header"></th:block>
     <title>팟 index</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
 
 <body>
-Hello world<br>
-<a href="/admin">관리자페이지</a><br>
-<a href="/session">로그인</a>
-<a href="/users">회원가입</a>
+<p th:inline="text">Hello [[${#httpServletRequest.remoteUser}]]</p>
+<a th:href="@{/admin}">관리자페이지</a><br>
+<a th:href="@{/session}">로그인</a>
+<a th:href="@{/users}">회원가입</a><br><br>
+
+<a th:href="@{/books}">책목록 보기</a>
 </body>
 </html>

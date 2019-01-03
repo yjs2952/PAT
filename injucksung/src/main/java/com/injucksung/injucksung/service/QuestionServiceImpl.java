@@ -2,7 +2,7 @@ package com.injucksung.injucksung.service;
 
 import com.injucksung.injucksung.domain.Question;
 import com.injucksung.injucksung.dto.QuestionForm;
-import com.injucksung.injucksung.enums.PageSize;
+import com.injucksung.injucksung.domain.enums.PageSize;
 import com.injucksung.injucksung.repository.BookContentRepository;
 import com.injucksung.injucksung.repository.QuestionCategoryRepository;
 import com.injucksung.injucksung.repository.QuestionRepository;
@@ -13,6 +13,8 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
 
 @Service
 @RequiredArgsConstructor
@@ -48,8 +50,8 @@ public class QuestionServiceImpl implements QuestionService {
 
     @Override
     @Transactional(readOnly = true)
-    public Page<Question> getQuestionList(Long bookContentId) {
-        return null;
+    public List<Question> getQuestionList(Long bookContentId) {
+        return questionRepository.findQuestionByBookContentId(bookContentId);
     }
 
     @Override

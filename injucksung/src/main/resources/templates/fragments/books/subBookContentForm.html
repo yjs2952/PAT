@@ -1,0 +1,20 @@
+<tr>
+    <td colspan="11">
+        <form method="post" th:action="@{/admin/book-contents}">
+            <label>목차 이름</label>
+            <input type="text" placeholder="목차 이름을 입력해주세요." name="name" required>
+
+            <label>모의고사 여부</label>
+            <input type="radio" name="isMockTest" value="true">모의고사 O
+            <input type="radio" name="isMockTest" value="false" checked="checked">모의고사 X <br>
+
+            <label>권장시간 (초) - 옵션</label>
+            <input type="number" placeholder="권장 풀이 시간" name="recommendTime">
+            <input type="hidden" name="bookId" th:value="${subBookContentForm.bookId}"/>
+            <input type="hidden" name="groupId" th:value="${subBookContentForm.groupId}">
+            <input type="hidden" name="sequence" th:value="${subBookContentForm.sequence}">
+            <input type="hidden" name="depth" th:value="${subBookContentForm.depth}">
+            <button type="submit">등록</button>
+        </form>
+    </td>
+</tr>

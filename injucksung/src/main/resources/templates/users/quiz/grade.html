@@ -1,0 +1,28 @@
+<!DOCTYPE HTML>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <th:block th:insert="fragments/header :: common-header"></th:block>
+    <th:block th:insert="fragments/header :: ajax-jquery"></th:block>
+    <title>채점하기</title>
+</head>
+<body>
+<h1>채점하기</h1>
+<form method="POST" th:action="@{/quiz}">
+    <th:block th:each="question : ${questions}">
+        <div>
+            <span th:text="${question.questionCategory.name}"></span>
+            <span th:text="${question.bookContent.name}"></span>
+            <span th:text="${question.bookNumber}"></span><br>
+        </div>
+        <div>
+            <input type="radio" th:name="${question.id}" th:value="1"/>1
+            <input type="radio" th:name="${question.id}" th:value="2"/>2
+            <input type="radio" th:name="${question.id}" th:value="3"/>3
+            <input type="radio" th:name="${question.id}" th:value="4"/>4
+            <input type="radio" th:if="${question.choiceCount}==5" th:name="${question.id}" th:value="5"/>5
+        </div>
+    </th:block>
+    <input type="submit" value="제출하기"/>
+</form>
+</body>
+</html>

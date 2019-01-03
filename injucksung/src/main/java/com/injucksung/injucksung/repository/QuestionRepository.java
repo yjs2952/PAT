@@ -7,9 +7,12 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
+import java.util.List;
+
 public interface QuestionRepository extends JpaRepository<Question, Long> {
     //책 목차 id로 문제 조회하기
-    Page<Question> findQuestionByBookContentId(Long bookContentId, Pageable pageable);
+    @Query(value = "SELECT q FROM Question q JOIN FETCH q.bookContent bc JOIN FETCH q.questionCategory qc WHERE book_content_id=:bookContentId")
+    List<Question> findQuestionByBookContentId(@Param("bookContentId") Long bookContentId);
 
     //책 id로 문제 조회하기
     //@Query(value = "SELECT * FROM question q JOIN book_content bc ON q.book_content_id = bc.id WHERE bc.book_id =:bookId", nativeQuery = true)

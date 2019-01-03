@@ -2,14 +2,11 @@
 <html lang="ko" xmlns:th="http://www.thymeleaf.org">
 <head>
     <th:block th:insert="fragments/header :: common-header"></th:block>
-    <title>관리자 페이지 - 책관리</title>
+    <title>책 목록보기</title>
 </head>
 
-<body th:with="hrefPrefix='/admin/books/'">
-관리자 페이지 - 책관리<br>
+<body th:with="hrefPrefix='/books/'">
+책 목록보기<br>
 <table th:replace="fragments/books/booksCommon :: book-list"></table>
-<form method="get" action="/admin/books/edit">
-    <button type="submit">추가하기</button>
-</form>
 </body>
 </html>

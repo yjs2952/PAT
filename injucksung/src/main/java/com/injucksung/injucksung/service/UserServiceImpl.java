@@ -2,7 +2,7 @@ package com.injucksung.injucksung.service;
 
 import com.injucksung.injucksung.domain.Role;
 import com.injucksung.injucksung.domain.User;
-import com.injucksung.injucksung.enums.PageSize;
+import com.injucksung.injucksung.domain.enums.PageSize;
 import com.injucksung.injucksung.repository.RoleRepository;
 import com.injucksung.injucksung.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
@@ -20,20 +20,20 @@ import java.util.Set;
 public class UserServiceImpl implements UserService {
     private final UserRepository userRepository;
     private final RoleRepository roleRepository;
+    private final BCryptPasswordEncoder bCryptPasswordEncoder;
 
     @Override
     @Transactional
-    public int signUp(User user) {
-        // TODO: 18. 12. 17 보라색 밑줄이 매우 거슬리니 나중에 modify와 합칠지 고민해 보세
-        User signupUser = userRepository.save(user);
-        BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
-        signupUser.setPassword(passwordEncoder.encode(signupUser.getPassword()));
+    public User signUp(User user) {
+        // TODO 중복된 이메일, 닉네임인 경우 예외처리
+        User signUpUser = userRepository.save(user);
+        signUpUser.setPassword(bCryptPasswordEncoder.encode(signUpUser.getPassword()));
 
         Set<Role> roles = new HashSet<>();
-        roles.add(roleRepository.getOne(2L));
-        signupUser.setRoles(roles);
+        roles.add(roleRepository.findByName("USER"));
+        signUpUser.setRoles(roles);
 
-        return 1;
+        return signUpUser;
     }
 
     @Override
@@ -105,7 +105,7 @@ public class UserServiceImpl implements UserService {
     @Transactional(readOnly = true)
     public Page<User> getUserList(int start, String searchType, String searchWord) {
         PageRequest pageRequest = PageRequest.of(start, PageSize.USER.getLimit());
-        org.springframework.data.domain.Page users = null;
+        Page<User> users = null;
         switch (searchType) {
             case "all":
                 users = userRepository.findAll(pageRequest);
@@ -122,4 +122,12 @@ public class UserServiceImpl implements UserService {
         }
         return users;
     }
+
+    //이메일로 유저 한건 가져오기
+    @Override
+    @Transactional(readOnly = true)
+    public User getUser(String email) {
+        return userRepository.findUserByEmail(email);
+    }
+
 }
