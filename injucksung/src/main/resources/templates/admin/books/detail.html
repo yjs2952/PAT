@@ -39,13 +39,16 @@ ISBN : <span th:text="${book.isbn}"></span><br>
     </thead>
     <tbody>
     <th:block th:each="bookContent : ${bookContentList}">
-        <tr th:id="'test'+${bookContent.id}">
+        <tr th:id="'bookContent'+${bookContent.id}">
             <td><a th:text="${bookContent.name}"></a></td>
             <td th:text="${bookContent.isMockTest}"></td>
             <td th:text="${bookContent.recommendTime}"></td>
             <td th:text="${bookContent.questionCount}"></td>
             <td>
-                <input type="button" th:onclick="'fetchSubBookContentForm(\''+${bookContent.id}+'\')'" th:value="추가"/>
+                <input type="button"
+                       th:onclick="'fetchSubBookContentForm('+${bookContent.id}+','+${bookContent.groupId}+','
+                       +${bookContent.sequence}+','+${bookContent.depth}+','+${book.id}+')'"
+                       th:value="추가"/>
             </td>
             <td>
                 <form th:method="delete" th:action="@{'/admin/book-contents/'+${bookContent.id}}">
@@ -64,9 +67,8 @@ ISBN : <span th:text="${book.isbn}"></span><br>
 
 </table>
 
-<!--<th:block th:replace="fragments/books/subBookContentForm :: sub-book-content-form"></th:block>-->
 <br>
-<input type="button" value="대분류 추가하기" th:onclick="'fetchBookContentForm(\''+${book.id}+'\')'"/>
+<input type="button" value="대분류 추가하기" th:onclick="'fetchBookContentForm('+${book.id}+')'"/>
 
 <div id="bookContentForm"></div>
 <script>
@@ -78,25 +80,21 @@ ISBN : <span th:text="${book.isbn}"></span><br>
             response.text().then(function (text) {
                 document.querySelector('#bookContentForm').innerHTML = text;
             })
-        })
+        }) //TODO: catch문
     }
 
-    //파라미터로 바로 넘기는 방법도 알았으니까 이제 수정만 하면 되겠따! 히히
-    function fetchSubBookContentForm(bookContentId) {
-        fetch('subBookContentForm?' + $.param({bookContentId: bookContentId}), {
+    // TODO: 값을 객체로 넘기는 방법이 있지 않을까?
+    function fetchSubBookContentForm(bookContentId, groupId, sequence, depth, bookId) {
+        fetch('subBookContentForm?' + $.param({bookContentId: bookContentId, groupId: groupId, sequence: sequence,
+                depth: depth, bookId: bookId}), {
             method: 'GET',
             credentials: 'include'
         }).then(function (response) {
             response.text().then(function (text) {
-                document.querySelector('#test' + bookContentId).insertAdjacentHTML("afterend", text);
-            })
+                document.querySelector('#bookContent' + bookContentId).insertAdjacentHTML("afterend", text);
+            })//TODO: catch문
         })
     }
-
-    // function fetchSubBookContentForm(bookContentId) {
-    //     document.querySelector('#test'+bookContentId).insertAdjacentHTML("afterend", mytext);
-    //     // document.querySelector('test'+bookContentId).innerHTML = text;
-    // }
 </script>
 </body>
 </html>
