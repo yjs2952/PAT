@@ -25,6 +25,7 @@ public class UserServiceImpl implements UserService {
     @Override
     @Transactional
     public User signUp(User user) {
+        // TODO 중복된 이메일, 닉네임인 경우 예외처리
         User signUpUser = userRepository.save(user);
         signUpUser.setPassword(bCryptPasswordEncoder.encode(signUpUser.getPassword()));
 
