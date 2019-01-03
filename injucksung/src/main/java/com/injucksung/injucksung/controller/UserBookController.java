@@ -1,4 +1,4 @@
-package com.injucksung.injucksung.controller.user;
+package com.injucksung.injucksung.controller;
 
 import com.injucksung.injucksung.domain.Book;
 import com.injucksung.injucksung.domain.BookContent;
@@ -41,6 +41,6 @@ public class UserBookController {
         List<BookContent> bookContentList = bookContentService.getBookContentList(bookId);
         if (bookContentList != null) model.addAttribute("bookContentList", bookContentList);
 
-        return "/detail";
+        return "/users/books/selectBookContent";
     }
 }
