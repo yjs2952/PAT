@@ -16,4 +16,6 @@ public interface QuestionService {
     List<Question> getQuestionList(Long bookContentId);
 
     Page<Question> getQuestionList(int start);
+
+    Question getQuestionById(Long questionId);
 }

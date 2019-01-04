@@ -60,4 +60,10 @@ public class QuestionServiceImpl implements QuestionService {
         Pageable pageable = PageRequest.of(start, PageSize.QUESTION.getLimit());
         return questionRepository.findAll(pageable);
     }
+
+    @Override
+    @Transactional(readOnly = true)
+    public Question getQuestionById(Long questionId) {
+        return questionRepository.findQuestionById(questionId);
+    }
 }
