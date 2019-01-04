@@ -80,8 +80,8 @@ VALUES (4, 7, 1, 3, 3, 3, 5);
 -- 문제 PDF파일 업로드, 문제 정보입력
 
 -- 시험기록
-INSERT INTO quiz_record (user_id, date, correct_count, total_count, time, title, book)
-VALUES (2, now(), 2, 3, 600, '위포트 언어 유의어 영역', '위포트 인적성 마스터 25대기업 인적성검사 통합 기본서');
+INSERT INTO quiz_record (user_id, date, correct_count, total_count, time, title)
+VALUES (2, now(), 2, 3, 600, '위포트 언어 유의어 영역');
 -- 시험기록 끝
 
 -- result
