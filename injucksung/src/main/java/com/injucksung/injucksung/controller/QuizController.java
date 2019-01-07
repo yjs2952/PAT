@@ -66,7 +66,7 @@ public class QuizController {
         //사용자에게 Record 보여주기
         model.addAttribute("quizRecord", quizRecord);
         model.addAttribute("results", results);
-        return "/users/quiz/record";
+        return "/users/quiz/result";
     }
 
 }
