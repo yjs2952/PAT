@@ -2,10 +2,12 @@ package com.injucksung.injucksung.controller;
 
 import com.injucksung.injucksung.domain.Question;
 import com.injucksung.injucksung.domain.QuizRecord;
+import com.injucksung.injucksung.domain.Result;
 import com.injucksung.injucksung.dto.BookContentSelectForm;
 import com.injucksung.injucksung.security.CustomUserDetails;
 import com.injucksung.injucksung.service.QuestionService;
 import com.injucksung.injucksung.service.QuizRecordService;
+import com.injucksung.injucksung.service.ResultService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
@@ -25,6 +27,7 @@ import java.util.Map;
 public class QuizController {
     private final QuestionService questionService;
     private final QuizRecordService quizRecordService;
+    private final ResultService resultService;
 
     //문제 리스트 가져오기
     @GetMapping
@@ -49,6 +52,7 @@ public class QuizController {
     @PostMapping
     public String submitQuiz(@RequestParam Map<String, String> selectedChoices, Model model) {
         selectedChoices.remove("_csrf");
+        // TODO: selectedChoices의 타입을 Map<Long, Integer>로 바뀌게 하는걸 컨트롤러에서 하는게 좋은거 같다
 
         //세션에 저장된 스프링 시큐리티 정보로 CumtomUserDetails 가져오기
         CustomUserDetails userDetails = (CustomUserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
@@ -56,12 +60,12 @@ public class QuizController {
         //QuizRecord 추가
         QuizRecord quizRecord = quizRecordService.addQuizRecordService(selectedChoices, userDetails);
 
-
         //Record 추가
+        List<Result> results = resultService.addResult(selectedChoices, quizRecord);
 
         //사용자에게 Record 보여주기
-        model.addAttribute("selectedChoices", selectedChoices);
         model.addAttribute("quizRecord", quizRecord);
+        model.addAttribute("results", results);
         return "/users/quiz/record";
     }
 
