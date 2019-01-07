@@ -1,4 +1,4 @@
-package com.injucksung.injucksung.controller;
+package com.injucksung.injucksung.controller.user;
 
 import com.injucksung.injucksung.domain.Question;
 import com.injucksung.injucksung.domain.QuizRecord;

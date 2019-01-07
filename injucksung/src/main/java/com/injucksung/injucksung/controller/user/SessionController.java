@@ -1,4 +1,4 @@
-package com.injucksung.injucksung.controller;
+package com.injucksung.injucksung.controller.user;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.DeleteMapping;
