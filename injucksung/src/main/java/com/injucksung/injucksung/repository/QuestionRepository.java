@@ -20,7 +20,8 @@ public interface QuestionRepository extends JpaRepository<Question, Long> {
     Page<Question> findQuestionByBookId(@Param("bookId") Long bookId, Pageable pageable);
 
     //문제 id로 문제 조회하기
-    Question findQuestionById(Long id);
+//    @Query(value = "SELECT q FROM Question q JOIN FETCH q.bookContent bc WHERE q.id =:id") // (책 목차까지 바로 FETCH 해오기)
+    Question findQuestionById(@Param("id") Long id);
 
     //책 목차 id로 연관된 문제 삭제하기
     void deleteByBookContentId(Long bookContentId);

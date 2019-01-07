@@ -27,16 +27,13 @@ ISBN : <span th:text="${book.isbn}"></span><br>
     <input type="submit" name="action" value="채점하기"/>
     <input type="submit" name="action" value="문제풀기"/>
 </form>
-
-</body>
 <script type="text/javascript">
-    $(document).ready(function(){
-        $("form").submit(function(){
-            if ($('input:checkbox').filter(':checked').length < 1){
-                alert("적어도 하나의 목차는 선택하세요!");
-                return false;
-            }
-        });
+    $("form").submit(function () {
+        if ($('input:checkbox').filter(':checked').length < 1) {
+            alert("적어도 하나의 목차는 선택하세요!");
+            return false;
+        }
     });
 </script>
+</body>
 </html>

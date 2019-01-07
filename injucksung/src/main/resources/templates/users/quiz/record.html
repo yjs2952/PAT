@@ -6,10 +6,11 @@
 </head>
 <body>
 <h3>결과 페이지</h3>
-<th:block th:each="choice : ${choices}">
+<h4 th:text="${quizRecord.title}"></h4>
+<th:block th:each="selectedChoice : ${selectedChoices}">
     <p>
-        <span th:text="'문제 ID: '+${choice.key}"></span><br>
-        <span th:text="'선택한 보기: '+${choice.value}"></span>
+        <span th:text="'문제 ID: '+${selectedChoice.key}"></span><br>
+        <span th:text="'선택한 보기: '+${selectedChoice.value}"></span>
     </p>
 </th:block>
 </body>
