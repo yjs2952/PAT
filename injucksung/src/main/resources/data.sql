@@ -17,6 +17,8 @@ INSERT INTO book_content (book_id, name, parent_id, group_id, sequence, depth, i
 VALUES (1, '유형1 유의어', 4, 1, 4, 2, false, null);
 INSERT INTO book_content (book_id, name, parent_id, group_id, sequence, depth, is_mock_test, recommend_time)
 VALUES (1, '유형2 다의어', 4, 1, 5, 2, false, null);
+INSERT INTO book_content (book_id, name, parent_id, group_id, sequence, depth, is_mock_test, recommend_time)
+VALUES (1, '유형3 단어관계', 4, 1, 5, 2, false, null);
 -- 책, 책목차 끝
 
 -- 문제 유형 (카테고리)
@@ -77,6 +79,30 @@ VALUES ('위프트 언어 다의어 1번문제 해설.pdf', '6556-6678-3456-6678
 INSERT INTO question (question_category_id, book_content_id, book_number, content_file_id, explanation_file_id, correct,
                       choice_count)
 VALUES (4, 7, 1, 3, 3, 3, 5);
+
+INSERT INTO content_file (origin_name, saved_name, type, length, reg_date, path)
+VALUES ('위프트 언어 다의어 2번문제.pdf', '3554-5678-1234-5678', 'PDF', '100', now(), '/file/....');
+INSERT INTO explanation_file (origin_name, saved_name, type, length, reg_date, path)
+VALUES ('위프트 언어 다의어 2번문제 해설.pdf', '1236-6678-3456-6678', 'PDF', '120', now(), '/file/....');
+INSERT INTO question (question_category_id, book_content_id, book_number, content_file_id, explanation_file_id, correct,
+                      choice_count)
+VALUES (4, 7, 2, 4, 4, 4, 5);
+
+INSERT INTO content_file (origin_name, saved_name, type, length, reg_date, path)
+VALUES ('위프트 언어 단어관계 1번문제.pdf', '3554-5678-1234-5678', 'PDF', '100', now(), '/file/....');
+INSERT INTO explanation_file (origin_name, saved_name, type, length, reg_date, path)
+VALUES ('위프트 언어 단어관계 1번문제 해설.pdf', '1236-6678-3456-6678', 'PDF', '120', now(), '/file/....');
+INSERT INTO question (question_category_id, book_content_id, book_number, content_file_id, explanation_file_id, correct,
+                      choice_count)
+VALUES (4, 8, 1, 5, 5, 3, 5);
+
+INSERT INTO content_file (origin_name, saved_name, type, length, reg_date, path)
+VALUES ('위프트 언어 단어관계 2번문제.pdf', '3554-5678-1234-5678', 'PDF', '100', now(), '/file/....');
+INSERT INTO explanation_file (origin_name, saved_name, type, length, reg_date, path)
+VALUES ('위프트 언어 단어관계 2번문제 해설.pdf', '1236-6678-3456-6678', 'PDF', '120', now(), '/file/....');
+INSERT INTO question (question_category_id, book_content_id, book_number, content_file_id, explanation_file_id, correct,
+                      choice_count)
+VALUES (4, 8, 2, 6, 6, 4, 5);
 -- 문제 PDF파일 업로드, 문제 정보입력
 
 -- 시험기록
