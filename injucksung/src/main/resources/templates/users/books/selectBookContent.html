@@ -20,7 +20,7 @@ ISBN : <span th:text="${book.isbn}"></span><br>
         <h1 th:if="${bookContent.depth}<=0" th:text="${bookContent.name}"></h1>
         <h2 th:if="${bookContent.depth}==1" th:text="${bookContent.name}"></h2>
         <th:block th:if="${bookContent.depth}>=2">
-            <label th:text="${bookContent.name}"></label><input type="checkbox" name="bookContentId"
+            <label th:text="${bookContent.name}"></label><input type="checkbox" name="bookContentIds"
                                                                 th:value="${bookContent.id}">
         </th:block>
     </th:block>
