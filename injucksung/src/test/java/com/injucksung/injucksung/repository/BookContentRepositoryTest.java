@@ -1,7 +1,6 @@
 package com.injucksung.injucksung.repository;
 
 import com.injucksung.injucksung.domain.BookContent;
-import lombok.NonNull;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -12,6 +11,8 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
+import static com.injucksung.injucksung.repository.Print.print;
+
 @RunWith(SpringRunner.class)
 @DataJpaTest
 @Transactional
@@ -21,30 +22,23 @@ public class BookContentRepositoryTest {
 
     @Test
     public void bookId로_책목차_조회하기() throws Exception {
-        List<BookContent> bookContents = bookContentRepository.findBookContentByBookIdOrderByGroupIdAscSequenceAsc(1L);
-//        print(bookContents);
+        List<BookContent> bookContents = bookContentRepository.findBookContentByBookId(1L);
+        Assert.assertEquals(8, bookContents.size());
+        for (BookContent bookContent : bookContents) {
+            for (BookContent subBookContent : bookContent.getSubBookContents()) {
+                System.out.println("서브"+subBookContent.getName());
+            }
+        }
     }
 
     @Test
-    public void 책_목차ID로_책목차_한건_조회하기() throws Exception {
-        BookContent bookContentById = bookContentRepository.findBookContentById(1L);
+    public void 책목차ID로_책목차_한건_조회하기() throws Exception {
+        BookContent bookContentById = bookContentRepository.findBookContentById(4L);
         Assert.assertNotNull(bookContentById);
-    }
-
-    @Test
-    public void 책목차id와_sequence를_받아서_sequence_재정렬하기() throws Exception {
-        Long bookId = 1L;
-        Long groupId = 1L;
-        int sequnece = 2;
-
-        int sequence = bookContentRepository.findBookContentById(4L).getSequence();
-        System.out.println(sequence);
-        bookContentRepository.arrangeSequence();
-        bookContentRepository.flush();
-        int sequence2 = bookContentRepository.findBookContentById(4L).getSequence();
-        System.out.println(sequence2);
-
-        Assert.assertEquals(1, sequence2 - sequence);
+        System.out.println(bookContentById.getSuperBookContent().getName());
+        for (BookContent subBookContent : bookContentById.getSubBookContents()) {
+            System.out.println(subBookContent.getName());
+        }
     }
 
 }

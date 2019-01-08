@@ -24,12 +24,8 @@ public class BookContentServiceImpl implements BookContentService {
         BeanUtils.copyProperties(bookContentForm, bookContent);
 
         bookContent.setBook(bookRepository.findBookById(bookContentForm.getBookId()));
-        BookContent addBookContent = bookContentRepository.save(bookContent);
 
-        //그룹id가 없는 경우 대분류일 경우다.
-        if (bookContent.getGroupId() == null) bookContent.setGroupId(addBookContent.getId());
-
-        return bookContent;
+        return bookContentRepository.save(bookContent);
     }
 
     @Override
@@ -53,7 +49,7 @@ public class BookContentServiceImpl implements BookContentService {
     @Override
     @Transactional(readOnly = true)
     public List<BookContent> getBookContentList(Long bookId) {
-        return bookContentRepository.findBookContentByBookIdOrderByGroupIdAscSequenceAsc(bookId);
+        return bookContentRepository.findBookContentByBookId(bookId);
     }
 
     @Override
