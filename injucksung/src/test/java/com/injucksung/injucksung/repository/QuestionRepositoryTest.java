@@ -12,6 +12,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import static com.injucksung.injucksung.repository.Print.print;
@@ -37,6 +38,19 @@ public class QuestionRepositoryTest {
 //        Page<Question> questions = questionRepository.findQuestionByBookContentId(6L, pageable);
 //        Assert.assertEquals(2, questions.getTotalElements());
 //        print(questions);
+    }
+
+    @Test
+    public void bookContentId_List로_문제_조회하기() throws Exception {
+        List<Long> bookContentIds = new ArrayList<>();
+        bookContentIds.add(6L);
+        bookContentIds.add(7L);
+
+        List<Question> questionByBookContentId = questionRepository.findQuestionByBookContentId(bookContentIds);
+
+        //책 목차 아이디 6,7에 해당하는 문제의 갯수는 3이다.
+        Assert.assertEquals(3, questionByBookContentId.size());
+        print(questionByBookContentId);
     }
 
     @Test
