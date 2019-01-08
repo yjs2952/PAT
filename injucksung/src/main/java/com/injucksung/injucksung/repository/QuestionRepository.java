@@ -9,6 +9,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
 import java.util.List;
+import java.util.Set;
 
 public interface QuestionRepository extends JpaRepository<Question, Long> {
     //책 목차 id로 문제 조회하기
@@ -27,6 +28,10 @@ public interface QuestionRepository extends JpaRepository<Question, Long> {
     //문제 id로 문제 조회하기
 //    @Query(value = "SELECT q FROM Question q JOIN FETCH q.bookContent bc WHERE q.id =:id") // (책 목차까지 바로 FETCH 해오기)
     Question findQuestionById(@Param("id") Long id);
+
+    //문제 id가 여러개인 경우 해당 문제 조회하기
+    @Query(value = "SELECT q FROM Question q WHERE id IN :questionIds")
+    List<Question> findQuestionById(@Param("questionIds") Set<Long> questionIds);
 
     //책 목차 id로 연관된 문제 삭제하기
     void deleteByBookContentId(Long bookContentId);
