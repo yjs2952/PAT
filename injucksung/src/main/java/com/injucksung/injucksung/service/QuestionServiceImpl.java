@@ -1,8 +1,9 @@
 package com.injucksung.injucksung.service;
 
 import com.injucksung.injucksung.domain.Question;
-import com.injucksung.injucksung.dto.QuestionForm;
 import com.injucksung.injucksung.domain.enums.PageSize;
+import com.injucksung.injucksung.dto.QuestionForm;
+import com.injucksung.injucksung.dto.SelectedBookContentForQuizForm;
 import com.injucksung.injucksung.repository.BookContentRepository;
 import com.injucksung.injucksung.repository.QuestionCategoryRepository;
 import com.injucksung.injucksung.repository.QuestionRepository;
@@ -14,6 +15,8 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Arrays;
+import java.util.LinkedList;
 import java.util.List;
 
 @Service
@@ -52,6 +55,13 @@ public class QuestionServiceImpl implements QuestionService {
     @Transactional(readOnly = true)
     public List<Question> getQuestionList(Long bookContentId) {
         return questionRepository.findQuestionByBookContentId(bookContentId);
+    }
+
+    @Override
+    @Transactional(readOnly = true)
+    public List<Question> getQuestionList(SelectedBookContentForQuizForm selectedBookContentForQuizForm) {
+        List<Long> bookContentIds = Arrays.asList(selectedBookContentForQuizForm.getBookContentIds());
+        return questionRepository.findQuestionByBookContentId(bookContentIds);
     }
 
     @Override

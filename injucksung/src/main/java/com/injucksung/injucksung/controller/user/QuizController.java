@@ -3,7 +3,7 @@ package com.injucksung.injucksung.controller.user;
 import com.injucksung.injucksung.domain.Question;
 import com.injucksung.injucksung.domain.QuizRecord;
 import com.injucksung.injucksung.domain.Result;
-import com.injucksung.injucksung.dto.BookContentSelectForm;
+import com.injucksung.injucksung.dto.SelectedBookContentForQuizForm;
 import com.injucksung.injucksung.security.CustomUserDetails;
 import com.injucksung.injucksung.service.QuestionService;
 import com.injucksung.injucksung.service.QuizRecordService;
@@ -15,9 +15,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
-import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
-import java.util.Enumeration;
 import java.util.List;
 import java.util.Map;
 
@@ -31,19 +29,14 @@ public class QuizController {
 
     //문제 리스트 가져오기
     @GetMapping
-    public ModelAndView getQuestionList(@ModelAttribute BookContentSelectForm bookContentSelectForm,
+    public ModelAndView getQuestionList(@ModelAttribute SelectedBookContentForQuizForm selectedBookContentForQuizForm,
                                         ModelAndView modelAndView) {
         // TODO: checkbox를 하나도 선택 안한 경우의 예외처리
-        // TODO: for문 말고 join fetch로 해결하도록 하자 (임시용)
-        List<Question> questions = new ArrayList<>();
-        for (Long bookContentId : bookContentSelectForm.getBookContentId()) {
-            List<Question> content = questionService.getQuestionList(bookContentId);
-            if (content != null) {
-                questions.addAll(content);
-            }
-        }
+
+        List<Question> questions = questionService.getQuestionList(selectedBookContentForQuizForm);
+
         modelAndView.addObject("questions", questions);
-        if (bookContentSelectForm.getAction().equals("문제풀기")) modelAndView.setViewName("/users/quiz/solve");
+        if (selectedBookContentForQuizForm.getAction().equals("문제풀기")) modelAndView.setViewName("/users/quiz/solve");
         else modelAndView.setViewName("/users/quiz/grade");
         return modelAndView;
     }
