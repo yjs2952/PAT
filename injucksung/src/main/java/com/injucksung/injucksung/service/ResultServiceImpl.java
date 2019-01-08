@@ -39,19 +39,7 @@ public class ResultServiceImpl implements ResultService {
                     .build());
         }
 
-
-//        for (Map.Entry<Long, Integer> selectedChoice : selectedChoices.entrySet()) {
-//            Question questionById = questionRepository.findQuestionById(selectedChoice.getKey());
-//            boolean isCorrect = questionById.getCorrect() == selectedChoice.getValue();
-//            Result result = Result.builder()
-//                    .isCorrect(isCorrect).checkedChoice(selectedChoice.getValue())
-//                    .question(questionById).quizRecord(quizRecord)
-//                    .build();
-//            Result save = resultRepository.save(result);
-//            results.add(save);
-//        }
-
-        return results;
+        return resultRepository.saveAll(results);
     }
 
     @Override
