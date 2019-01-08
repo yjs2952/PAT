@@ -29,7 +29,7 @@ public class QuizRecordServiceImpl implements QuizRecordService {
     @Transactional
     public QuizRecord addQuizRecordService(Map<Long, Integer> selectedChoices, CustomUserDetails userDetails, int bookContentCount) {
         QuizRecord quizRecord = QuizRecord.builder()
-                .title(createQuizRecordTitle(selectedChoices.keySet(), bookContentCount).toString())
+                .title(createQuizRecordTitle(selectedChoices.keySet(), bookContentCount))
                 .user(userService.getUser(userDetails.getEmail()))
 //                .time() // TODO : 풀이 시간
                 .build();
@@ -38,7 +38,7 @@ public class QuizRecordServiceImpl implements QuizRecordService {
     }
 
     //QuizRecord(시험 목록)의 제목 만들기
-    private StringBuilder createQuizRecordTitle(Set<Long> questionIds, int bookContentCount) {
+    private String createQuizRecordTitle(Set<Long> questionIds, int bookContentCount) {
         StringBuilder title = new StringBuilder();
         Iterator<Long> iterator = questionIds.iterator();
         if (iterator.hasNext()) {
@@ -48,7 +48,7 @@ public class QuizRecordServiceImpl implements QuizRecordService {
             //제일 앞에 책 이름
             title.append(questionById.getBookContent().getBook().getName())
                     .append(" : ")
-                    //그 뒤에 대표로 들어갈 책 목차 이름
+                    //책 이름 뒤에 대표로 들어갈 책 목차 이름
                     .append(questionById.getBookContent().getName())
                     .append(" 영역");
         }
@@ -58,7 +58,7 @@ public class QuizRecordServiceImpl implements QuizRecordService {
             title.append(" 외 ").append(bookContentCount-1).append("건");
         }
 
-        return title;
+        return title.toString();
     }
 
     // TODO: 2018-12-18 이게 과연 필요할까?
