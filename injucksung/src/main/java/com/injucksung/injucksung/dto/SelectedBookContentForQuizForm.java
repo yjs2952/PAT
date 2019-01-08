@@ -6,6 +6,6 @@ import lombok.Setter;
 @Getter
 @Setter
 public class SelectedBookContentForQuizForm {
-    private Long[] bookContentId;
+    private Long[] bookContentIds;
     private String action;
 }
