@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -44,19 +45,23 @@ public class QuizController {
     //퀴즈 종료 후 결과
     @PostMapping
     public String submitQuiz(@RequestParam Map<String, String> selectedChoices, Model model) {
+        //Map 으로 넘어온 모든 파라미터 수정 (불필요한 csrf 제거, 타입을 String, String 에서 Long, Integer 로 변경)
         selectedChoices.remove("_csrf");
-        // TODO: selectedChoices의 타입을 Map<Long, Integer>로 바뀌게 하는걸 컨트롤러에서 하는게 좋은거 같다
+        Map<Long, Integer> typeCorrectedSelectedChoices = new HashMap<>();
+        for (Map.Entry<String, String> selectedChoice : selectedChoices.entrySet()) {
+            typeCorrectedSelectedChoices.put(Long.parseLong(selectedChoice.getKey()), Integer.parseInt(selectedChoice.getValue()));
+        }
 
-        //세션에 저장된 스프링 시큐리티 정보로 CumtomUserDetails 가져오기
+        //세션에 저장된 스프링 시큐리티 정보로 CustomUserDetails 가져오기
         CustomUserDetails userDetails = (CustomUserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 
         //QuizRecord 추가
-        QuizRecord quizRecord = quizRecordService.addQuizRecordService(selectedChoices, userDetails);
+        QuizRecord quizRecord = quizRecordService.addQuizRecordService(typeCorrectedSelectedChoices, userDetails);
 
-        //Record 추가
-        List<Result> results = resultService.addResult(selectedChoices, quizRecord);
+        //Result 추가
+        List<Result> results = resultService.addResult(typeCorrectedSelectedChoices, quizRecord);
 
-        //사용자에게 Record 보여주기
+        //사용자에게 result 보여주기
         model.addAttribute("quizRecord", quizRecord);
         model.addAttribute("results", results);
         return "/users/quiz/result";

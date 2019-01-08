@@ -27,14 +27,13 @@ public class QuizRecordServiceImpl implements QuizRecordService {
     }
 
     @Transactional
-    public QuizRecord addQuizRecordService(Map<String, String> selectedChoices, CustomUserDetails userDetails) {
+    public QuizRecord addQuizRecordService(Map<Long, Integer> selectedChoices, CustomUserDetails userDetails) {
         // TODO : for문안에 Repository는 구려보여 고민해봐야함
         //책 목차로 책 제목 만들기
-        Set<String> questionIds = selectedChoices.keySet();
-        StringBuffer titleString = new StringBuffer();
+        StringBuilder titleString = new StringBuilder();
 
-        for (String questionId : questionIds) {
-            String bookContentName = questionService.getQuestionById(Long.parseLong(questionId)).getBookContent().getName();
+        for (Long questionId : selectedChoices.keySet()) {
+            String bookContentName = questionService.getQuestionById(questionId).getBookContent().getName();
             if (bookContentName != null) {
                 titleString.append(bookContentName).append(", ");
             }
@@ -45,18 +44,7 @@ public class QuizRecordServiceImpl implements QuizRecordService {
 //                .time() // TODO : 풀이 시간
                 .build();
 
-        QuizRecord save = quizRecordRepository.save(quizRecord);
-        //TODO: 이건 Result로 가야
-//        for (Map.Entry<Long, Integer> choice : choices.entrySet()) {
-//            Question questionById = questionService.getQuestionById(choice.getKey());
-//            if (questionById.getCorrect() == choice.getValue()) {
-//                //정답
-//            } else {
-//                // 틀림
-//            }
-//        }
-
-        return save;
+        return quizRecordRepository.save(quizRecord);
     }
 
     // TODO: 2018-12-18 이게 과연 필요할까?

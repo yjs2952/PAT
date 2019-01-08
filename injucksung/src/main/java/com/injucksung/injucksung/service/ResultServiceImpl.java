@@ -25,14 +25,14 @@ public class ResultServiceImpl implements ResultService {
     }
 
     @Override
-    public List<Result> addResult(Map<String, String> selectedChoices, QuizRecord quizRecord) {
+    public List<Result> addResult(Map<Long, Integer> selectedChoices, QuizRecord quizRecord) {
         List<Result> results = new ArrayList<>();
         //TODO for문 X 성능 심히 구림
-        for (Map.Entry<String, String> selectedChoice : selectedChoices.entrySet()) {
-            Question questionById = questionRepository.findQuestionById(Long.parseLong(selectedChoice.getKey()));
-            boolean isCorrect = questionById.getCorrect() == Integer.parseInt(selectedChoice.getValue());
+        for (Map.Entry<Long, Integer> selectedChoice : selectedChoices.entrySet()) {
+            Question questionById = questionRepository.findQuestionById(selectedChoice.getKey());
+            boolean isCorrect = questionById.getCorrect() == selectedChoice.getValue();
             Result result = Result.builder()
-                    .isCorrect(isCorrect).checkedChoice(Integer.parseInt(selectedChoice.getValue()))
+                    .isCorrect(isCorrect).checkedChoice(selectedChoice.getValue())
                     .question(questionById).quizRecord(quizRecord)
                     .build();
             Result save = resultRepository.save(result);

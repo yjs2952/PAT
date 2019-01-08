@@ -11,7 +11,7 @@ public interface ResultService {
 
     Page<Result> getResultList(Long QuizResultId, int start);
 
-    List<Result> addResult(Map<String, String> selectedChoices, QuizRecord quizRecord);
+    List<Result> addResult(Map<Long, Integer> selectedChoices, QuizRecord quizRecord);
 
     int modifyResult(Result result);
 
