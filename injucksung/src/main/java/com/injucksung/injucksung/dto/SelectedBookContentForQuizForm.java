@@ -5,7 +5,7 @@ import lombok.Setter;
 
 @Getter
 @Setter
-public class BookContentSelectForm {
+public class SelectedBookContentForQuizForm {
     private Long[] bookContentId;
     private String action;
 }
