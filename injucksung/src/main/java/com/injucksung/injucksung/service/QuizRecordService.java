@@ -11,7 +11,7 @@ public interface QuizRecordService {
 
     Page<QuizRecord> getQuizRecordList(int start);
 
-    QuizRecord addQuizRecordService(Map<Long, Integer> selectedChoices, CustomUserDetails userDetails);
+    QuizRecord addQuizRecordService(Map<Long, Integer> selectedChoices, CustomUserDetails userDetails, int bookContentCount);
 
     // TODO: 2018-12-18 이게 과연 필요할까?
     int modifyQuizRecordService(QuizRecord quizRecord);

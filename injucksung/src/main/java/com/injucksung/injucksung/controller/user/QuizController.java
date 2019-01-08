@@ -15,7 +15,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -37,6 +36,7 @@ public class QuizController {
         List<Question> questions = questionService.getQuestionList(selectedBookContentForQuizForm);
 
         modelAndView.addObject("questions", questions);
+        modelAndView.addObject("bookContentCount", selectedBookContentForQuizForm.getBookContentIds().length);
         if (selectedBookContentForQuizForm.getAction().equals("문제풀기")) modelAndView.setViewName("/users/quiz/solve");
         else modelAndView.setViewName("/users/quiz/grade");
         return modelAndView;
@@ -47,6 +47,9 @@ public class QuizController {
     public String submitQuiz(@RequestParam Map<String, String> selectedChoices, Model model) {
         //Map 으로 넘어온 모든 파라미터 수정 (불필요한 csrf 제거, 타입을 String, String 에서 Long, Integer 로 변경)
         selectedChoices.remove("_csrf");
+        int bookContentCount =  Integer.parseInt(selectedChoices.get("bookContentCount"));
+        selectedChoices.remove("bookContentCount");
+
         Map<Long, Integer> typeCorrectedSelectedChoices = new HashMap<>();
         for (Map.Entry<String, String> selectedChoice : selectedChoices.entrySet()) {
             typeCorrectedSelectedChoices.put(Long.parseLong(selectedChoice.getKey()), Integer.parseInt(selectedChoice.getValue()));
@@ -56,7 +59,7 @@ public class QuizController {
         CustomUserDetails userDetails = (CustomUserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 
         //QuizRecord 추가
-        QuizRecord quizRecord = quizRecordService.addQuizRecordService(typeCorrectedSelectedChoices, userDetails);
+        QuizRecord quizRecord = quizRecordService.addQuizRecordService(typeCorrectedSelectedChoices, userDetails, bookContentCount);
 
         //Result 추가
         List<Result> results = resultService.addResult(typeCorrectedSelectedChoices, quizRecord);

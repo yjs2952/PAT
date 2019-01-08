@@ -22,6 +22,7 @@
             <input type="radio" th:if="${question.choiceCount}==5" th:name="${question.id}" th:value="5"/>5
         </div>
     </th:block>
+    <input type="hidden" name="bookContentCount" th:value="${bookContentCount}"/>
     <input type="submit" value="제출하기"/>
 </form>
 </body>
