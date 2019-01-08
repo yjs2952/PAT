@@ -34,8 +34,5 @@ public class QuizRecord {
 
     @Column (nullable = false)
     private String title;
-
-    @Column
-    private String book;
 }
 

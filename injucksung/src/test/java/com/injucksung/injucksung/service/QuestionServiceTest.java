@@ -1,6 +1,7 @@
 package com.injucksung.injucksung.service;
 
 import com.injucksung.injucksung.domain.*;
+import com.injucksung.injucksung.dto.SelectedBookContentForQuizForm;
 import com.injucksung.injucksung.repository.BookContentRepository;
 import com.injucksung.injucksung.repository.QuestionCategoryRepository;
 import org.junit.Assert;
@@ -11,8 +12,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.data.domain.Page;
+import org.springframework.stereotype.Component;
+import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
 
 import static com.injucksung.injucksung.repository.Print.print;
 
@@ -28,6 +33,17 @@ public class QuestionServiceTest {
 //    private QuestionCategoryRepository questionCategoryRepository;
 //    @Autowired
 //    private BookContentRepository bookContentRepository;
+
+    @Test
+    public void 책목차ID를_리스트로_넘겨서_문제_리스트_가져오기() throws Exception {
+        SelectedBookContentForQuizForm selectedBookContentForQuizForm = new SelectedBookContentForQuizForm();
+        Long[] bookContentIds = {6L, 7L};
+        selectedBookContentForQuizForm.setBookContentIds(bookContentIds);
+        selectedBookContentForQuizForm.setAction("채점하기");
+
+        List<Question> questionList = questionService.getQuestionList(selectedBookContentForQuizForm);
+        Assert.assertEquals(3, questionList.size());
+    }
 
     @Test
     public void 문제_하나_추가하기() throws Exception {
@@ -60,12 +76,6 @@ public class QuestionServiceTest {
     @Test
     public void 문제_하나_제거하기() throws Exception {
         questionService.deleteQuestion(1L);
-    }
-
-    @Test
-    public void 문제_리스트_가져오기() throws Exception {
-//        PageSize<Question> questionList = questionService.getQuestionList(6L);
-//        Assert.assertEquals(2, questionList.getTotalElements());
     }
 
 }

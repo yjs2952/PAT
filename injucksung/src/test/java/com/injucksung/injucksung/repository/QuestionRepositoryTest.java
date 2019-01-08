@@ -12,7 +12,10 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import static com.injucksung.injucksung.repository.Print.print;
 
@@ -40,6 +43,19 @@ public class QuestionRepositoryTest {
     }
 
     @Test
+    public void bookContentId_List로_문제_조회하기() throws Exception {
+        List<Long> bookContentIds = new ArrayList<>();
+        bookContentIds.add(6L);
+        bookContentIds.add(7L);
+
+        List<Question> questionByBookContentId = questionRepository.findQuestionByBookContentId(bookContentIds);
+
+        //책 목차 아이디 6,7에 해당하는 문제의 갯수는 3이다.
+        Assert.assertEquals(3, questionByBookContentId.size());
+        print(questionByBookContentId);
+    }
+
+    @Test
     public void bookId로_문제_조회하기() throws Exception {
         Pageable pageable = PageRequest.of(0, 5);
 //        Page<Question> questions = questionRepository.findQuestionByBookId(1L, pageable);
@@ -50,6 +66,19 @@ public class QuestionRepositoryTest {
     public void id로_문제_한건_조회하기() throws Exception {
         Question question = questionRepository.findQuestionById(2L);
         System.out.println(question.toString());
+    }
+
+    @Test
+    public void id_Set으로_문제_조회하기() throws Exception {
+        Set<Long> questionIds = new HashSet<>();
+        questionIds.add(1L);
+        questionIds.add(2L);
+        questionIds.add(3L);
+        questionIds.add(4L);
+
+        List<Question> questionById = questionRepository.findQuestionById(questionIds);
+        Assert.assertEquals(4,questionById.size());
+        print(questionById);
     }
 
     @Test
