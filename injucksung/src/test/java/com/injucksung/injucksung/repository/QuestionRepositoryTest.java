@@ -13,7 +13,9 @@ import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import static com.injucksung.injucksung.repository.Print.print;
 
@@ -64,6 +66,19 @@ public class QuestionRepositoryTest {
     public void id로_문제_한건_조회하기() throws Exception {
         Question question = questionRepository.findQuestionById(2L);
         System.out.println(question.toString());
+    }
+
+    @Test
+    public void id_Set으로_문제_조회하기() throws Exception {
+        Set<Long> questionIds = new HashSet<>();
+        questionIds.add(1L);
+        questionIds.add(2L);
+        questionIds.add(3L);
+        questionIds.add(4L);
+
+        List<Question> questionById = questionRepository.findQuestionById(questionIds);
+        Assert.assertEquals(4,questionById.size());
+        print(questionById);
     }
 
     @Test
