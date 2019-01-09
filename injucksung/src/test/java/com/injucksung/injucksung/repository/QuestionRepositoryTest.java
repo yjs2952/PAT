@@ -44,10 +44,7 @@ public class QuestionRepositoryTest {
 
     @Test
     public void bookContentId_List로_문제_조회하기() throws Exception {
-        List<Long> bookContentIds = new ArrayList<>();
-        bookContentIds.add(6L);
-        bookContentIds.add(7L);
-
+        Long[] bookContentIds = {6L, 7L};
         List<Question> questionByBookContentId = questionRepository.findQuestionByBookContentId(bookContentIds);
 
         //책 목차 아이디 6,7에 해당하는 문제의 갯수는 3이다.
