@@ -60,8 +60,8 @@ public class QuestionServiceImpl implements QuestionService {
     @Override
     @Transactional(readOnly = true)
     public List<Question> getQuestionList(SelectedBookContentForQuizForm selectedBookContentForQuizForm) {
-        List<Long> bookContentIds = Arrays.asList(selectedBookContentForQuizForm.getBookContentIds());
-        return questionRepository.findQuestionByBookContentId(bookContentIds);
+        return questionRepository.findQuestionByBookContentId
+                (selectedBookContentForQuizForm.getBookContentIds());
     }
 
     @Override
