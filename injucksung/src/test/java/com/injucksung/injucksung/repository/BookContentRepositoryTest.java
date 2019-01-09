@@ -24,11 +24,6 @@ public class BookContentRepositoryTest {
     public void bookId로_책목차_조회하기() throws Exception {
         List<BookContent> bookContents = bookContentRepository.findBookContentByBookId(1L);
         Assert.assertEquals(8, bookContents.size());
-        for (BookContent bookContent : bookContents) {
-            for (BookContent subBookContent : bookContent.getSubBookContents()) {
-                System.out.println("서브"+subBookContent.getName());
-            }
-        }
     }
 
     @Test
