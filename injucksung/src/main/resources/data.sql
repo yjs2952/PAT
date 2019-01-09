@@ -35,10 +35,10 @@ VALUES ('독해', 1, 'apt');
 -- 문제 유형 (카테고리) 끝
 
 -- 유저 권한
-# INSERT INTO role (name)
-# VALUES ('ADMIN');
-# INSERT INTO role (name)
-# VALUES ('USER');
+INSERT INTO role (name)
+VALUES ('ADMIN');
+INSERT INTO role (name)
+VALUES ('USER');
 -- 유저 권한 끝
 
 -- 유저

@@ -5,6 +5,7 @@ import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 
 import javax.persistence.*;
+import java.util.List;
 import java.util.Set;
 
 @Entity @Table(name = "book_content")
@@ -16,17 +17,18 @@ public class BookContent {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "book_id")
     @OnDelete(action = OnDeleteAction.CASCADE)
     private Book book;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "super_book_content_id", referencedColumnName = "id")
+    @JoinColumn(name = "super_book_content_id")
     private BookContent superBookContent;
 
-    @OneToMany(mappedBy = "superBookContent")
-    private Set<BookContent> subBookContents;
+    @OneToMany
+    @JoinColumn(name = "super_book_content_id")
+    private List<BookContent> subBookContents;
 
     @Column(length = 100, nullable = false)
     private String name;
