@@ -9,7 +9,7 @@ import java.util.Map;
 
 public interface ResultService {
 
-    Page<Result> getResultList(Long QuizResultId, int start);
+    Result getResult(Long QuizResultId);
 
     List<Result> addResult(Map<Long, Integer> selectedChoices, QuizRecord quizRecord);
 

@@ -20,8 +20,8 @@ public class ResultServiceImpl implements ResultService {
     private final QuestionRepository questionRepository;
 
     @Override
-    public Page<Result> getResultList(Long QuizResultId, int start) {
-        return null;
+    public Result getResult(Long resultId) {
+        return resultRepository.findResultById(resultId);
     }
 
     @Override
