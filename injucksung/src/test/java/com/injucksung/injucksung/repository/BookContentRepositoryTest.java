@@ -2,6 +2,7 @@ package com.injucksung.injucksung.repository;
 
 import com.injucksung.injucksung.domain.BookContent;
 import org.junit.Assert;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,6 +25,12 @@ public class BookContentRepositoryTest {
     public void bookId로_책목차_조회하기() throws Exception {
         List<BookContent> bookContents = bookContentRepository.findBookContentByBookId(1L);
         Assert.assertEquals(8, bookContents.size());
+    }
+
+    @Test
+    public void bookId로_책목차_중_대분류만_조회하기() throws Exception {
+        List<BookContent> bookContents = bookContentRepository.findBookContentByBookIdAndDepthEqualsZero(1L);
+        Assert.assertEquals(3, bookContents.size());
     }
 
     @Test
