@@ -20,8 +20,8 @@ public class ResultServiceImpl implements ResultService {
     private final QuestionRepository questionRepository;
 
     @Override
-    public Result getResult(Long resultId) {
-        return resultRepository.findResultById(resultId);
+    public List<Result> getResults(Long quizRecordId) {
+        return resultRepository.findResultByQuizRecordId(quizRecordId);
     }
 
     @Override

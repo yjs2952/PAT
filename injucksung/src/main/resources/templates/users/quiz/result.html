@@ -6,7 +6,8 @@
 </head>
 <body>
 <h3>결과 페이지</h3>
-<h4 th:text="${quizRecord.title}"></h4>
+<!-- TODO quizRecord ? 없애기 -->
+<h4 th:text="${quizRecord?.title}"></h4>
 <th:block th:each="result : ${results}">
     <p>
         <span th:text="'문제 ID: '+${result.question.id}"></span><br>

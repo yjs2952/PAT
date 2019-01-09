@@ -21,7 +21,7 @@
     </thead>
     <tbody>
     <tr th:each="quizRecord : ${quizRecordPage.content}">
-        <td th:text="${quizRecord.title}"></td>
+        <td><a th:text="${quizRecord.title}" th:href="@{'/users/'+${quizRecord.user.id}+'/results/'+${quizRecord.id}}"></a></td>
         <td th:text="${quizRecord.date}"></td>
         <td th:text="${quizRecord.id}"></td>
         <td th:text="${quizRecord.user.id}"></td>
