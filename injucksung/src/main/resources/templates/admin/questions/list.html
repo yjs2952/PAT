@@ -22,7 +22,6 @@
     </tr>
     </thead>
     <tbody>
-    <tr></tr>
     <tr th:each="question : ${questionPage.content}">
         <td th:text="${question.questionCategory.name}"></td>
         <td th:text="${question.bookContent.name}"></td>

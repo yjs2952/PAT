@@ -1,0 +1,35 @@
+<!DOCTYPE HTML>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <th:block th:insert="fragments/header :: common-header"></th:block>
+    <title>시험 목록 페이지</title>
+</head>
+<body>
+<h3>시험 목록 페이지</h3>
+<table>
+    <thead>
+    <tr>
+        <th>제목</th>
+        <th>응시한 시간</th>
+        <th>id</th>
+        <th>userid</th>
+
+        <th>맞춘갯수</th>
+        <th>총 갯수</th>
+        <th>시간</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="quizRecord : ${quizRecordPage.content}">
+        <td><a th:text="${quizRecord.title}" th:href="@{'/users/'+${quizRecord.user.id}+'/results/'+${quizRecord.id}}"></a></td>
+        <td th:text="${quizRecord.date}"></td>
+        <td th:text="${quizRecord.id}"></td>
+        <td th:text="${quizRecord.user.id}"></td>
+        <td th:text="${quizRecord.correctCount}"></td>
+        <td th:text="${quizRecord.totalCount}"></td>
+        <td th:text="${quizRecord.time}"></td>
+    </tr>
+    </tbody>
+</table>
+</body>
+</html>

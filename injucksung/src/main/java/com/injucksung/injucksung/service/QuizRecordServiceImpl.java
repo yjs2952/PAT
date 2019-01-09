@@ -2,11 +2,13 @@ package com.injucksung.injucksung.service;
 
 import com.injucksung.injucksung.domain.Question;
 import com.injucksung.injucksung.domain.QuizRecord;
-import com.injucksung.injucksung.repository.BookContentRepository;
+import com.injucksung.injucksung.domain.enums.PageSize;
 import com.injucksung.injucksung.repository.QuizRecordRepository;
 import com.injucksung.injucksung.security.CustomUserDetails;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -19,11 +21,12 @@ import java.util.Set;
 public class QuizRecordServiceImpl implements QuizRecordService {
     private final QuizRecordRepository quizRecordRepository;
     private final QuestionService questionService;
-    private final BookContentRepository bookContentRepository;
     private final UserService userService;
 
-    public Page<QuizRecord> getQuizRecordList(int start) {
-        return null;
+    @Transactional(readOnly = true)
+    public Page<QuizRecord> getQuizRecordList(Long userId, int start) {
+        PageRequest pageRequest = PageRequest.of(start, PageSize.QUIZ_RECORD.getLimit());
+        return quizRecordRepository.findQuizRecordByUserId(userId, pageRequest);
     }
 
     @Transactional

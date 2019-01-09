@@ -41,6 +41,6 @@ public class UserBookController {
         List<BookContent> bookContentList = bookContentService.getBookContentList(bookId);
         if (bookContentList != null) model.addAttribute("bookContentList", bookContentList);
 
-        return "/users/books/selectBookContent";
+        return "/users/books/selectingBookContent";
     }
 }

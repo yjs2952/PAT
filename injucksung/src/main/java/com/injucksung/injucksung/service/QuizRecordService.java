@@ -4,12 +4,11 @@ import com.injucksung.injucksung.domain.QuizRecord;
 import com.injucksung.injucksung.security.CustomUserDetails;
 import org.springframework.data.domain.Page;
 
-import javax.servlet.http.HttpSession;
 import java.util.Map;
 
 public interface QuizRecordService {
 
-    Page<QuizRecord> getQuizRecordList(int start);
+    Page<QuizRecord> getQuizRecordList(Long userId, int start);
 
     QuizRecord addQuizRecordService(Map<Long, Integer> selectedChoices, CustomUserDetails userDetails, int bookContentCount);
 

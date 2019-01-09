@@ -10,17 +10,17 @@ public class BookContentForm {
     private Boolean isMockTest;
     private Integer recommendTime;
     private Long bookId;
-    private Long groupId;
+    private Long bookContentId;
     private Integer sequence;
     private Integer depth;
     private Integer questionCount;
 
-    public BookContentForm(String name, Boolean isMockTest, Integer recommendTime, Long bookId, Long groupId, Integer sequence, Integer depth) {
+    public BookContentForm(String name, Boolean isMockTest, Integer recommendTime, Long bookId, Long bookContentId, Integer sequence, Integer depth) {
         this.name = name;
         this.isMockTest = isMockTest;
         this.recommendTime = recommendTime;
         this.bookId = bookId;
-        this.groupId = groupId;
+        this.bookContentId = bookContentId;
         this.sequence = sequence;
         this.depth = depth;
         this.questionCount = 0;

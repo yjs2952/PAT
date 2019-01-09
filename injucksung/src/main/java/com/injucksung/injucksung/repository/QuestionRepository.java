@@ -18,7 +18,7 @@ public interface QuestionRepository extends JpaRepository<Question, Long> {
 
     //책 목차 id가 여러개인 경우(list) 해당 문제 조회하기
     @Query(value = "SELECT q FROM Question q JOIN FETCH q.bookContent bc JOIN FETCH q.questionCategory qc WHERE book_content_id IN :bookContentIds")
-    List<Question> findQuestionByBookContentId(@Param("bookContentIds") List<Long> bookContentIds);
+    List<Question> findQuestionByBookContentId(@Param("bookContentIds") Long[] bookContentIds);
 
     //책 id로 문제 조회하기
     //@Query(value = "SELECT * FROM question q JOIN book_content bc ON q.book_content_id = bc.id WHERE bc.book_id =:bookId", nativeQuery = true)
