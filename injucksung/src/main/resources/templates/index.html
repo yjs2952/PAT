@@ -13,6 +13,6 @@
 <a th:if="${user} == null" th:href="@{/users}">회원가입</a><br><br>
 
 <a th:if="${user} != null" th:href="@{/books}">책목록 보기 (문제풀기 / 채점하기)</a><br>
-<a th:if="${user} != null" th:href="@{'/users/'+${user.id}+'/quiz-records'}">이전에 응시했던 시험 목록</a>
+<a th:if="${user} != null" th:href="@{'/users/'+${user.id}+'/results'}">이전에 응시했던 시험 목록</a>
 </body>
 </html>

@@ -1,18 +1,17 @@
 package com.injucksung.injucksung.controller.user;
 
-import com.injucksung.injucksung.domain.QuizRecord;
-import com.injucksung.injucksung.dto.SelectedBookContentForQuizForm;
 import com.injucksung.injucksung.service.QuizRecordService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 @RequiredArgsConstructor
-@RequestMapping("/users/{userId}/quiz-records")
+@RequestMapping("/users/{userId}/results")
 public class QuizRecordController {
     private final QuizRecordService quizRecordService;
 
