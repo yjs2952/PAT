@@ -13,6 +13,10 @@ public interface BookContentRepository extends JpaRepository<BookContent, Long> 
     @Query(value = "SELECT bc FROM BookContent bc WHERE book_id = :bookId")
     List<BookContent> findBookContentByBookId(@Param("bookId") Long bookId);
 
+    //책 id로 검색하여 책 목차 중 대분류(depth=0) 조회하기
+    @Query(value = "SELECT bc FROM BookContent bc WHERE book_id = :bookId AND depth = 0")
+    List<BookContent> findBookContentByBookIdAndDepthEqualsZero(@Param("bookId") Long bookId);
+
     //책 목차 id로 책목차 한건 조회하기
     BookContent findBookContentById(Long id);
 
