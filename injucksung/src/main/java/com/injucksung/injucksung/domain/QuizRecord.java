@@ -17,8 +17,7 @@ public class QuizRecord {
     @ManyToOne
     @JoinColumn(name = "user_id",nullable = false)
     private User user;
-
-    //@Column(nullable = false)
+    
     @Temporal(TemporalType.TIMESTAMP)
     @Column(columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
     private Date date;
