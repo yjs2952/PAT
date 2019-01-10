@@ -15,11 +15,11 @@
             <span th:text="${question.bookNumber}"></span><br>
         </div>
         <div>
-            <input type="radio" th:name="${question.id}" th:value="1"/>1
-            <input type="radio" th:name="${question.id}" th:value="2"/>2
-            <input type="radio" th:name="${question.id}" th:value="3"/>3
-            <input type="radio" th:name="${question.id}" th:value="4"/>4
-            <input type="radio" th:if="${question.choiceCount}==5" th:name="${question.id}" th:value="5"/>5
+            <input type="radio" th:name="${question.id}" th:value="1" required/>1
+            <input type="radio" th:name="${question.id}" th:value="2" required/>2
+            <input type="radio" th:name="${question.id}" th:value="3" required/>3
+            <input type="radio" th:name="${question.id}" th:value="4" required/>4
+            <input type="radio" th:if="${question.choiceCount}==5" th:name="${question.id}" th:value="5" required(/>5
         </div>
     </th:block>
     <input type="hidden" name="bookContentCount" th:value="${bookContentCount}"/>

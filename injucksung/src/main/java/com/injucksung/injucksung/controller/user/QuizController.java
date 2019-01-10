@@ -37,8 +37,8 @@ public class QuizController {
 
         modelAndView.addObject("questions", questions);
         modelAndView.addObject("bookContentCount", selectedBookContentForQuizForm.getBookContentIds().length);
-        if (selectedBookContentForQuizForm.getAction().equals("문제풀기")) modelAndView.setViewName("/users/quiz/solve");
-        else modelAndView.setViewName("/users/quiz/grade");
+        if (selectedBookContentForQuizForm.getAction().equals("문제풀기")) modelAndView.setViewName("/users/quiz/solving");
+        else modelAndView.setViewName("/users/quiz/grading");
         return modelAndView;
     }
 
