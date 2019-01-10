@@ -11,6 +11,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Collections;
 import java.util.List;
 
 @Controller
@@ -63,10 +64,23 @@ public class BookController {
         model.addAttribute("book", bookService.getBook(bookId));
 
         //책의 책목차 데이터
-        List<BookContent> bookContentList = bookContentService.getBookContentList(bookId);
-        if (bookContentList != null) model.addAttribute("bookContentList", bookContentList);
+        List<BookContent> bookContentList = sortBookContents(
+                bookContentService.getBookContentList(bookId));
 
+        model.addAttribute("bookContentList", bookContentList);
         return "/admin/books/detail";
+    }
+
+    private List<BookContent> sortBookContents(List<BookContent> bookContentList) {
+        for (int i = 0; i < bookContentList.size(); i++) {
+            BookContent bookContent = bookContentList.get(i);
+            BookContent superBookContent = bookContent.getSuperBookContent();
+            if (superBookContent != null) {
+                Collections.swap(bookContentList,
+                        i, bookContentList.indexOf(superBookContent) + 1 + bookContent.getSequence());
+            }
+        }
+        return bookContentList;
     }
 
     //책 삭제하기
