@@ -3,6 +3,7 @@ package com.injucksung.injucksung.service;
 import com.injucksung.injucksung.domain.Question;
 import com.injucksung.injucksung.domain.QuizRecord;
 import com.injucksung.injucksung.domain.enums.PageSize;
+import com.injucksung.injucksung.dto.SubmittedQuizInfoDto;
 import com.injucksung.injucksung.repository.QuizRecordRepository;
 import com.injucksung.injucksung.security.CustomUserDetails;
 import lombok.RequiredArgsConstructor;
@@ -30,9 +31,9 @@ public class QuizRecordServiceImpl implements QuizRecordService {
     }
 
     @Transactional
-    public QuizRecord addQuizRecordService(Map<Long, Integer> selectedChoices, CustomUserDetails userDetails, int bookContentCount) {
+    public QuizRecord addQuizRecordService(SubmittedQuizInfoDto submittedQuizInfoDto, CustomUserDetails userDetails) {
         QuizRecord quizRecord = QuizRecord.builder()
-                .title(createQuizRecordTitle(selectedChoices.keySet(), bookContentCount))
+                .title(createQuizRecordTitle(submittedQuizInfoDto))
                 .user(userService.getUser(userDetails.getEmail()))
 //                .time() // TODO : 풀이 시간
                 .build();
@@ -41,9 +42,9 @@ public class QuizRecordServiceImpl implements QuizRecordService {
     }
 
     //QuizRecord(시험 목록)의 제목 만들기
-    private String createQuizRecordTitle(Set<Long> questionIds, int bookContentCount) {
+    private String createQuizRecordTitle(SubmittedQuizInfoDto submittedQuizInfoDto) {
         StringBuilder title = new StringBuilder();
-        Iterator<Long> iterator = questionIds.iterator();
+        Iterator<Long> iterator = submittedQuizInfoDto.getSelectedChoices().keySet().iterator();
         if (iterator.hasNext()) {
             //책 이름과 책목차 한가지를 생성한다.
             Question questionById = questionService.getQuestionById(iterator.next());
@@ -57,6 +58,7 @@ public class QuizRecordServiceImpl implements QuizRecordService {
         }
 
         //위에 적힌 제목이외에 여러 영역을 응시한 경우
+        int bookContentCount = submittedQuizInfoDto.getBookContentCount();
         if (bookContentCount > 1) {
             title.append(" 외 ").append(bookContentCount-1).append("건");
         }
