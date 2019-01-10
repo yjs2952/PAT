@@ -9,6 +9,7 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Collections;
 import java.util.List;
 
 @Service
@@ -49,7 +50,19 @@ public class BookContentServiceImpl implements BookContentService {
     @Override
     @Transactional(readOnly = true)
     public List<BookContent> getBookContentList(Long bookId) {
-        return bookContentRepository.findBookContentByBookId(bookId);
+        return sortBookContents(bookContentRepository.findBookContentByBookId(bookId));
+    }
+
+    private List<BookContent> sortBookContents(List<BookContent> bookContentList) {
+        for (int i = 0; i < bookContentList.size(); i++) {
+            BookContent bookContent = bookContentList.get(i);
+            BookContent superBookContent = bookContent.getSuperBookContent();
+            if (superBookContent != null) {
+                Collections.swap(bookContentList,
+                        i, bookContentList.indexOf(superBookContent) + 1 + bookContent.getSequence());
+            }
+        }
+        return bookContentList;
     }
 
     @Override
