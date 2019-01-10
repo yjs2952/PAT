@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 @RequiredArgsConstructor
-@RequestMapping("/users/{userId}/results")
+@RequestMapping("/users/{userId}/quiz-records")
 public class QuizRecordController {
     private final QuizRecordService quizRecordService;
     private final ResultService resultService;
@@ -23,7 +23,7 @@ public class QuizRecordController {
                                  @RequestParam(value = "start", defaultValue = "0") int start,
                                  Model model) {
         model.addAttribute("quizRecordPage", quizRecordService.getQuizRecordList(userId, start));
-        return "/users/quiz/quizRecord";
+        return "/users/quiz/quizRecordList";
     }
 
 
