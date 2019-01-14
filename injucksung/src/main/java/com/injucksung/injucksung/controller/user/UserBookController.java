@@ -39,7 +39,7 @@ public class UserBookController {
 
         //책의 책목차 데이터
         List<BookContent> bookContentList = bookContentService.getBookContentList(bookId);
-        if (bookContentList != null) model.addAttribute("bookContentList", bookContentList);
+        model.addAttribute("bookContentList", bookContentList);
 
         return "/users/books/selectingBookContent";
     }

@@ -9,6 +9,7 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Collections;
 import java.util.List;
 
 @Service
@@ -22,7 +23,9 @@ public class BookContentServiceImpl implements BookContentService {
     public BookContent addBookContent(BookContentForm bookContentForm) {
         BookContent bookContent = new BookContent();
         BeanUtils.copyProperties(bookContentForm, bookContent);
-
+        if (bookContent.getSuperBookContent() == null) {
+            bookContent.setSequence(bookContentRepository.findBookContentDepthEqualsZero().size());
+        }
         bookContent.setBook(bookRepository.findBookById(bookContentForm.getBookId()));
 
         return bookContentRepository.save(bookContent);
@@ -31,7 +34,23 @@ public class BookContentServiceImpl implements BookContentService {
     @Override
     @Transactional
     public void deleteBookContent(Long id) {
+        arrangeSequencePull(id);
         bookContentRepository.deleteById(id);
+    }
+
+    //삭제 시에 sequence (정렬 순서) 재정렬
+    private void arrangeSequencePull(Long id) {
+        BookContent bookContentById = bookContentRepository.findBookContentById(id);
+        Integer sequence = bookContentById.getSequence();
+        Long superBookContentId = null;
+        try {
+            superBookContentId = bookContentById.getSuperBookContent().getId();
+        } catch (NullPointerException e) {
+            e.printStackTrace();
+            //TODO 대분류 삭제시에 별개로 처리하기 
+            return;
+        }
+        bookContentRepository.arrangeSequencePull(superBookContentId, sequence);
     }
 
     @Override
@@ -49,7 +68,21 @@ public class BookContentServiceImpl implements BookContentService {
     @Override
     @Transactional(readOnly = true)
     public List<BookContent> getBookContentList(Long bookId) {
-        return bookContentRepository.findBookContentByBookId(bookId);
+        return sortBookContents(bookContentRepository.findBookContentByBookId(bookId));
+    }
+
+    private List<BookContent> sortBookContents(List<BookContent> bookContentList) {
+        //TODO 책 목차 정렬하는 알고리즘 고민중 (현재 정렬 잘 안됨)
+        for (int i = 0; i < bookContentList.size(); i++) {
+            BookContent bookContent = bookContentList.get(i);
+            BookContent superBookContent = bookContent.getSuperBookContent();
+            if (superBookContent != null) {
+                Collections.swap(bookContentList,
+                        i, bookContentList.indexOf(superBookContent) + 1 + bookContent.getSequence());
+            }
+        }
+
+        return bookContentList;
     }
 
     @Override

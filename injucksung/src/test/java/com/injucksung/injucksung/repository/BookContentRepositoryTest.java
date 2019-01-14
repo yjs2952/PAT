@@ -28,12 +28,6 @@ public class BookContentRepositoryTest {
     }
 
     @Test
-    public void bookId로_책목차_중_대분류만_조회하기() throws Exception {
-        List<BookContent> bookContents = bookContentRepository.findBookContentByBookIdAndDepthEqualsZero(1L);
-        Assert.assertEquals(3, bookContents.size());
-    }
-
-    @Test
     public void 책목차ID로_책목차_한건_조회하기() throws Exception {
         BookContent bookContentById = bookContentRepository.findBookContentById(4L);
         Assert.assertNotNull(bookContentById);

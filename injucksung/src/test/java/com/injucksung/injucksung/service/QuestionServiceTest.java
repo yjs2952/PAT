@@ -10,6 +10,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
+import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Component;
@@ -23,9 +24,8 @@ import static com.injucksung.injucksung.repository.Print.print;
 
 
 @RunWith(SpringRunner.class)
-@DataJpaTest
+@SpringBootTest
 @Transactional
-@ComponentScan
 public class QuestionServiceTest {
     @Autowired
     private QuestionService questionService;
@@ -47,7 +47,7 @@ public class QuestionServiceTest {
 
     @Test
     public void 문제_하나_추가하기() throws Exception {
-        //샘플데이터
+//        샘플데이터
 //        ContentFile contentFile = new ContentFile("위포트 언어 다의어 2번문제.pdf", "3535-4646-5757-6868", "PDF", "150", "/file/....");
 //        ExplanationFile explanationFile = new ExplanationFile("위포트 언어 다의어 2번문제 해설.pdf", "0987-9877-8765-6543", "PDF", "100", "/file/....");
 //        Question Question = new Question(contentFile, explanationFile, 4, 0, 0, 5);

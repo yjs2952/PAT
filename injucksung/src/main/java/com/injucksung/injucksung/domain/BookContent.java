@@ -26,8 +26,7 @@ public class BookContent {
     @JoinColumn(name = "super_book_content_id")
     private BookContent superBookContent;
 
-    @OneToMany
-    @JoinColumn(name = "super_book_content_id")
+    @OneToMany(mappedBy = "superBookContent", cascade = CascadeType.ALL)
     private List<BookContent> subBookContents;
 
     @Column(length = 100, nullable = false)

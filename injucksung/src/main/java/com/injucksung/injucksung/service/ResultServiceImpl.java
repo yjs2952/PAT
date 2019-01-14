@@ -3,15 +3,14 @@ package com.injucksung.injucksung.service;
 import com.injucksung.injucksung.domain.Question;
 import com.injucksung.injucksung.domain.QuizRecord;
 import com.injucksung.injucksung.domain.Result;
+import com.injucksung.injucksung.dto.SubmittedQuizInfoDto;
 import com.injucksung.injucksung.repository.QuestionRepository;
 import com.injucksung.injucksung.repository.ResultRepository;
 import lombok.RequiredArgsConstructor;
-import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 @Service
 @RequiredArgsConstructor
@@ -25,15 +24,16 @@ public class ResultServiceImpl implements ResultService {
     }
 
     @Override
-    public List<Result> addResult(Map<Long, Integer> selectedChoices, QuizRecord quizRecord) {
+    public List<Result> addResult(SubmittedQuizInfoDto submittedQuizInfoDto, QuizRecord quizRecord) {
         List<Result> results = new ArrayList<>();
-        List<Question> questions = questionRepository.findQuestionById(selectedChoices.keySet());
+        List<Question> questions = questionRepository.findQuestionById(submittedQuizInfoDto.getSelectedChoices().keySet());
 
         for (Question question : questions) {
+            Integer chosenNum = submittedQuizInfoDto.getSelectedChoices().get(question.getId());
             results.add(
                     Result.builder()
-                    .isCorrect(question.getCorrect() == selectedChoices.get(question.getId()))
-                    .checkedChoice(selectedChoices.get(question.getId()))
+                    .isCorrect(question.getCorrect() == chosenNum)
+                    .checkedChoice(chosenNum)
                     .question(question)
                     .quizRecord(quizRecord)
                     .build());

@@ -10,20 +10,18 @@ import java.util.List;
 
 public interface BookContentRepository extends JpaRepository<BookContent, Long> {
     //책 id로 검색하여 책 목차 조회하기
-    @Query(value = "SELECT bc FROM BookContent bc WHERE book_id = :bookId")
+    @Query(value = "SELECT bc FROM BookContent bc WHERE book_id = :bookId ORDER BY bc.depth, bc.sequence ASC")
     List<BookContent> findBookContentByBookId(@Param("bookId") Long bookId);
-
-    //책 id로 검색하여 책 목차 중 대분류(depth=0) 조회하기
-    @Query(value = "SELECT bc FROM BookContent bc WHERE book_id = :bookId AND depth = 0")
-    List<BookContent> findBookContentByBookIdAndDepthEqualsZero(@Param("bookId") Long bookId);
 
     //책 목차 id로 책목차 한건 조회하기
     BookContent findBookContentById(Long id);
 
-    //TODO 하위 목차 구현하기 참조하는 방식으로 바꾸자
-//    @Query(value = "update BookContent bc set bc.sequence = bc.sequence+1 where bc.book.id = :bookId and bc.groupId = :groupId and bc.sequence >= :sequence")
-//    @Modifying
-//    @Query("update BookContent bc set bc.sequence = bc.sequence+1 where bc.groupId = 1 and bc.sequence > 2")
-    @Query(value = "UPDATE book_content SET sequence = sequence+1", nativeQuery = true)
-    void arrangeSequence();
+    //대분류 인것만 가져오기
+    @Query(value = "SELECT bc FROM BookContent bc WHERE depth = 0")
+    List<BookContent> findBookContentDepthEqualsZero();
+
+//    @Query("UPDATE BookContent bc SET bc.sequence = bc.sequence-1 WHERE bc.id in (SELECT bc1.id FROM BookContent bc1 LEFT JOIN bc1.supBookContent sbc WHERE bc.super_book_content_id = :superBookContentId AND bc.sequence > :sequence")
+    @Modifying
+    @Query(value = "UPDATE book_content SET sequence = sequence - 1 WHERE super_book_content_id = :superBookContentId AND sequence > :sequence", nativeQuery = true)
+    void arrangeSequencePull(@Param("superBookContentId") Long superBookContentId, @Param("sequence") Integer sequence);
 }

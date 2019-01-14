@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 @RequiredArgsConstructor
-@RequestMapping("/users/{userId}/results")
+@RequestMapping("/users/{userId}/quiz-records")
 public class QuizRecordController {
     private final QuizRecordService quizRecordService;
     private final ResultService resultService;
@@ -20,12 +20,11 @@ public class QuizRecordController {
     //시험 목록 가져오기
     @GetMapping
     public String getResults(@PathVariable Long userId,
-                                 @RequestParam(value = "start", defaultValue = "0") int start,
-                                 Model model) {
+                             @RequestParam(value = "start", defaultValue = "0") int start,
+                             Model model) {
         model.addAttribute("quizRecordPage", quizRecordService.getQuizRecordList(userId, start));
-        return "/users/quiz/quizRecord";
+        return "/users/quiz/quizRecordList";
     }
-
 
     //결과 페이지 한건 가져오기
     @GetMapping("/{quizRecordId}")
@@ -34,5 +33,4 @@ public class QuizRecordController {
         model.addAttribute("results", resultService.getResults(quizRecordId));
         return "/users/quiz/result";
     }
-
 }

@@ -2,6 +2,7 @@ package com.injucksung.injucksung.service;
 
 import com.injucksung.injucksung.domain.QuizRecord;
 import com.injucksung.injucksung.domain.Result;
+import com.injucksung.injucksung.dto.SubmittedQuizInfoDto;
 import org.springframework.data.domain.Page;
 
 import java.util.List;
@@ -11,7 +12,7 @@ public interface ResultService {
 
     List<Result> getResults(Long quizRecordId);
 
-    List<Result> addResult(Map<Long, Integer> selectedChoices, QuizRecord quizRecord);
+    List<Result> addResult(SubmittedQuizInfoDto submittedQuizInfoDto, QuizRecord quizRecord);
 
     int modifyResult(Result result);
 

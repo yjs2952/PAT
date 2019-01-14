@@ -95,7 +95,6 @@ public class QuestionRepositoryTest {
 //        aptitudeQuestion.setBookNumber(2);
 //
 //        questionRepository.save(aptitudeQuestion);
-//        questionRepository.flush();
 //
 //        Assert.assertEquals(4L, questionRepository.findQuestionById(4L).getId().longValue());
     }
