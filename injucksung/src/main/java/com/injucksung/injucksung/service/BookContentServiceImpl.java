@@ -23,7 +23,9 @@ public class BookContentServiceImpl implements BookContentService {
     public BookContent addBookContent(BookContentForm bookContentForm) {
         BookContent bookContent = new BookContent();
         BeanUtils.copyProperties(bookContentForm, bookContent);
-
+        if (bookContent.getSuperBookContent() == null) {
+            bookContent.setSequence(bookContentRepository.findBookContentDepthEqualsZero().size());
+        }
         bookContent.setBook(bookRepository.findBookById(bookContentForm.getBookId()));
 
         return bookContentRepository.save(bookContent);
@@ -40,7 +42,14 @@ public class BookContentServiceImpl implements BookContentService {
     private void arrangeSequencePull(Long id) {
         BookContent bookContentById = bookContentRepository.findBookContentById(id);
         Integer sequence = bookContentById.getSequence();
-        Long superBookContentId = bookContentById.getSuperBookContent().getId();
+        Long superBookContentId = null;
+        try {
+            superBookContentId = bookContentById.getSuperBookContent().getId();
+        } catch (NullPointerException e) {
+            e.printStackTrace();
+            //TODO 대분류 삭제시에 별개로 처리하기 
+            return;
+        }
         bookContentRepository.arrangeSequencePull(superBookContentId, sequence);
     }
 

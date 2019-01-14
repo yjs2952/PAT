@@ -16,6 +16,9 @@ public interface BookContentRepository extends JpaRepository<BookContent, Long> 
     //책 목차 id로 책목차 한건 조회하기
     BookContent findBookContentById(Long id);
 
+    //대분류 인것만 가져오기
+    @Query(value = "SELECT bc FROM BookContent bc WHERE depth = 0")
+    List<BookContent> findBookContentDepthEqualsZero();
 
 //    @Query("UPDATE BookContent bc SET bc.sequence = bc.sequence-1 WHERE bc.id in (SELECT bc1.id FROM BookContent bc1 LEFT JOIN bc1.supBookContent sbc WHERE bc.super_book_content_id = :superBookContentId AND bc.sequence > :sequence")
     @Modifying
