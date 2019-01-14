@@ -54,6 +54,7 @@ public class BookContentServiceImpl implements BookContentService {
     }
 
     private List<BookContent> sortBookContents(List<BookContent> bookContentList) {
+        //TODO 책 목차 정렬하는 알고리즘 고민중 (현재 정렬 잘 안됨)
         for (int i = 0; i < bookContentList.size(); i++) {
             BookContent bookContent = bookContentList.get(i);
             BookContent superBookContent = bookContent.getSuperBookContent();
@@ -62,6 +63,7 @@ public class BookContentServiceImpl implements BookContentService {
                         i, bookContentList.indexOf(superBookContent) + 1 + bookContent.getSequence());
             }
         }
+
         return bookContentList;
     }
 
