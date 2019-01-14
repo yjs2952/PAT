@@ -32,7 +32,16 @@ public class BookContentServiceImpl implements BookContentService {
     @Override
     @Transactional
     public void deleteBookContent(Long id) {
+        arrangeSequencePull(id);
         bookContentRepository.deleteById(id);
+    }
+
+    //삭제 시에 sequence (정렬 순서) 재정렬
+    private void arrangeSequencePull(Long id) {
+        BookContent bookContentById = bookContentRepository.findBookContentById(id);
+        Integer sequence = bookContentById.getSequence();
+        Long superBookContentId = bookContentById.getSuperBookContent().getId();
+        bookContentRepository.arrangeSequencePull(superBookContentId, sequence);
     }
 
     @Override
