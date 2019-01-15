@@ -14,9 +14,4 @@ public class BookContentForm {
     private Integer sequence;
     private Integer depth;
     private Integer questionCount;
-
-    public void adjustFields() {
-        this.depth = (depth == null) ? 0 : depth + 1;
-        this.questionCount = 0;
-    }
 }

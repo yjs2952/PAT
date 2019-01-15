@@ -21,15 +21,28 @@ public class BookContentServiceImpl implements BookContentService {
     @Override
     @Transactional
     public BookContent addBookContent(BookContentForm bookContentForm) {
-        bookContentForm.adjustFields();
+        BookContent bookContent = convertFormToBookContent(bookContentForm);
+        return bookContentRepository.save(bookContent);
+    }
+
+    private BookContent convertFormToBookContent(BookContentForm bookContentForm) {
+        //depth 설정
+        Integer depth = bookContentForm.getDepth();
+        bookContentForm.setDepth((depth == null) ? 0 : depth + 1);
+
+        //questionCount 0으로 설정
+        bookContentForm.setQuestionCount(0);
+
+        //sequence 설정
+        int maxSequenceByBookIdAndDepth =
+                bookContentRepository.findMaxSequenceByBookIdAndDepth(bookContentForm.getBookId(), bookContentForm.getDepth());
+        bookContentForm.setSequence(maxSequenceByBookIdAndDepth + 1);
+
         BookContent bookContent = new BookContent();
         BeanUtils.copyProperties(bookContentForm, bookContent);
-        if (bookContent.getSuperBookContent() == null) {
-            bookContent.setSequence(bookContentRepository.findBookContentDepthEqualsZero().size());
-        }
-        bookContent.setBook(bookRepository.findBookById(bookContentForm.getBookId()));
 
-        return bookContentRepository.save(bookContent);
+        bookContent.setBook(bookRepository.findBookById(bookContentForm.getBookId()));
+        return bookContent;
     }
 
     @Override
