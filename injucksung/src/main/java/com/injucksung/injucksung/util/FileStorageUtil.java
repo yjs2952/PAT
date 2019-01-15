@@ -17,32 +17,13 @@ import java.util.UUID;
 public class FileStorageUtil {
     public static ContentFile uploadContentFile(String uploadPath, MultipartFile multipartFile) throws IOException {
 
-        //겹쳐지지 않는 파일명을 위한 유니크한 값 생성
-        UUID uid = UUID.randomUUID();
-
-        //원본파일 이름과 UUID 결합
-        String savedName = uid.toString() + "_" + multipartFile.getOriginalFilename();
-
-        //파일을 저장할 폴더 생성(년 월 일 기준)
-        String savedPath = calcPath(uploadPath);
-
-        //저장할 파일준비
-        File target = new File(savedPath, savedName);
-
-        /*log.info("-------- saved file info --------");
-        log.info("upload path : " + uploadPath);
-        log.info("file name : " + savedName);
-        log.info("file path : " + savedPath);
-        log.info("file length : " + multipartFile.getSize());*/
-
-        //파일을 저장
-        FileCopyUtils.copy(multipartFile.getBytes(), target);
+        String[] savedNameAndPath = savedNameAndPath(uploadPath, multipartFile);
 
         //uploadedFileName는 썸네일명으로 화면에 전달된다.
         return ContentFile.builder()
                 .originName(multipartFile.getOriginalFilename())
-                .savedName(savedName)
-                .path(savedPath)
+                .savedName(savedNameAndPath[0])
+                .path(savedNameAndPath[1])
                 .length(multipartFile.getSize())
                 .type(multipartFile.getContentType())
                 .regDate(LocalDateTime.now())
@@ -51,6 +32,20 @@ public class FileStorageUtil {
 
     public static ExplanationFile uploadExplanationFile(String uploadPath, MultipartFile multipartFile) throws IOException {
 
+        String[] savedNameAndPath = savedNameAndPath(uploadPath, multipartFile);
+
+        //uploadedFileName는 썸네일명으로 화면에 전달된다.
+        return ExplanationFile.builder()
+                .originName(multipartFile.getOriginalFilename())
+                .savedName(savedNameAndPath[0])
+                .path(savedNameAndPath[1])
+                .length(multipartFile.getSize())
+                .type(multipartFile.getContentType())
+                .regDate(LocalDateTime.now())
+                .build();
+    }
+
+    private static String[] savedNameAndPath(String uploadPath, MultipartFile multipartFile) throws IOException{
         //겹쳐지지 않는 파일명을 위한 유니크한 값 생성
         UUID uid = UUID.randomUUID();
 
@@ -63,24 +58,16 @@ public class FileStorageUtil {
         //저장할 파일준비
         File target = new File(savedPath, savedName);
 
-        /*log.info("-------- saved file info --------");
-        log.info("upload path : " + uploadPath);
-        log.info("file name : " + savedName);
-        log.info("file path : " + savedPath);
-        log.info("file length : " + multipartFile.getSize());*/
-
         //파일을 저장
         FileCopyUtils.copy(multipartFile.getBytes(), target);
 
-        //uploadedFileName는 썸네일명으로 화면에 전달된다.
-        return ExplanationFile.builder()
-                .originName(multipartFile.getOriginalFilename())
-                .savedName(savedName)
-                .path(savedPath)
-                .length(multipartFile.getSize())
-                .type(multipartFile.getContentType())
-                .regDate(LocalDateTime.now())
-                .build();
+        log.info("-------- saved file info --------");
+        log.info("upload path : " + uploadPath);
+        log.info("file name : " + savedName);
+        log.info("file path : " + savedPath);
+        log.info("file length : " + multipartFile.getSize());
+
+        return new String[]{savedName, savedPath};
     }
 
     //폴더 생성 함수
