@@ -3,6 +3,7 @@ package com.injucksung.injucksung.domain;
 import lombok.*;
 
 import javax.persistence.*;
+import java.time.LocalDateTime;
 import java.util.Date;
 
 @Entity @Table(name = "content_file")
@@ -24,13 +25,11 @@ public class ContentFile {
     private String type;
 
     @Column(nullable = false)
-    private String length;
-    
-    @Temporal(TemporalType.TIMESTAMP)
-    @Column(columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
-    private Date regDate;
-
-    @NonNull
-    @Column(nullable = false)
     private String path;
+
+    @Column(nullable = false)
+    private Long length;
+
+    @Column
+    private LocalDateTime regDate;
 }
