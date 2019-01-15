@@ -31,9 +31,8 @@ ISBN : <span th:text="${book.isbn}"></span><br>
         <th>하위 목차 추가</th>
         <th>삭제</th>
         <th>Id</th>
-        <!--<th>SuperId</th>-->
-        <th>depth</th>
-        <th>sequence</th>
+        <th>위로</th>
+        <th>아래로</th>
     </tr>
     </thead>
     <tbody>
@@ -58,9 +57,18 @@ ISBN : <span th:text="${book.isbn}"></span><br>
                 </form>
             </td>
             <td th:text="${bookContent.id}"></td>
-            <!--<td th:text="${bookContent.supBookContentid}"></td>-->
-            <td th:text="${bookContent.depth}"></td>
-            <td th:text="${bookContent.sequence}"></td>
+            <td>
+                <form th:method="put" th:action="@{'/admin/book-contents/'+${bookContent.id}}">
+                    <input type="hidden" name="sequenceDirection" th:value="up"/>
+                    <button type="submit">△</button>
+                </form>
+            </td>
+            <td>
+                <form th:method="put" th:action="@{'/admin/book-contents/'+${bookContent.id}}">
+                    <input type="hidden" name="sequenceDirection" th:value="down"/>
+                    <button type="submit">▽</button>
+                </form>
+            </td>
         </tr>
     </th:block>
     </tbody>
