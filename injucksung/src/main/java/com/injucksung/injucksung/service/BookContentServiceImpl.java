@@ -37,15 +37,23 @@ public class BookContentServiceImpl implements BookContentService {
         BookContent bookContent = new BookContent();
         BeanUtils.copyProperties(bookContentForm, bookContent);
 
-        //superBookContent & sequence 설정
+        //superBookContent
         Long bookContentId = bookContentForm.getBookContentId();
         if (bookContentId != null) {
             bookContent.setSuperBookContent(
                     bookContentRepository.findBookContentById(bookContentId));
+        }
 
-            int maxSequenceByBookIdAndDepth =
-                    bookContentRepository.findMaxSequenceBySuperBookContentId(bookContentId);
-            bookContent.setSequence(maxSequenceByBookIdAndDepth + 1);
+        //sequence 설정
+        if(bookContentId != null){
+            int maxSequenceByBookIdAndDepth;
+            try {
+                maxSequenceByBookIdAndDepth = bookContentRepository.findMaxSequenceBySuperBookContentId(bookContentId) + 1;
+            } catch (Exception e) {
+                e.printStackTrace();
+                maxSequenceByBookIdAndDepth = 0;
+            }
+            bookContent.setSequence(maxSequenceByBookIdAndDepth);
         } else {
             bookContent.setSequence(
                     bookContentRepository.findBookContentByDepthEqualsZero(
@@ -68,15 +76,14 @@ public class BookContentServiceImpl implements BookContentService {
     private void arrangeSequencePull(Long id) {
         BookContent bookContentById = bookContentRepository.findBookContentById(id);
         Integer sequence = bookContentById.getSequence();
-        Long superBookContentId = null;
-        try {
-            superBookContentId = bookContentById.getSuperBookContent().getId();
-        } catch (NullPointerException e) {
-            e.printStackTrace();
-            //TODO 대분류 삭제시에 별개로 처리하기 
-            return;
+        BookContent superBookContent = bookContentById.getSuperBookContent();
+
+        if (superBookContent != null) {
+            bookContentRepository.arrangeSequencePull(superBookContent.getId(), sequence);
+        } else {
+            bookContentRepository.arrangeSequencePullByDepthEqualsZero(
+                    bookContentById.getBook().getId(), sequence);
         }
-        bookContentRepository.arrangeSequencePull(superBookContentId, sequence);
     }
 
     @Override
