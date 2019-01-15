@@ -94,23 +94,24 @@ public class BookContentServiceImpl implements BookContentService {
     @Override
     @Transactional(readOnly = true)
     public List<BookContent> getBookContentList(Long bookId) {
-        return sortBookContents(bookContentRepository.findBookContentByBookId(bookId));
+        LinkedList<BookContent> bookContentByBookId = bookContentRepository.findBookContentByBookId(bookId);
+        return sortBookContents(bookContentByBookId);
     }
 
-    private List<BookContent> sortBookContents(List<BookContent> bookContentList) {
-        //TODO 책 목차 정렬하는 알고리즘 고민중 (현재 정렬 잘 안됨)
-        LinkedList<BookContent> bookContentLinkedList = (LinkedList) bookContentList;
-        BookContent tmpBookContent = null;
-        for (int i = 0; i < bookContentLinkedList.size(); i++) {
-            BookContent bookContent = bookContentLinkedList.get(i);
+    private List<BookContent> sortBookContents(LinkedList<BookContent> bookContentList) {
+        BookContent tmpBookContent;
+        for (int i = 0; i < bookContentList.size(); i++) {
+            BookContent bookContent = bookContentList.get(i);
             BookContent superBookContent = bookContent.getSuperBookContent();
             if (superBookContent != null) {
                 tmpBookContent = bookContent;
-                bookContentLinkedList.remove(bookContent);
-                bookContentLinkedList.add(bookContentLinkedList.indexOf(superBookContent) + 1 + bookContent.getSequence(), tmpBookContent);
+                bookContentList.remove(bookContent);
+                bookContentList.add(
+                        bookContentList.indexOf(superBookContent) + 1 + bookContent.getSequence(),
+                        tmpBookContent);
             }
         }
-        return bookContentLinkedList;
+        return bookContentList;
     }
 
     @Override
