@@ -2,7 +2,6 @@ package com.injucksung.injucksung.repository;
 
 import com.injucksung.injucksung.domain.BookContent;
 import org.junit.Assert;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,6 +34,14 @@ public class BookContentRepositoryTest {
         for (BookContent subBookContent : bookContentById.getSubBookContents()) {
             System.out.println(subBookContent.getName());
         }
+    }
+
+    @Test
+    public void 가장큰Sequence조회해오기() {
+        Long superBookContentId = 4L;
+        int maxSequenceByBookIdAndDepth = bookContentRepository.findMaxSequenceBySuperBookContentId(superBookContentId);
+        //bookid가 1이고 뎁스가 1인 경우의 sequnece 최대값은 2 (샘플데이터 기준)
+        Assert.assertEquals(2, maxSequenceByBookIdAndDepth);
     }
 
 }
