@@ -20,7 +20,11 @@ public interface BookContentRepository extends JpaRepository<BookContent, Long> 
     @Query(value = "SELECT bc FROM BookContent bc WHERE depth = 0")
     List<BookContent> findBookContentDepthEqualsZero();
 
-//    @Query("UPDATE BookContent bc SET bc.sequence = bc.sequence-1 WHERE bc.id in (SELECT bc1.id FROM BookContent bc1 LEFT JOIN bc1.supBookContent sbc WHERE bc.super_book_content_id = :superBookContentId AND bc.sequence > :sequence")
+    //특정 책의 + 특정 depth의 가장 큰 sequence값 가져오기
+    @Query(value = "SELECT MAX(bc.sequence) FROM BookContent bc JOIN bc.book b WHERE b.id = :bookId AND bc.depth = :depth")
+    int findMaxSequenceByBookIdAndDepth( @Param("bookId") Long bookId, @Param("depth") Integer depth);
+
+    //    @Query("UPDATE BookContent bc SET bc.sequence = bc.sequence-1 WHERE bc.id in (SELECT bc1.id FROM BookContent bc1 LEFT JOIN bc1.supBookContent sbc WHERE bc.super_book_content_id = :superBookContentId AND bc.sequence > :sequence")
     @Modifying
     @Query(value = "UPDATE book_content SET sequence = sequence - 1 WHERE super_book_content_id = :superBookContentId AND sequence > :sequence", nativeQuery = true)
     void arrangeSequencePull(@Param("superBookContentId") Long superBookContentId, @Param("sequence") Integer sequence);
