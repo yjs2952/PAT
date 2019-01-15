@@ -9,7 +9,7 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.Collections;
+import java.util.LinkedList;
 import java.util.List;
 
 @Service
@@ -33,14 +33,26 @@ public class BookContentServiceImpl implements BookContentService {
         //questionCount 0으로 설정
         bookContentForm.setQuestionCount(0);
 
-        //sequence 설정
-        int maxSequenceByBookIdAndDepth =
-                bookContentRepository.findMaxSequenceByBookIdAndDepth(bookContentForm.getBookId(), bookContentForm.getDepth());
-        bookContentForm.setSequence(maxSequenceByBookIdAndDepth + 1);
-
+        //bookContent 생성 후 복사
         BookContent bookContent = new BookContent();
         BeanUtils.copyProperties(bookContentForm, bookContent);
 
+        //superBookContent & sequence 설정
+        Long bookContentId = bookContentForm.getBookContentId();
+        if (bookContentId != null) {
+            bookContent.setSuperBookContent(
+                    bookContentRepository.findBookContentById(bookContentId));
+
+            int maxSequenceByBookIdAndDepth =
+                    bookContentRepository.findMaxSequenceBySuperBookContentId(bookContentId);
+            bookContent.setSequence(maxSequenceByBookIdAndDepth + 1);
+        } else {
+            bookContent.setSequence(
+                    bookContentRepository.findBookContentByDepthEqualsZero(
+                            bookContentForm.getBookId()).size());
+        }
+
+        //Book 정보 주입
         bookContent.setBook(bookRepository.findBookById(bookContentForm.getBookId()));
         return bookContent;
     }
@@ -87,16 +99,18 @@ public class BookContentServiceImpl implements BookContentService {
 
     private List<BookContent> sortBookContents(List<BookContent> bookContentList) {
         //TODO 책 목차 정렬하는 알고리즘 고민중 (현재 정렬 잘 안됨)
-        for (int i = 0; i < bookContentList.size(); i++) {
-            BookContent bookContent = bookContentList.get(i);
+        LinkedList<BookContent> bookContentLinkedList = (LinkedList) bookContentList;
+        BookContent tmpBookContent = null;
+        for (int i = 0; i < bookContentLinkedList.size(); i++) {
+            BookContent bookContent = bookContentLinkedList.get(i);
             BookContent superBookContent = bookContent.getSuperBookContent();
             if (superBookContent != null) {
-                Collections.swap(bookContentList,
-                        i, bookContentList.indexOf(superBookContent) + 1 + bookContent.getSequence());
+                tmpBookContent = bookContent;
+                bookContentLinkedList.remove(bookContent);
+                bookContentLinkedList.add(bookContentLinkedList.indexOf(superBookContent) + 1 + bookContent.getSequence(), tmpBookContent);
             }
         }
-
-        return bookContentList;
+        return bookContentLinkedList;
     }
 
     @Override

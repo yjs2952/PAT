@@ -39,11 +39,10 @@ public class BookContentRepositoryTest {
 
     @Test
     public void 가장큰Sequence조회해오기() {
-        Long bookId = 1L;
-        Integer depth = 1;
-        int maxSequenceByBookIdAndDepth = bookContentRepository.findMaxSequenceByBookIdAndDepth(bookId, depth);
-        //bookid가 1이고 뎁스가 1인 경우의 sequnece 최대값은 1 (샘플데이터 기준)
-        Assert.assertEquals(1, maxSequenceByBookIdAndDepth);
+        Long superBookContentId = 4L;
+        int maxSequenceByBookIdAndDepth = bookContentRepository.findMaxSequenceBySuperBookContentId(superBookContentId);
+        //bookid가 1이고 뎁스가 1인 경우의 sequnece 최대값은 2 (샘플데이터 기준)
+        Assert.assertEquals(2, maxSequenceByBookIdAndDepth);
     }
 
 }

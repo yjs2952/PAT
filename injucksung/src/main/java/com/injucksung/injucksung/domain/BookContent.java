@@ -6,11 +6,14 @@ import org.hibernate.annotations.OnDeleteAction;
 
 import javax.persistence.*;
 import java.util.List;
-import java.util.Set;
 
-@Entity @Table(name = "book_content")
-@Setter @Getter
-@NoArgsConstructor @AllArgsConstructor @Builder
+@Entity
+@Table(name = "book_content")
+@Setter
+@Getter
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
 @EqualsAndHashCode
 public class BookContent {
     @Id
