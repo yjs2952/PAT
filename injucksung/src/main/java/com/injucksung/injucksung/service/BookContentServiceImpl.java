@@ -21,6 +21,7 @@ public class BookContentServiceImpl implements BookContentService {
     @Override
     @Transactional
     public BookContent addBookContent(BookContentForm bookContentForm) {
+        bookContentForm.adjustFields();
         BookContent bookContent = new BookContent();
         BeanUtils.copyProperties(bookContentForm, bookContent);
         if (bookContent.getSuperBookContent() == null) {
