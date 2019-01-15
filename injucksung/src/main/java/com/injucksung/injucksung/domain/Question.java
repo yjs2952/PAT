@@ -6,11 +6,15 @@ import org.hibernate.annotations.OnDeleteAction;
 
 import javax.persistence.*;
 
-@Entity @Table(name = "question")
-@Setter @Getter
-@NoArgsConstructor @AllArgsConstructor @Builder
+@Entity
+@Table(name = "question")
+@Setter
+@Getter
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
 @EqualsAndHashCode
-public class Question{
+public class Question {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -27,11 +31,11 @@ public class Question{
     @Column(nullable = false)
     private int bookNumber;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name = "content_file_id")
     private ContentFile contentFile; //지문
 
-    @OneToOne(fetch = FetchType.LAZY)
+    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name = "explanation_file_id")
     private ExplanationFile explanationFile; //해설
 

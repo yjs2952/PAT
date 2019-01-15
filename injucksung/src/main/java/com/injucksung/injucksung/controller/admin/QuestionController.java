@@ -6,10 +6,17 @@ import com.injucksung.injucksung.service.BookService;
 import com.injucksung.injucksung.service.QuestionCategoryService;
 import com.injucksung.injucksung.service.QuestionService;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.util.FileCopyUtils;
 import org.springframework.web.bind.annotation.*;
 
+import java.io.File;
+import java.io.IOException;
+import java.util.UUID;
+
+@Slf4j
 @Controller
 @RequiredArgsConstructor
 @RequestMapping("/admin/questions")
@@ -26,7 +33,7 @@ public class QuestionController {
         return "admin/questions/list";
     }
 
-    //문제 등록하기
+    //문제 등록 페이지 이동하기
     @GetMapping("/edit")
     public String addQuestion(Model model) {
         model.addAttribute("questionCategoryPage", questionCategoryService.getQuestionCategoryList(0));
@@ -35,8 +42,9 @@ public class QuestionController {
         return "admin/questions/edit";
     }
 
+    // 문제 등록하기
     @PostMapping
-    public String addQuestion(@ModelAttribute QuestionForm questionForm) {
+    public String addQuestion(QuestionForm questionForm) throws IOException {
         questionService.addQuestion(questionForm);
         return "redirect:/admin/questions";
     }
