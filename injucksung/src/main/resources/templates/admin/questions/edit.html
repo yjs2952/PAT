@@ -8,7 +8,7 @@
 <body>
 관리자 페이지 - 문제 에딧
 
-<form method="post" th:action="@{/admin/questions}">
+<form method="post" th:action="@{/admin/questions}" enctype="multipart/form-data">
     <label>문제 카테고리</label>
     <select name="questionCategoryId">
         <option th:each="questionCategory : ${questionCategoryPage.content}" th:value="${questionCategory.id}"
@@ -30,11 +30,11 @@
     <input type="number" name="bookNumber"><br>
 
     <!--TODO: 파일 업로드 구현 -->
-    <!--<label>지문 파일</label>-->
-    <!--<input type="file" name="contentFile"><br>-->
+    <label>지문 파일</label>
+    <input type="file" name="contentFile"><br>
 
-    <!--<label>해설 파일</label>-->
-    <!--<input type="file" name="explanationFile"><br>-->
+    <label>해설 파일</label>
+    <input type="file" name="explanationFile"><br>
 
     <label>정답 보기</label>
     <input type="number" name="bookNumber"><br>
@@ -43,7 +43,7 @@
     <input type="number" name="choiceCount"><br>
 
     <button type="submit">등록</button>
-    <button type="button" onclick="window.location.href='/admin/questions'">취소</button>
+    <button type="submit">취소</button>
 </form>
 </body>
 </html>

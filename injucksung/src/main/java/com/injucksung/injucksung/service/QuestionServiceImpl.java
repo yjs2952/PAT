@@ -1,5 +1,7 @@
 package com.injucksung.injucksung.service;
 
+import com.injucksung.injucksung.domain.ContentFile;
+import com.injucksung.injucksung.domain.ExplanationFile;
 import com.injucksung.injucksung.domain.Question;
 import com.injucksung.injucksung.domain.enums.PageSize;
 import com.injucksung.injucksung.dto.QuestionForm;
@@ -7,35 +9,44 @@ import com.injucksung.injucksung.dto.SelectedBookContentForQuizForm;
 import com.injucksung.injucksung.repository.BookContentRepository;
 import com.injucksung.injucksung.repository.QuestionCategoryRepository;
 import com.injucksung.injucksung.repository.QuestionRepository;
+import com.injucksung.injucksung.util.FileStorageUtil;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeanUtils;
+import org.springframework.core.env.Environment;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.multipart.MultipartFile;
 
-import java.util.Arrays;
-import java.util.LinkedList;
+import java.io.IOException;
 import java.util.List;
 
+@Slf4j
 @Service
 @RequiredArgsConstructor
 public class QuestionServiceImpl implements QuestionService {
     private final QuestionRepository questionRepository;
     private final QuestionCategoryRepository questionCategoryRepository;
     private final BookContentRepository bookContentRepository;
+    private final Environment env;
 
     @Override
     @Transactional
-    public Question addQuestion(QuestionForm questionForm) {
-        //TODO: 파일 업로드 구현
+    public Question addQuestion(QuestionForm questionForm) throws IOException {
 
         Question question = new Question();
-        BeanUtils.copyProperties(questionForm, question);
+        BeanUtils.copyProperties(questionForm, question, "contentFile", "explanationFile");
+
+        ContentFile contentFile = FileStorageUtil.uploadContentFile(env.getProperty("file.upload-dir"), questionForm.getContentFile());
+        ExplanationFile explanationFile = FileStorageUtil.uploadExplanationFile(env.getProperty("file.upload-dir"), questionForm.getExplanationFile());
 
         question.setBookContent(bookContentRepository.findBookContentById(questionForm.getBookContentId()));
         question.setQuestionCategory(questionCategoryRepository.findQuestionCategoryById(questionForm.getQuestionCategoryId()));
+        question.setContentFile(contentFile);
+        question.setExplanationFile(explanationFile);
 
         return questionRepository.save(question);
     }

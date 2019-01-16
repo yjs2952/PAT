@@ -5,10 +5,11 @@ import com.injucksung.injucksung.dto.QuestionForm;
 import com.injucksung.injucksung.dto.SelectedBookContentForQuizForm;
 import org.springframework.data.domain.Page;
 
+import java.io.IOException;
 import java.util.List;
 
 public interface QuestionService {
-    Question addQuestion(QuestionForm questionForm);
+    Question addQuestion(QuestionForm questionForm) throws IOException;
 
     void deleteQuestion(Long questionId);
 
