@@ -88,14 +88,48 @@ public class BookContentServiceImpl implements BookContentService {
 
     @Override
     @Transactional
-    public int modifyBookContent(BookContent bookContent) {
-//        BookContent modifyBookContent = bookContentRepository.save(bookContent);
-//        if (modifyBookContent != null) {
-//            bookContentRepository.flush();
-//            return 1;
-//        }
-//
-        return 0;
+    public BookContent modifyBookContent(BookContentForm bookContentForm, Long bookContentId) {
+        //TODO : 현재는 sequence 조정만 구현
+        BookContent bookContent = null;
+        if (bookContentForm.getSequenceDirection() != null) {
+            bookContent = bookContentRepository.findBookContentById(bookContentId);
+
+            int sequence = 0;
+            switch (bookContentForm.getSequenceDirection()) {
+                case "up":
+                    sequence = bookContent.getSequence() - 1;
+                    break;
+                case "down":
+                    sequence = bookContent.getSequence() + 1;
+                    break;
+            }
+
+            BookContent bookContentBySequence;
+            BookContent superBookContent = bookContent.getSuperBookContent();
+            if (superBookContent != null) {
+                bookContentBySequence =
+                        bookContentRepository.findBookContentBySuperBookContentIdAndSequence(
+                                bookContent.getSuperBookContent().getId(),
+                                sequence);
+            } else {
+                bookContentBySequence =
+                        bookContentRepository.findBookContentByBookIdAndSequenceAndDepthEqualsZero(
+                                bookContent.getBook().getId(),
+                                sequence);
+            }
+
+            swapSequence(bookContent, bookContentBySequence);
+        }
+        return bookContent;
+    }
+
+    private void swapSequence(BookContent bookContentById, BookContent bookContentBySuperBookContentIdAndSequence) {
+        if (bookContentBySuperBookContentIdAndSequence != null) {
+            Integer tmp;
+            tmp = bookContentById.getSequence();
+            bookContentById.setSequence(bookContentBySuperBookContentIdAndSequence.getSequence());
+            bookContentBySuperBookContentIdAndSequence.setSequence(tmp);
+        }
     }
 
     @Override

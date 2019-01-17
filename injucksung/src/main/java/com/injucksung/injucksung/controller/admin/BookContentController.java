@@ -1,5 +1,6 @@
 package com.injucksung.injucksung.controller.admin;
 
+import com.injucksung.injucksung.domain.BookContent;
 import com.injucksung.injucksung.dto.BookContentForm;
 import com.injucksung.injucksung.service.BookContentService;
 import lombok.RequiredArgsConstructor;
@@ -28,8 +29,8 @@ public class BookContentController {
 
     //책 목차 수정하기
     @PutMapping("/{bookContentId}")
-    public String modifyBookContent(@PathVariable Long bookContentId) {
-        // TODO : 미구현
-        return null;
+    public String modifyBookContent(@PathVariable Long bookContentId, @ModelAttribute BookContentForm bookContentForm) {
+        BookContent bookContent = bookContentService.modifyBookContent(bookContentForm, bookContentId);
+        return "redirect:/admin/books/" + bookContent.getBook().getId();
     }
 }

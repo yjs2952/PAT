@@ -44,7 +44,7 @@ public class QuestionController {
 
     // 문제 등록하기
     @PostMapping
-    public String addQuestion(QuestionForm questionForm) throws IOException {
+    public String addQuestion(@ModelAttribute QuestionForm questionForm) throws IOException {
         questionService.addQuestion(questionForm);
         return "redirect:/admin/questions";
     }

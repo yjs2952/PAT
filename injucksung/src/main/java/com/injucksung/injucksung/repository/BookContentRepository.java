@@ -25,6 +25,14 @@ public interface BookContentRepository extends JpaRepository<BookContent, Long> 
     @Query(value = "SELECT MAX(bc.sequence) FROM BookContent bc JOIN bc.superBookContent sp WHERE sp.id = :superBookContentId")
     int findMaxSequenceBySuperBookContentId(@Param("superBookContentId") Long superBookContentId);
 
+    //sequence로 책목차 조회하기
+    @Query(value = "SELECT bc FROM BookContent bc JOIN bc.superBookContent sp WHERE sp.id = :superBookContentId AND bc.sequence = :sequence")
+    BookContent findBookContentBySuperBookContentIdAndSequence(@Param("superBookContentId") Long superBookContentId, @Param("sequence") Integer sequence);
+
+    //sequence로 대분류 책목차 조회하기
+    @Query(value = "SELECT bc FROM BookContent bc JOIN bc.book b WHERE b.id = :bookId AND bc.sequence = :sequence AND bc.depth = 0")
+    BookContent findBookContentByBookIdAndSequenceAndDepthEqualsZero(@Param("bookId") Long bookId, @Param("sequence") Integer sequence);
+
     //TODO native 쿼리 JPQL로 바꾸기
     @Modifying
     @Query(value = "UPDATE book_content SET sequence = sequence - 1 WHERE super_book_content_id = :superBookContentId AND sequence > :sequence", nativeQuery = true)
