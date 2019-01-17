@@ -1,7 +1,7 @@
 <!DOCTYPE HTML>
 <html lang="ko" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <th:block th:insert="fragments/header :: common-header"></th:block>
+    <th:block th:insert="fragments/head :: common-head"></th:block>
     <title>관리자 페이지 - 책 관리 - 책 편집</title>
 </head>
 <body th:with="isPost=${book}==null ? true : false">
