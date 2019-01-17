@@ -2,7 +2,7 @@
 <html lang="ko" xmlns:th="http://www.thymeleaf.org">
 <head>
     <th:block th:insert="fragments/head :: common-head"></th:block>
-    <title>팟 index</title>
+    <title>PAT</title>
 </head>
 
 <!-- TODO 권한검사 -->
@@ -12,34 +12,7 @@
     <div class="loader"></div>
 </div>
 
-<!-- Header section -->
-<header class="header-section">
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-3 col-md-3">
-                <div class="site-logo">
-                    <img th:src="@{/img/logo.png}" alt="logo">
-                </div>
-                <div class="nav-switch">
-                    <i class="fa fa-bars"></i>
-                </div>
-            </div>
-            <div class="col-lg-9 col-md-9">
-                <a th:if="${user} == null" th:href="@{/session}" class="site-btn header-btn">로그인</a>
-                <nav class="main-menu">
-                    <ul>
-                        <li><a th:href="@{/}">Home</a></li>
-                        <li th:if="${user} != null"><a th:href="@{/admin}">관리자 페이지</a></li>
-                        <li th:if="${user} != null"><a th:href="@{/books}">책 목록</a></li>
-                        <li th:if="${user} != null"><a th:href="@{'/users/'+${user.id}+'/quiz-records'}">마이페이지</a></li>
-                        <li th:if="${user} == null"><a th:href="@{/users}">회원가입</a></li>
-                    </ul>
-                </nav>
-            </div>
-        </div>
-    </div>
-</header>
-<!-- Header section end -->
+<th:block th:insert="fragments/header :: nav"></th:block>
 
 <!-- Hero section -->
 <section class="hero-section set-bg" th:style="'background:url(' + @{/img/bg.jpg} + ');'">
@@ -51,5 +24,7 @@
     </div>
 </section>
 <!-- Hero section end -->
+
 </body>
+
 </html>
