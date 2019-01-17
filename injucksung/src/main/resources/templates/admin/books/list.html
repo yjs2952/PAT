@@ -2,14 +2,33 @@
 <html lang="ko" xmlns:th="http://www.thymeleaf.org">
 <head>
     <th:block th:insert="fragments/head :: common-head"></th:block>
-    <title>관리자 페이지 - 책관리</title>
+    <title>PAT - 관리자 페이지</title>
 </head>
 
 <body th:with="hrefPrefix='/admin/books/'">
-관리자 페이지 - 책관리<br>
-<table th:replace="fragments/books/booksCommon :: book-list"></table>
-<form method="get" action="/admin/books/edit">
-    <button type="submit">추가하기</button>
-</form>
+<th:block th:insert="fragments/page :: preloader"></th:block>
+<th:block th:insert="fragments/header :: nav"></th:block>
+
+
+<div class="page-info-section set-bg" th:style="'background:url(' + @{/img/page-bg/2.jpg} + ');'">
+    <div class="container">
+        <div class="site-breadcrumb">
+            <a th:href="@{/}">Main</a>
+            <span>관리자 페이지</span>
+        </div>
+    </div>
+</div>
+<div class="container">
+    <div class="row" style="margin-top: 30px">
+        <th:block th:insert="fragments/header :: admin-nav"></th:block>
+        <div class="col-lg-9">
+            <form method="get" action="/admin/books/edit">
+                <table th:replace="fragments/books/booksCommon :: book-list"></table>
+                <button type="submit">추가하기</button>
+            </form>
+        </div>
+    </div>
+</div>
+
 </body>
 </html>

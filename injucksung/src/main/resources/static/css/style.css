@@ -725,12 +725,13 @@ ol {
 }
 
 .widget-item h4 {
-	margin-bottom: 30px;
+	/*margin-bottom: 30px;*/
+	margin-bottom: 10px;
 }
 
 .widget-item ul {
 	list-style: none;
-	padding-top: 30px;
+	padding-top: 15px;
 }
 
 .widget-item ul li {
@@ -749,7 +750,7 @@ ol {
 }
 
 .widget-item ul.contact-list li {
-	margin-bottom: 27px;
+	margin-bottom: 12px;
 	position: relative;
 	padding-left: 10px;
 }
@@ -851,11 +852,13 @@ ol {
 =======================*/
 
 .page-info-section {
-	height: 443px;
+	/*height: 443px;*/
+	height: 200px;
 }
 
 .site-breadcrumb {
-	padding-top: 215px;
+	/*padding-top: 215px;*/
+	padding-top: 150px;
 }
 
 .site-breadcrumb a,
