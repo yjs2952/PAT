@@ -22,10 +22,13 @@
                 </div>
 
                 <div class="row">
-                    <!--<form method="get" action="/admin/books/edit">-->
-                        <!--<table th:replace="fragments/books/booksCommon :: book-list"></table>-->
-                        <!--<button type="submit">추가하기</button>-->
-                    <!--</form>-->
+                    <div class="col">
+                        <div th:replace="fragments/books/booksCommon :: book-list"></div>
+
+                        <button type="button" onclick="location.href='/admin/books/edit'"
+                                class="mb-2 btn btn-primary mr-2">추가하기
+                        </button>
+                    </div>
                 </div>
             </div>
             <!--End Page Content -->

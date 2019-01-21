@@ -1,20 +1,43 @@
 <!DOCTYPE HTML>
 <html lang="ko" xmlns:th="http://www.thymeleaf.org">
-<table th:fragment="book-list" class="table table-hover">
+<table class="table table-hover">
     <thead>
     <tr>
-        <th>이름</th>
-        <th>출간일자</th>
-        <th>출판사</th>
+
     </tr>
     </thead>
     <tbody>
-    <tr th:each="book : ${bookList}">
-        <td><a th:text="${book.name}" th:href="@{${hrefPrefix}+${book.id}}"></a></td>
-        <td th:text="${book.publicationDate}"></td>
-        <td th:text="${book.publisher}"></td>
-    </tr>
+
     </tbody>
     <!--TODO: 페이징기능 -->
 </table>
+
+<div th:fragment="book-list" class="card card-small mb-4">
+    <div class="card-header border-bottom">
+        <h6 class="m-0">Active Users</h6>
+    </div>
+    <div class="card-body p-0 pb-3 text-center">
+        <table class="table mb-0">
+            <thead class="bg-light">
+            <tr>
+                <th scope="col" class="border-0">ISBN</th>
+                <th scope="col" class="border-0">이름</th>
+                <th scope="col" class="border-0">출간일자</th>
+                <th scope="col" class="border-0">저자</th>
+                <th scope="col" class="border-0">출판사</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="book : ${bookList}">
+                <td th:text="${book.isbn}"></td>
+                <td><a th:text="${book.name}" th:href="@{${hrefPrefix}+${book.id}}"></a></td>
+                <td th:text="${book.publicationDate}"></td>
+                <td th:text="${book.author}"></td>
+                <td th:text="${book.publisher}"></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
 </html>
