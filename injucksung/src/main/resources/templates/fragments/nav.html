@@ -33,12 +33,12 @@
         <div action="#" class="main-navbar__search w-100 d-none d-md-flex d-lg-flex">
         </div>
         <ul class="navbar-nav border-left flex-row ">
-            <li class="nav-item dropdown">
+            <li th:if="${user} != null" class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle text-nowrap px-3" data-toggle="dropdown" href="#"
                    role="button" aria-haspopup="true" aria-expanded="false">
-                    <img class="user-avatar rounded-circle mr-2" src="images/avatars/0.jpg"
+                    <img class="user-avatar rounded-circle mr-2" src="images/avatars/default.png"
                          alt="User Avatar">
-                    <span class="d-none d-md-inline-block">Sierra Brooks</span>
+                    <span class="d-none d-md-inline-block" th:text="${user.name}">Sierra Brooks</span>
                 </a>
                 <div class="dropdown-menu dropdown-menu-small">
                     <a class="dropdown-item" href="user-profile-lite.html">
