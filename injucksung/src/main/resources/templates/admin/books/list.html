@@ -7,10 +7,10 @@
 <body th:with="hrefPrefix='/admin/books/'" class="h-100">
 <div class="container-fluid">
     <div class="row">
-        <th:block th:insert="fragments/aside :: admin-aside"></th:block>
+        <th:block th:insert="fragments/aside :: admin"></th:block>
 
         <main class="main-content col-lg-10 col-md-9 col-sm-12 p-0 offset-lg-2 offset-md-3">
-            <th:block th:insert="fragments/nav :: admin-nav"></th:block>
+            <th:block th:insert="fragments/nav :: admin"></th:block>
 
             <!--Page Content -->
             <div class="main-content-container container-fluid px-4">
@@ -30,7 +30,7 @@
             </div>
             <!--End Page Content -->
 
-            <th:block th:insert="fragments/footer :: admin-footer"></th:block>
+            <th:block th:insert="fragments/footer :: admin"></th:block>
         </main>
     </div>
 </div>

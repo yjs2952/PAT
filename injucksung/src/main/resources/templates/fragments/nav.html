@@ -36,7 +36,7 @@
             <li th:if="${user} != null" class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle text-nowrap px-3" data-toggle="dropdown" href="#"
                    role="button" aria-haspopup="true" aria-expanded="false">
-                    <img class="user-avatar rounded-circle mr-2" src="images/avatars/default.png"
+                    <img class="user-avatar rounded-circle mr-2" th:src="@{/images/avatars/default.png}"
                          alt="User Avatar">
                     <span class="d-none d-md-inline-block" th:text="${user.name}">Sierra Brooks</span>
                 </a>
