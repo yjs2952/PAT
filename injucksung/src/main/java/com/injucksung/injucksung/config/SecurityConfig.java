@@ -13,7 +13,7 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     public void configure(WebSecurity web) throws Exception {
-        web.ignoring().antMatchers("/resoures/**", "/static/**", "/css/**", "js/**", "/images/**");
+        web.ignoring().antMatchers("/resources/**", "/static/**", "/styles/**", "/scripts/**", "/imgages/**","/fonts/**");
     }
 
     @Override

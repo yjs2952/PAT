@@ -1,18 +1,11 @@
 <!DOCTYPE HTML>
 <html lang="ko" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <th:block th:insert="fragments/header :: common-header"></th:block>
-    <title>팟 index</title>
+    <th:block th:insert="fragments/head :: common"></th:block>
+    <title>PAT</title>
 </head>
-
-<body>
-<p th:inline="text">Hello [[${#httpServletRequest.remoteUser}]]</p>
 <!-- TODO 권한검사 -->
-<a th:if="${user} != null" th:href="@{/admin}">관리자페이지</a><br>
-<a th:if="${user} == null" th:href="@{/session}">로그인</a>
-<a th:if="${user} == null" th:href="@{/users}">회원가입</a><br><br>
-
-<a th:if="${user} != null" th:href="@{/books}">책목록 보기 (문제풀기 / 채점하기)</a><br>
-<a th:if="${user} != null" th:href="@{'/users/'+${user.id}+'/quiz-records'}">이전에 응시했던 시험 목록</a>
+<body>
+<th:block th:insert="fragments/nav :: main"></th:block>
 </body>
 </html>

@@ -1,84 +1,152 @@
 <!DOCTYPE HTML>
 <html lang="ko" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <th:block th:insert="fragments/header :: common-header"></th:block>
-    <th:block th:insert="fragments/header :: ajax-jquery"></th:block>
-    <title>관리자 페이지 - 책 상세보기</title>
+    <th:block th:insert="fragments/head :: common"></th:block>
+    <th:block th:insert="fragments/head :: ajax-jquery"></th:block>
+    <title>PAT - 관리자 페이지</title>
 </head>
+<body class="h-100">
+<div class="container-fluid">
+    <div class="row">
+        <th:block th:insert="fragments/aside :: admin"></th:block>
+
+        <main class="main-content col-lg-10 col-md-9 col-sm-12 p-0 offset-lg-2 offset-md-3">
+            <th:block th:insert="fragments/nav :: admin"></th:block>
+
+            <!--Page Content -->
+            <div class="main-content-container container-fluid px-4">
+                <div class="page-header row no-gutters py-4">
+                    <div class="col-12 col-sm-4 text-center text-sm-left mb-0">
+                        <span class="text-uppercase page-subtitle">책 관리하기</span>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-lg-12 col-md-12">
+                        <!-- 책 상세 정보 Overview -->
+                        <div class="card card-small mb-3">
+                            <div class="card-header border-bottom">
+                                <h6 class="m-0">상세 정보</h6>
+                            </div>
+                            <div class="card-body p-0">
+                                <ul class="list-group list-group-flush">
+                                    <li class="list-group-item p-3">
+                        <span class="d-flex mb-2">
+                          <strong class="mr-1">책 제목:</strong> <span th:text="${book.name}"></span>
+                        </span>
+                                        <span class="d-flex mb-2">
+                          <strong class="mr-1">출간일자:</strong> <span th:text="${book.publicationDate}"></span>
+                        </span>
+                                        <span class="d-flex mb-2">
+                          <strong class="mr-1">저자:</strong> <span th:text="${book.author}"></span>
+                        </span>
+                                        <span class="d-flex mb-2">
+                          <strong class="mr-1">ISBN:</strong> <span th:text="${book.isbn}"></span>
+                        </span>
+                                        <span class="d-flex mb-2">
+                          <strong class="mr-1">출판사:</strong> <span th:text="${book.publisher}"></span>
+                        </span>
+                                    </li>
+                                    <li class="list-group-item d-flex px-3">
+                                        <form th:action="@{'/admin/books/'+${book.id}}" th:method="DELETE"
+                                              style="margin-right: 5px">
+                                            <button type="submit" class="mb-2 btn btn-primary">
+                                                삭제
+                                            </button>
+                                        </form>
+                                        <form th:action="@{'/admin/books/edit/'+${book.id}}">
+                                            <button type="submit" class="mb-2 btn btn-secondary">
+                                                수정
+                                            </button>
+                                        </form>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                        <!-- / 책 상세 정보 Overview -->
+                    </div>
+                    <div class="col-lg-12 col-md-12">
+                        <!-- Add New Post Form -->
+                        <div class="card card-small mb-3">
+                            <div class="card-header border-bottom">
+                                <h6 class="m-0">책 목차</h6>
+                            </div>
+                            <div class="card-body">
+                                <table class="table mb-0">
+                                    <thead class="bg-light">
+                                    <tr>
+                                        <th scope="col" class="border-0">목차</th>
+                                        <th scope="col" class="border-0" style="text-align: center">모의고사 여부</th>
+                                        <th scope="col" class="border-0" style="text-align: center">권장 풀이 시간</th>
+                                        <th scope="col" class="border-0" style="text-align: center">문제 갯수</th>
+                                        <th scope="col" class="border-0" style="text-align: center">하위 목차 추가</th>
+                                        <th scope="col" class="border-0" style="text-align: center">삭제</th>
+                                        <th scope="col" class="border-0" style="text-align: center">위로</th>
+                                        <th scope="col" class="border-0" style="text-align: center">아래로</th>
+                                    </tr>
+                                    </thead>
+
+                                    <tbody>
+                                    <th:block th:each="bookContent : ${bookContentList}">
+                                        <tr th:id="'bookContent'+${bookContent.id}">
+                                            <td>
+                                                <span><th:block th:each="index:${#numbers.sequence(0,bookContent.depth)}"
+                                                        th:if="${index}&gt;0">&nbsp;&nbsp;&nbsp;</th:block></span>
+                                                <a th:text="${bookContent.name}"></a></td>
+                                            <td th:text="${bookContent.isMockTest}" style="text-align: center"></td>
+                                            <td th:text="${bookContent.recommendTime}" style="text-align: center"></td>
+                                            <td th:text="${bookContent.questionCount}" style="text-align: center"></td>
+                                            <td style="text-align: center">
+                                                <input type="button"
+                                                       th:onclick="'fetchSubBookContentForm('+${bookContent.id}+','+${bookContent.sequence}+','
+                                                        +${bookContent.depth}+','+${book.id}+')'"
+                                                       th:value="추가"
+                                                       class="mb-2 btn btn-outline-success"/>
+                                            </td>
+                                            <td style="text-align: center">
+                                                <form th:method="delete"
+                                                      th:action="@{'/admin/book-contents/'+${bookContent.id}}">
+                                                    <input type="hidden" name="bookId" th:value="${book.id}"/>
+                                                    <button type="submit" class="mb-2 btn btn-outline-danger">삭제</button>
+                                                </form>
+                                            </td>
+                                            <td style="text-align: center">
+                                                <form th:method="put"
+                                                      th:action="@{'/admin/book-contents/'+${bookContent.id}}">
+                                                    <input type="hidden" name="sequenceDirection" th:value="up"/>
+                                                    <button type="submit" class="mb-2 btn btn-outline-secondary">△</button>
+                                                </form>
+                                            </td>
+                                            <td style="text-align: center">
+                                                <form th:method="put"
+                                                      th:action="@{'/admin/book-contents/'+${bookContent.id}}">
+                                                    <input type="hidden" name="sequenceDirection" th:value="down"/>
+                                                    <button type="submit" class="mb-2 btn btn-outline-secondary">▽</button>
+                                                </form>
+                                            </td>
+                                        </tr>
+                                    </th:block>
+                                    </tbody>
+
+                                </table>
+
+                                <input type="button" value="대분류 추가하기"
+                                       th:onclick="'fetchBookContentForm('+${book.id}+')'" class="mb-2 btn btn-outline-primary"/>
+                                <div id="bookContentForm"></div>
+                            </div>
+                        </div>
+                        <!-- / Add New Post Form -->
+                    </div>
+                </div>
+            </div>
+            <!--End Page Content -->
+
+            <th:block th:insert="fragments/footer :: admin"></th:block>
+        </main>
+    </div>
+</div>
+</body>
 <body>
-관리자 페이지 - 책 상세보기<br>
-이름 : <span th:text="${book.name}"></span><br>
-출간일자 : <span th:text="${book.publicationDate}"></span><br>
-저자 : <span th:text="${book.author}"></span><br>
-ISBN : <span th:text="${book.isbn}"></span><br>
-출판사 : <span th:text="${book.publisher}"></span><br>
-
-
-<form th:action="@{'/admin/books/'+${book.id}}" th:method="DELETE">
-    <button type="submit">삭제</button>
-</form>
-<form th:action="@{'/admin/books/edit/'+${book.id}}">
-    <button type="submit">수정</button>
-</form>
-
-<table>
-    <thead>
-    <tr>
-        <th>이름</th>
-        <th>모의고사 여부</th>
-        <th>권장 풀이 시간</th>
-        <th>문제 갯수</th>
-        <th>하위 목차 추가</th>
-        <th>삭제</th>
-        <th>Id</th>
-        <th>위로</th>
-        <th>아래로</th>
-    </tr>
-    </thead>
-    <tbody>
-    <th:block th:each="bookContent : ${bookContentList}">
-        <tr th:id="'bookContent'+${bookContent.id}">
-            <td>
-                <span><th:block th:each="index:${#numbers.sequence(0,bookContent.depth)}" th:if="${index}&gt;0">ㄴ</th:block></span>
-                <a th:text="${bookContent.name}"></a></td>
-            <td th:text="${bookContent.isMockTest}"></td>
-            <td th:text="${bookContent.recommendTime}"></td>
-            <td th:text="${bookContent.questionCount}"></td>
-            <td>
-                <input type="button"
-                       th:onclick="'fetchSubBookContentForm('+${bookContent.id}+','+${bookContent.sequence}+','
-                       +${bookContent.depth}+','+${book.id}+')'"
-                       th:value="추가"/>
-            </td>
-            <td>
-                <form th:method="delete" th:action="@{'/admin/book-contents/'+${bookContent.id}}">
-                    <input type="hidden" name="bookId" th:value="${book.id}"/>
-                    <button type="submit">삭제</button>
-                </form>
-            </td>
-            <td th:text="${bookContent.id}"></td>
-            <td>
-                <form th:method="put" th:action="@{'/admin/book-contents/'+${bookContent.id}}">
-                    <input type="hidden" name="sequenceDirection" th:value="up"/>
-                    <button type="submit">△</button>
-                </form>
-            </td>
-            <td>
-                <form th:method="put" th:action="@{'/admin/book-contents/'+${bookContent.id}}">
-                    <input type="hidden" name="sequenceDirection" th:value="down"/>
-                    <button type="submit">▽</button>
-                </form>
-            </td>
-        </tr>
-    </th:block>
-    </tbody>
-
-</table>
-
-<br>
-<input type="button" value="대분류 추가하기" th:onclick="'fetchBookContentForm('+${book.id}+')'"/>
-
-<div id="bookContentForm"></div>
 <script>
     function fetchBookContentForm(bookId) {
         fetch('bookContentForm?' + $.param({bookId: bookId}), {
