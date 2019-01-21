@@ -1,7 +1,7 @@
 <!DOCTYPE HTML>
 <html lang="ko" xmlns:th="http://www.thymeleaf.org">
 
-<header th:fragment="nav" class="header-section">
+<header th:fragment="main" class="header-section">
     <div class="container">
         <div class="row">
             <div class="col-lg-3 col-md-3">
@@ -28,8 +28,7 @@
     </div>
 </header>
 
-<div th:fragment="admin-nav" class="main-navbar sticky-top bg-white">
-    <!-- Main Navbar -->
+<div th:fragment="admin" class="main-navbar sticky-top bg-white">
     <nav class="navbar align-items-stretch navbar-light flex-md-nowrap p-0">
         <div action="#" class="main-navbar__search w-100 d-none d-md-flex d-lg-flex">
         </div>
@@ -64,4 +63,5 @@
         </nav>
     </nav>
 </div>
+
 </html>

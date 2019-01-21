@@ -4,31 +4,35 @@
     <th:block th:insert="fragments/head :: common-head"></th:block>
     <title>PAT - 관리자 페이지</title>
 </head>
+<body th:with="hrefPrefix='/admin/books/'" class="h-100">
+<div class="container-fluid">
+    <div class="row">
+        <th:block th:insert="fragments/aside :: admin-aside"></th:block>
 
-<body th:with="hrefPrefix='/admin/books/'">
-<th:block th:insert="fragments/page :: preloader"></th:block>
-<th:block th:insert="fragments/header :: nav"></th:block>
+        <main class="main-content col-lg-10 col-md-9 col-sm-12 p-0 offset-lg-2 offset-md-3">
+            <th:block th:insert="fragments/nav :: admin-nav"></th:block>
 
+            <!--Page Content -->
+            <div class="main-content-container container-fluid px-4">
+                <div class="page-header row no-gutters py-4">
+                    <div class="col-12 col-sm-4 text-center text-sm-left mb-0">
+                        <span class="text-uppercase page-subtitle">Dashboard</span>
+                        <h3 class="page-title">책 관리하기</h3>
+                    </div>
+                </div>
 
-<div class="page-info-section set-bg" th:style="'background:url(' + @{/img/page-bg/2.jpg} + ');'">
-    <div class="container">
-        <div class="site-breadcrumb">
-            <a th:href="@{/}">Main</a>
-            <span>관리자 페이지</span>
-        </div>
+                <div class="row">
+                    <!--<form method="get" action="/admin/books/edit">-->
+                        <!--<table th:replace="fragments/books/booksCommon :: book-list"></table>-->
+                        <!--<button type="submit">추가하기</button>-->
+                    <!--</form>-->
+                </div>
+            </div>
+            <!--End Page Content -->
+
+            <th:block th:insert="fragments/footer :: admin-footer"></th:block>
+        </main>
     </div>
 </div>
-<div class="container">
-    <div class="row" style="margin-top: 30px">
-        <th:block th:insert="fragments/header :: admin-nav"></th:block>
-        <div class="col-lg-9">
-            <form method="get" action="/admin/books/edit">
-                <table th:replace="fragments/books/booksCommon :: book-list"></table>
-                <button type="submit">추가하기</button>
-            </form>
-        </div>
-    </div>
-</div>
-
 </body>
 </html>
