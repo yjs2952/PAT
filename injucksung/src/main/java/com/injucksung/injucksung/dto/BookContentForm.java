@@ -14,4 +14,5 @@ public class BookContentForm {
     private Integer sequence;
     private Integer depth;
     private Integer questionCount;
+    private String sequenceDirection;
 }

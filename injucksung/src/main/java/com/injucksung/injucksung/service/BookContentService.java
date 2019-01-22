@@ -10,7 +10,7 @@ public interface BookContentService {
 
     void deleteBookContent(Long id);
 
-    int modifyBookContent(BookContent bookContent);
+    BookContent modifyBookContent(BookContentForm bookContentForm, Long bookContentId);
 
     List<BookContent> getBookContentList(Long bookId);
 
