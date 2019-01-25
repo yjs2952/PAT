@@ -10,8 +10,9 @@
                 </div>
                 <div class="col-xs-10 text-right menu-1">
                     <ul>
-                        <!-- TODO 권한검사 -->
-                        <li class="active"><a th:href="@{/}">Home</a></li>
+                        <!-- TODO 권한검사 & 동적으로 class="active" 설정하기-->
+                        <!--<li class="active"><a th:href="@{/}">Home</a></li>-->
+                        <li><a th:href="@{/}">Home</a></li>
                         <li th:if="${user} != null"><a th:href="@{/admin}">관리자 페이지</a></li>
                         <li th:if="${user} != null"><a th:href="@{/books}">책 목록</a></li>
                         <li th:if="${user} != null"><a th:href="@{'/users/'+${user.id}+'/quiz-records'}">마이페이지</a></li>
