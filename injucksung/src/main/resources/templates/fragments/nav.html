@@ -1,21 +1,26 @@
 <!DOCTYPE HTML>
 <html lang="ko" xmlns:th="http://www.thymeleaf.org">
 
-<nav th:fragment="main" class="navbar navbar-expand-lg navbar-dark bg-secondary mb-4">
-    <img th:src="@{/admin/images/shards-logo.svg}" alt="네비게이션" class="mr-2" height="30">
-    <a class="navbar-brand" th:href="@{/}">PAT</a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown-1"
-            aria-controls="navbarNavDropdown-1" aria-expanded="false" aria-label="Toggle navigation"><span
-            class="navbar-toggler-icon"></span></button>
-    <div class="collapse navbar-collapse" id="navbarNavDropdown-1">
-        <ul class="navbar-nav mr-auto">
-            <li class="nav-item"><a class="nav-link" href="/">Home</a></li>
-            <li th:if="${user} != null" class="nav-item"><a th:href="@{/admin}" class="nav-link">관리자 페이지</a></li>
-            <li th:if="${user} != null" class="nav-item"><a th:href="@{/books}" class="nav-link">책 목록</a></li>
-            <li th:if="${user} != null" class="nav-item"><a th:href="@{'/users/'+${user.id}+'/quiz-records'}" class="nav-link">마이페이지</a></li>
-            <li th:if="${user} == null" class="nav-item"><a th:href="@{/users}" class="nav-link">회원가입</a></li>
-            <li th:if="${user} == null" class="nav-item"><a th:if="${user} == null" th:href="@{/session}" class="nav-link">로그인</a></li>
-        </ul>
+<nav th:fragment="user" class="fh5co-nav" role="navigation">
+    <div class="container-wrap">
+        <div class="top-menu">
+            <div class="row">
+                <div class="col-xs-2">
+                    <div id="fh5co-logo"><a th:href="@{/}">PAT</a></div>
+                </div>
+                <div class="col-xs-10 text-right menu-1">
+                    <ul>
+                        <!-- TODO 권한검사 -->
+                        <li class="active"><a th:href="@{/}">Home</a></li>
+                        <li th:if="${user} != null"><a th:href="@{/admin}">관리자 페이지</a></li>
+                        <li th:if="${user} != null"><a th:href="@{/books}">책 목록</a></li>
+                        <li th:if="${user} != null"><a th:href="@{'/users/'+${user.id}+'/quiz-records'}">마이페이지</a></li>
+                        <li th:if="${user} == null"><a th:href="@{/users}">회원가입</a></li>
+                        <li th:if="${user} == null"><a th:if="${user} == null" th:href="@{/session}">로그인</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
     </div>
 </nav>
 

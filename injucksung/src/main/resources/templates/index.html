@@ -2,11 +2,12 @@
 <html lang="ko" xmlns:th="http://www.thymeleaf.org">
 <head>
     <th:block th:insert="fragments/head :: common"></th:block>
+    <th:block th:insert="fragments/head :: user-resources"></th:block>
     <title>PAT</title>
 </head>
-<!-- TODO 권한검사 -->
+
 <body>
-<th:block th:insert="fragments/nav :: main"></th:block>
+<th:block th:insert="fragments/nav :: user"></th:block>
 <div class="container-fluid">
     <div class="row">
         <div>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Animi dolorem excepturi fugit molestiae, quaerat
