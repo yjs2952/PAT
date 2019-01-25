@@ -2,42 +2,76 @@
 <html lang="ko" xmlns:th="http://www.thymeleaf.org">
 <head>
     <th:block th:insert="fragments/head :: common"></th:block>
-    <title>관리자 페이지 - 문제 관리</title>
+    <th:block th:insert="fragments/head :: admin-resources"></th:block>
+    <title>PAT - 관리자 페이지</title>
 </head>
+<body class="h-100">
+<div class="container-fluid">
+    <div class="row">
+        <th:block th:insert="fragments/aside :: admin"></th:block>
 
-<body>
-관리자 페이지 - 문제 관리<br>
-<table>
-    <thead>
-    <tr>
-        <th>카테고리</th>
-        <th>책 목차</th>
-        <th>책 번호</th>
-        <th>지문 파일</th>
-        <th>해설 파일</th>
-        <th>정답 보기</th>
-        <th>문제 시도 횟수</th>
-        <th>문제 맞춘 횟수</th>
-        <th>선지 갯수</th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr th:each="question : ${questionPage.content}">
-        <td th:text="${question.questionCategory.name}"></td>
-        <td th:text="${question.bookContent.name}"></td>
-        <td th:text="${question.contentFile.originName}"></td>
-        <td th:text="${question.explanationFile.originName}"></td>
-        <td th:text="${question.correct}"></td>
-        <td th:text="${question.tryCount}"></td>
-        <td th:text="${question.correctCount}"></td>
-        <td th:text="${question.choiceCount}"></td>
-    </tr>
-    </tbody>
-    <!--TODO: 페이징기능 -->
+        <main class="main-content col-lg-10 col-md-9 col-sm-12 p-0 offset-lg-2 offset-md-3">
+            <th:block th:insert="fragments/nav :: admin"></th:block>
 
-</table>
-<form method="get" action="/admin/questions/edit">
-    <button type="submit">추가하기</button>
-</form>
+            <!--Page Content -->
+            <div class="main-content-container container-fluid px-4">
+                <div class="page-header row no-gutters py-4">
+                    <div class="col-12 col-sm-4 text-center text-sm-left mb-0">
+                        <span class="text-uppercase page-subtitle">문제 관리하기</span>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col">
+                        <div class="card card-small mb-4">
+                            <div class="card-header border-bottom">
+                                <h6 class="m-0">문제 목록</h6>
+                            </div>
+                            <div class="card-body p-0 pb-3 text-center">
+                                <table class="table mb-0">
+                                    <thead class="bg-light">
+                                    <tr>
+                                        <th scope="col" class="border-0">카테고리</th>
+                                        <th scope="col" class="border-0">책 목차</th>
+                                        <th scope="col" class="border-0">책 번호</th>
+                                        <th scope="col" class="border-0">지문 파일</th>
+                                        <th scope="col" class="border-0">해설 파일</th>
+                                        <th scope="col" class="border-0">정답 보기</th>
+                                        <th scope="col" class="border-0">문제 시도 횟수</th>
+                                        <th scope="col" class="border-0">문제 맞춘 횟수</th>
+                                        <th scope="col" class="border-0">선지 갯수</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr th:each="question : ${questionPage.content}">
+                                        <td th:text="${question.questionCategory.name}"></td>
+                                        <td th:text="${question.bookContent.name}"></td>
+                                        <td th:text="${question.bookNumber}"></td>
+                                        <td th:text="${question.contentFile.originName}"></td>
+                                        <td th:text="${question.explanationFile.originName}"></td>
+                                        <td th:text="${question.correct}"></td>
+                                        <td th:text="${question.tryCount}"></td>
+                                        <td th:text="${question.correctCount}"></td>
+                                        <td th:text="${question.choiceCount}"></td>
+                                    </tr>
+                                    </tbody>
+                                    <!--TODO: 페이징기능 -->
+                                </table>
+                            </div>
+                        </div>
+
+                        <button type="button" onclick="location.href='/admin/questions/edit'"
+                                class="mb-2 btn btn-primary mr-2">추가하기
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <!--End Page Content -->
+
+            <th:block th:insert="fragments/footer :: admin"></th:block>
+        </main>
+    </div>
+</div>
 </body>
+
 </html>

@@ -2,27 +2,49 @@
 <html lang="ko" xmlns:th="http://www.thymeleaf.org">
 <head>
     <th:block th:insert="fragments/head :: common"></th:block>
-    <title>회원가입 페이지</title>
+    <th:block th:insert="fragments/head :: user-resources"></th:block>
+    <title>PAT - 회원가입</title>
 </head>
+
 <body>
-<form method="POST" th:action="@{/users}">
-    <label>이메일</label>
-    <input type="email" name="email" placeholder="이메일"><br>
+<div id="page">
+    <th:block th:insert="fragments/nav :: user"></th:block>
+    <div class="container-wrap">
+        <div class="container">
+            <div class="col-md-7 col-md-push-2 animate-box" style="padding: 50px">
+                <div class="row">
+                    <div class="main">
+                        <form method="POST" th:action="@{/users}" role="form">
+                            <div class="form-group">
+                                <label>이메일 주소</label>
+                                <input type="email" name="email" class="form-control" required><br>
 
-    <label>비밀번호</label>
-    <input type="password" name="password" placeholder="비밀번호"><br>
+                                <label>비밀번호</label>
+                                <input type="password" name="password" class="form-control" required><br>
 
-    <!--TODO 비밀번호 확인 -->
+                                <!--TODO 비밀번호 확인 기능구현-->
+                                <label>비밀번호 확인</label>
+                                <input type="password" name="password-check" class="form-control" required><br>
 
-    <label>닉네임</label>
-    <input type="text" name="nickname" placeholder="닉네임" required><br>
+                                <label>닉네임</label>
+                                <input type="text" name="nickname" class="form-control" required><br>
 
-    <label>핸드폰 번호</label>
-    <input type="tel" name="phone" placeholder="전화번호"><br>
 
-    <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
-    <button type="submit">회원가입 하기</button>
-</form>
+                                <label>핸드폰 번호</label>
+                                <input type="tel" name="phone" class="form-control"><br>
+                            </div>
+                            <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>
+                            <button type="submit" class="btn btn-primary">회원가입</button>
+                        </form>
 
+                        <hr class="hr-or">
+                        <!--TODO: 소셜 로그인 가입-->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 </body>
+<th:block th:insert="fragments/footer :: user"></th:block>
 </html>

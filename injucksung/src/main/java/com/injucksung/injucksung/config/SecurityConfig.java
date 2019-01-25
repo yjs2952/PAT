@@ -13,24 +13,26 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     public void configure(WebSecurity web) throws Exception {
-        web.ignoring().antMatchers("/resources/**", "/static/**", "/styles/**", "/scripts/**", "/imgages/**","/fonts/**");
+        web.ignoring().antMatchers("/resources/**", "/static/**",
+                "/admin/styles/**", "/admin/scripts/**", "/admin/images/**", "/admin/fonts/**", "/**.ico",
+                "/css/**", "/fonts/**", "/images/**", "/js/**", "/sass/**");
     }
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http
-            .authorizeRequests()
-                .antMatchers("/","/users").permitAll()
+                .authorizeRequests()
+                .antMatchers("/", "/users").permitAll()
                 .antMatchers("/books").hasRole("USER")
                 .antMatchers("/admin").hasRole("ADMIN")
                 .anyRequest().authenticated()
                 .and()
-            .formLogin()
+                .formLogin()
                 .loginPage("/session")
                 .loginProcessingUrl("/session")
                 .permitAll()
                 .and()
-            .logout()
+                .logout()
                 .logoutSuccessUrl("/")
                 .permitAll();
     }
