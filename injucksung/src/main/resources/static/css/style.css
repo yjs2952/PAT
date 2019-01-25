@@ -1274,8 +1274,8 @@ input[type="text"] {
   border: 2px solid #FF6F61;
 }
 .btn-primary:hover, .btn-primary:focus, .btn-primary:active {
-  background: #7ad98f !important;
-  border-color: #7ad98f !important;
+  background: #fed65e !important;
+  border-color: #fed65e !important;
 }
 .btn-primary.btn-outline {
   background: transparent;
