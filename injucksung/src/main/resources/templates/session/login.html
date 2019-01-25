@@ -2,32 +2,58 @@
 <html lang="ko" xmlns:th="http://www.thymeleaf.org">
 <head>
     <th:block th:insert="fragments/head :: common"></th:block>
+    <th:block th:insert="fragments/head :: user-resources"></th:block>
     <title>PAT - 로그인</title>
 </head>
-<body>
-<th:block th:insert="fragments/nav :: main"></th:block>
 
-<section class="search-section ss-other-page">
-    <div class="container">
-        <div class="search-warp">
-            <div th:if="${param.error}" class="section-title text-white">
-                <h2 style="text-align: left"><span>이메일 주소 혹은 비밀번호를 확인해주세요.</span></h2>
-            </div>
-            <div th:if="${param.logout}" class="section-title text-white">
-                <h2 style="text-align: left"><span>로그아웃 되었습니다.</span></h2>
-            </div>
-            <div class="row">
-                <div class="col-lg-10 offset-lg-1">
-                    <!-- login form -->
-                    <form method="POST" th:action="@{/session}" class="course-search-form">
-                        <input type="email" name="username" placeholder="이메일 주소" required>
-                        <input type="password" name="password" placeholder="비밀번호" required class="last-m">
-                        <input type="submit" value="로그인" class="site-btn btn-dark"/>
-                    </form>
+<body>
+<th:block th:insert="fragments/nav :: user"></th:block>
+<div id="page">
+    <div class="container-wrap">
+        <div class="container">
+            <div class="col-md-7 col-md-push-2 animate-box" style="padding: 30px">
+                <div class="row content-padding">
+                    <div class="main">
+                        <h3>Please Log In, or <a href="#">Sign Up</a></h3>
+                        <div th:if="${param.error}" class="login-or">
+                            <span class="span-or">이메일 주소 혹은 비밀번호를 확인해주세요.</span>
+                        </div>
+
+                        <form  method="POST" th:action="@{/session}" role="form">
+                            <div class="form-group">
+                                <label for="inputUsernameEmail">Username or email</label>
+                                <input type="email" name="username" class="form-control" required id="inputUsernameEmail">
+                            </div>
+                            <div class="form-group">
+                                <a class="pull-right" href="#">Forgot password?</a>
+                                <label for="inputPassword">Password</label>
+                                <input type="password" name="password" class="form-control" id="inputPassword">
+                            </div>
+                            <div class="checkbox pull-right">
+                                <label>
+                                    <input type="checkbox">
+                                    Remember me </label>
+                            </div>
+                            <button type="submit" class="btn btn btn-primary">
+                                Log In
+                            </button>
+                        </form>
+
+                        <hr class="hr-or">
+                        <!--TODO: 소셜 로그인-->
+                        <!--<div class="row">-->
+                            <!--<div class="col-xs-6 col-sm-6 col-md-6">-->
+                                <!--<a href="#" class="btn btn-lg btn-primary btn-block">Facebook</a>-->
+                            <!--</div>-->
+                            <!--<div class="col-xs-6 col-sm-6 col-md-6">-->
+                                <!--<a href="#" class="btn btn-lg btn-info btn-block">Google</a>-->
+                            <!--</div>-->
+                        <!--</div>-->
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-</section>
+</div>
 </body>
 </html>
