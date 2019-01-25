@@ -2,7 +2,7 @@
 <html lang="ko" xmlns:th="http://www.thymeleaf.org">
 
 <nav th:fragment="main" class="navbar navbar-expand-lg navbar-dark bg-secondary mb-4">
-    <img th:src="@{/images/shards-logo.svg}" alt="네비게이션" class="mr-2" height="30">
+    <img th:src="@{/admin/images/shards-logo.svg}" alt="네비게이션" class="mr-2" height="30">
     <a class="navbar-brand" th:href="@{/}">PAT</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown-1"
             aria-controls="navbarNavDropdown-1" aria-expanded="false" aria-label="Toggle navigation"><span
@@ -27,7 +27,7 @@
             <li th:if="${user} != null" class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle text-nowrap px-3" data-toggle="dropdown" href="#"
                    role="button" aria-haspopup="true" aria-expanded="false">
-                    <img class="user-avatar rounded-circle mr-2" th:src="@{/images/avatars/default.png}"
+                    <img class="user-avatar rounded-circle mr-2" th:src="@{/admin/images/avatars/default.png}"
                          alt="User Avatar">
                     <span class="d-none d-md-inline-block" th:text="${user.name}">Sierra Brooks</span>
                 </a>
