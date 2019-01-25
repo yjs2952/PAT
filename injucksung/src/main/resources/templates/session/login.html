@@ -14,19 +14,18 @@
             <div class="col-md-7 col-md-push-2 animate-box" style="padding: 30px">
                 <div class="row content-padding">
                     <div class="main">
-                        <h3>Please Log In, or <a href="#">Sign Up</a></h3>
                         <div th:if="${param.error}" class="login-or">
                             <span class="span-or">이메일 주소 혹은 비밀번호를 확인해주세요.</span>
                         </div>
 
                         <form  method="POST" th:action="@{/session}" role="form">
                             <div class="form-group">
-                                <label for="inputUsernameEmail">Username or email</label>
+                                <label for="inputUsernameEmail">이메일 주소</label>
                                 <input type="email" name="username" class="form-control" required id="inputUsernameEmail">
                             </div>
                             <div class="form-group">
-                                <a class="pull-right" href="#">Forgot password?</a>
-                                <label for="inputPassword">Password</label>
+                                <a class="pull-right" href="#">비밀번호 찾기</a>
+                                <label for="inputPassword">비밀번호</label>
                                 <input type="password" name="password" class="form-control" id="inputPassword">
                             </div>
                             <div class="checkbox pull-right">
@@ -35,11 +34,12 @@
                                     Remember me </label>
                             </div>
                             <button type="submit" class="btn btn btn-primary">
-                                Log In
+                                로그인
                             </button>
                         </form>
 
                         <hr class="hr-or">
+                        <span>로그인 아이디가 없으신가요? <a href="#">회원 가입</a></span>
                         <!--TODO: 소셜 로그인-->
                         <!--<div class="row">-->
                             <!--<div class="col-xs-6 col-sm-6 col-md-6">-->
