@@ -1474,3 +1474,7 @@ input[type="text"] {
 }
 
 /*# sourceMappingURL=style.css.map */
+
+.table-tr-center table th{
+    text-align: center;
+}
