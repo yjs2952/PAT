@@ -24,26 +24,29 @@
     </div>
     <div class="container-wrap">
         <div class="row">
-            <div class="col-md-12 animate-box" style="padding: 2em 4em;">
+            <div class="col-md-12 animate-box">
                 <form method="GET" th:action="@{/quiz}">
                     <div class="tree">
-                            <ul>
-                                <th:block th:each="bookContent : ${bookContentList}" th:if="${bookContent.depth}==0">
-                                    <div th:fragment="bookContentTree" th:remove="tag">
-                                        <li>
-                                            <span th:text="${bookContent.name}"></span>
-                                            <ul>
-                                                <th:block th:each="subBookContent : ${bookContent.subBookContents}">
-                                                    <th:block th:with="bookContent = ${subBookContent}"
-                                                              th:include="this :: bookContentTree"
-                                                              th:remove="tag">
-                                                    </th:block>
+                        <ul>
+                            <th:block th:each="bookContent : ${bookContentList}" th:if="${bookContent.depth}==0">
+                                <div th:fragment="bookContentTree" th:remove="tag">
+                                    <li>
+                                        <span th:text="${bookContent.name}"></span>
+                                        <th:block th:if="${bookContent.depth}==2">
+                                            <input type="checkbox" name="bookContentIds" th:value="${bookContent.id}"/>
+                                        </th:block>
+                                        <ul th:if="${#lists.size(bookContent.subBookContents)} > 0">
+                                            <th:block th:each="subBookContent : ${bookContent.subBookContents}">
+                                                <th:block th:with="bookContent = ${subBookContent}"
+                                                          th:include="this :: bookContentTree"
+                                                          th:remove="tag">
                                                 </th:block>
-                                            </ul>
-                                        </li>
-                                    </div>
-                                </th:block>
-                            </ul>
+                                            </th:block>
+                                        </ul>
+                                    </li>
+                                </div>
+                            </th:block>
+                        </ul>
                         <input type="submit" name="action" value="채점하기"/>
                         <input type="submit" name="action" value="문제풀기"/>
                     </div>

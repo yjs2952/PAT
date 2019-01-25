@@ -1595,7 +1595,7 @@ input[type="text"] {
   padding:19px;
   margin-bottom:20px;
   background-color:#fbfbfb;
-  border:1px solid #999;
+  /*border:1px solid #999;*/
   -webkit-border-radius:4px;
   -moz-border-radius:4px;
   border-radius:4px;
