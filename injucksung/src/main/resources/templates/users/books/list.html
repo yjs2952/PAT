@@ -8,8 +8,8 @@
 </head>
 
 <body th:with="hrefPrefix='/books/'">
-<th:block th:insert="fragments/nav :: user"></th:block>
 <div id="page">
+    <th:block th:insert="fragments/nav :: user"></th:block>
     <div class="container-wrap">
         <div class="table-tr-center">
             <table th:replace="fragments/books/booksCommon :: book-list"></table>
