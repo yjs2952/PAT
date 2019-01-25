@@ -26,22 +26,27 @@
         <div class="row">
             <div class="col-md-12 animate-box" style="padding: 2em 4em;">
                 <form method="GET" th:action="@{/quiz}">
-                    <div class="funkyradio">
-                        <th:block th:each="bookContent : ${bookContentList}">
-                            <h1 th:if="${bookContent.depth}<=0" th:text="${bookContent.name}"></h1>
-                            <h2 th:if="${bookContent.depth}==1" th:text="${bookContent.name}"></h2>
-                                <th:block th:if="${bookContent.depth}>=2">
-
-                                    <div class="funkyradio-primary col-md-4">
-                                        <input type="checkbox" name="bookContentIds" th:value="${bookContent.id}"
-                                               th:id="${bookContent.id}"/>
-                                        <label th:for="${bookContent.id}" th:text="${bookContent.name}"></label>
+                    <div class="tree">
+                            <ul>
+                                <th:block th:each="bookContent : ${bookContentList}" th:if="${bookContent.depth}==0">
+                                    <div th:fragment="bookContentTree" th:remove="tag">
+                                        <li>
+                                            <span th:text="${bookContent.name}"></span>
+                                            <ul>
+                                                <th:block th:each="subBookContent : ${bookContent.subBookContents}">
+                                                    <th:block th:with="bookContent = ${subBookContent}"
+                                                              th:include="this :: bookContentTree"
+                                                              th:remove="tag">
+                                                    </th:block>
+                                                </th:block>
+                                            </ul>
+                                        </li>
                                     </div>
                                 </th:block>
-                        </th:block>
+                            </ul>
+                        <input type="submit" name="action" value="채점하기"/>
+                        <input type="submit" name="action" value="문제풀기"/>
                     </div>
-                    <input type="submit" name="action" value="채점하기"/>
-                    <input type="submit" name="action" value="문제풀기"/>
                 </form>
             </div>
         </div>
@@ -54,6 +59,21 @@
             alert("적어도 하나의 목차는 선택하세요!");
             return false;
         }
+    });
+
+    $(function () {
+        $('.tree li:has(ul)').addClass('parent_li').find(' > span').attr('title', 'Collapse this branch');
+        $('.tree li.parent_li > span').on('click', function (e) {
+            var children = $(this).parent('li.parent_li').find(' > ul > li');
+            if (children.is(":visible")) {
+                children.hide('fast');
+                $(this).attr('title', 'Expand this branch').find(' > i').addClass('icon-plus-sign').removeClass('icon-minus-sign');
+            } else {
+                children.show('fast');
+                $(this).attr('title', 'Collapse this branch').find(' > i').addClass('icon-minus-sign').removeClass('icon-plus-sign');
+            }
+            e.stopPropagation();
+        });
     });
 </script>
 </body>
