@@ -11,7 +11,7 @@
     <th:block th:insert="fragments/nav :: user"></th:block>
     <div class="container-wrap">
         <div class="container">
-            <div class="col-md-7 col-md-push-2 animate-box" style="padding: 30px">
+            <div class="col-md-7 col-md-push-2 animate-box" style="padding: 50px">
                 <div class="row">
                     <div class="main">
                         <form method="POST" th:action="@{/users}" role="form">
@@ -22,7 +22,9 @@
                                 <label>비밀번호</label>
                                 <input type="password" name="password" class="form-control" required><br>
 
-                                <!--TODO 비밀번호 확인 -->
+                                <!--TODO 비밀번호 확인 기능구현-->
+                                <label>비밀번호 확인</label>
+                                <input type="password" name="password-check" class="form-control" required><br>
 
                                 <label>닉네임</label>
                                 <input type="text" name="nickname" class="form-control" required><br>

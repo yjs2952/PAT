@@ -3,7 +3,6 @@
 <head>
     <th:block th:insert="fragments/head :: common"></th:block>
     <th:block th:insert="fragments/head :: user-resources"></th:block>
-    <!--<th:block th:insert="fragments/head :: admin-resources"></th:block>-->
     <title>PAT - 책 목록</title>
 </head>
 
@@ -11,7 +10,7 @@
 <div id="page">
     <th:block th:insert="fragments/nav :: user"></th:block>
     <div class="container-wrap">
-        <div class="table-tr-center">
+        <div class="table-tr-center animate-box" style="padding: 50px;">
             <table th:replace="fragments/books/booksCommon :: book-list"></table>
         </div>
     </div>

@@ -2,31 +2,52 @@
 <html lang="ko" xmlns:th="http://www.thymeleaf.org">
 <head>
     <th:block th:insert="fragments/head :: common"></th:block>
-    <th:block th:insert="fragments/head :: ajax-jquery"></th:block>
-    <title>책 목차 선택하기</title>
+    <th:block th:insert="fragments/head :: user-resources"></th:block>
+    <title>PAT - 목차 선택</title>
 </head>
+
 <body>
-책 목차 선택하기 - 책 상세보기<br>
-이름 : <span th:text="${book.name}"></span><br>
-출간일자 : <span th:text="${book.publicationDate}"></span><br>
-저자 : <span th:text="${book.author}"></span><br>
-ISBN : <span th:text="${book.isbn}"></span><br>
-출판사 : <span th:text="${book.publisher}"></span><br>
+<div id="page">
+    <th:block th:insert="fragments/nav :: user"></th:block>
+    <div class="container-wrap">
+        <div class="row">
+            <div class="animate-box" style="padding: 2em 4em 1em;">
+                <ul class="contact-info" style="margin-bottom: 0px">
+                    <li><i class="icon-book2"></i>제목 : <span th:text="${book.name}"></span></li>
+                    <li><i class="icon-calendar3"></i>출간일자 : <span th:text="${book.publicationDate}"></span></li>
+                    <li><i class="icon-user"></i>저자 : <span th:text="${book.author}"></span></li>
+                    <li><i class="icon-barcode"></i>ISBN : <span th:text="${book.isbn}"></span></li>
+                    <li><i class="icon-globe2"></i>출판사 : <span th:text="${book.publisher}"></span></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="container-wrap">
+        <div class="row">
+            <div class="col-md-12 animate-box" style="padding: 2em 4em;">
+                <form method="GET" th:action="@{/quiz}">
+                    <div class="funkyradio">
+                        <th:block th:each="bookContent : ${bookContentList}">
+                            <h1 th:if="${bookContent.depth}<=0" th:text="${bookContent.name}"></h1>
+                            <h2 th:if="${bookContent.depth}==1" th:text="${bookContent.name}"></h2>
+                                <th:block th:if="${bookContent.depth}>=2">
 
-<h1>책 목차 선택하기 selection</h1>
+                                    <div class="funkyradio-primary col-md-4">
+                                        <input type="checkbox" name="bookContentIds" th:value="${bookContent.id}"
+                                               th:id="${bookContent.id}"/>
+                                        <label th:for="${bookContent.id}" th:text="${bookContent.name}"></label>
+                                    </div>
+                                </th:block>
+                        </th:block>
+                    </div>
+                    <input type="submit" name="action" value="채점하기"/>
+                    <input type="submit" name="action" value="문제풀기"/>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
 
-<form method="GET" th:action="@{/quiz}">
-    <th:block th:each="bookContent : ${bookContentList}">
-        <h1 th:if="${bookContent.depth}<=0" th:text="${bookContent.name}"></h1>
-        <h2 th:if="${bookContent.depth}==1" th:text="${bookContent.name}"></h2>
-        <th:block th:if="${bookContent.depth}>=2">
-            <label th:text="${bookContent.name}"></label><input type="checkbox" name="bookContentIds"
-                                                                th:value="${bookContent.id}">
-        </th:block>
-    </th:block>
-    <input type="submit" name="action" value="채점하기"/>
-    <input type="submit" name="action" value="문제풀기"/>
-</form>
 <script type="text/javascript">
     $("form").submit(function () {
         if ($('input:checkbox').filter(':checked').length < 1) {
@@ -36,4 +57,5 @@ ISBN : <span th:text="${book.isbn}"></span><br>
     });
 </script>
 </body>
+<th:block th:insert="fragments/footer :: user"></th:block>
 </html>
