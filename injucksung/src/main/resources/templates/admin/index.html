@@ -1,14 +1,35 @@
 <!DOCTYPE HTML>
 <html lang="ko" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <th:block th:insert="fragments/header :: common-header"></th:block>
-    <title>관리자 페이지 index</title>
+    <th:block th:insert="fragments/head :: common"></th:block>
+    <th:block th:insert="fragments/head :: admin-resources"></th:block>
+    <title>PAT - 관리자 페이지</title>
 </head>
+<body class="h-100">
+<div class="container-fluid">
+    <div class="row">
+        <th:block th:insert="fragments/aside :: admin"></th:block>
 
-<body>
-관리자 페이지<br>
-<a href="/admin/books">책 관리하기</a><br>
-<a href="/admin/questions">문제 관리하기</a><br>
-<a href="/admin/question-categories">문제카테고리 관리하기</a>
+        <main class="main-content col-lg-10 col-md-9 col-sm-12 p-0 offset-lg-2 offset-md-3">
+            <th:block th:insert="fragments/nav :: admin"></th:block>
+
+            <!--Page Content -->
+            <div class="main-content-container container-fluid px-4">
+                <div class="page-header row no-gutters py-4">
+                    <div class="col-12 col-sm-4 text-center text-sm-left mb-0">
+                        <span class="text-uppercase page-subtitle">Dashboard</span>
+                    </div>
+                </div>
+
+                <div class="row">
+
+                </div>
+            </div>
+            <!--End Page Content -->
+
+            <th:block th:insert="fragments/footer :: admin"></th:block>
+        </main>
+    </div>
+</div>
 </body>
 </html>

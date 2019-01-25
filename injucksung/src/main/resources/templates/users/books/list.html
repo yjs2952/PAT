@@ -1,12 +1,20 @@
 <!DOCTYPE HTML>
 <html lang="ko" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <th:block th:insert="fragments/header :: common-header"></th:block>
-    <title>책 목록보기</title>
+    <th:block th:insert="fragments/head :: common"></th:block>
+    <th:block th:insert="fragments/head :: user-resources"></th:block>
+    <title>PAT - 책 목록</title>
 </head>
 
 <body th:with="hrefPrefix='/books/'">
-책 목록보기<br>
-<table th:replace="fragments/books/booksCommon :: book-list"></table>
+<div id="page">
+    <th:block th:insert="fragments/nav :: user"></th:block>
+    <div class="container-wrap">
+        <div class="table-tr-center animate-box" style="padding: 50px;">
+            <table th:replace="fragments/books/booksCommon :: book-list"></table>
+        </div>
+    </div>
+</div>
 </body>
+<th:block th:insert="fragments/footer :: user"></th:block>
 </html>
