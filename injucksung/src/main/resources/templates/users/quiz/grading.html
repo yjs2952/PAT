@@ -2,28 +2,36 @@
 <html lang="ko" xmlns:th="http://www.thymeleaf.org">
 <head>
     <th:block th:insert="fragments/head :: common"></th:block>
-    <th:block th:insert="fragments/head :: ajax-jquery"></th:block>
-    <title>채점하기</title>
+    <th:block th:insert="fragments/head :: user-resources"></th:block>
+    <title>PAT - 채점 하기</title>
 </head>
 <body>
-<h1>채점하기</h1>
-<form method="POST" th:action="@{/quiz}">
-    <th:block th:each="question : ${questions}">
-        <div>
-            <span th:text="${question.questionCategory.name}"></span>
-            <span th:text="${question.bookContent.name}"></span>
-            <span th:text="${question.bookNumber}"></span><br>
+<div id="page">
+    <th:block th:insert="fragments/nav :: user"></th:block>
+    <div class="container-wrap">
+        <div class="animate-box" style="padding: 2em 4em 1em;">
+        <form method="POST" th:action="@{/quiz}">
+            <th:block th:each="question : ${questions}">
+                <div>
+                    <span th:text="${question.questionCategory.name}"></span>
+                    <span th:text="${question.bookContent.name}"></span>
+                    <span th:text="${question.bookNumber}"></span><br>
+                </div>
+                <div>
+                    <input type="radio" th:name="${question.id}" th:value="1" required/>1
+                    <input type="radio" th:name="${question.id}" th:value="2" required/>2
+                    <input type="radio" th:name="${question.id}" th:value="3" required/>3
+                    <input type="radio" th:name="${question.id}" th:value="4" required/>4
+                    <input type="radio" th:if="${question.choiceCount}==5" th:name="${question.id}" th:value="5"
+                           required(/>5
+                </div>
+            </th:block>
+            <input type="hidden" name="bookContentCount" th:value="${bookContentCount}"/>
+            <input class="btn btn-primary" style="margin-top:1.5em" type="submit" value="제출하기"/>
+        </form>
         </div>
-        <div>
-            <input type="radio" th:name="${question.id}" th:value="1" required/>1
-            <input type="radio" th:name="${question.id}" th:value="2" required/>2
-            <input type="radio" th:name="${question.id}" th:value="3" required/>3
-            <input type="radio" th:name="${question.id}" th:value="4" required/>4
-            <input type="radio" th:if="${question.choiceCount}==5" th:name="${question.id}" th:value="5" required(/>5
-        </div>
-    </th:block>
-    <input type="hidden" name="bookContentCount" th:value="${bookContentCount}"/>
-    <input type="submit" value="제출하기"/>
-</form>
+    </div>
+</div>
 </body>
+<th:block th:insert="fragments/footer :: user"></th:block>
 </html>
