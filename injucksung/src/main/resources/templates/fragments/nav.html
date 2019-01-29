@@ -38,7 +38,7 @@
                    role="button" aria-haspopup="true" aria-expanded="false">
                     <img class="user-avatar rounded-circle mr-2" th:src="@{/admin/images/avatars/default.png}"
                          alt="User Avatar">
-                    <span class="d-none d-md-inline-block" th:text="${user.name}">Sierra Brooks</span>
+                    <span class="d-none d-md-inline-block" th:text="${#authentication.principal.username}">Sierra Brooks</span>
                 </a>
                 <div class="dropdown-menu dropdown-menu-small">
                     <a class="dropdown-item" href="user-profile-lite.html">
