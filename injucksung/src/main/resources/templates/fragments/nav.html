@@ -12,15 +12,15 @@
                     <ul>
                         <!-- TODO 권한검사 & 동적으로 class="active" 설정하기-->
                         <!--<li class="active"><a th:href="@{/}">Home</a></li>-->
+                        <li sec:authorize="isAuthenticated()"><span sec:authentication="principal.username"></span></li>
                         <li><a th:href="@{/}">Home</a></li>
                         <li sec:authorize="hasRole('ROLE_ADMIN')"><a th:href="@{/admin}">관리자 페이지</a></li>
                         <li sec:authorize="hasRole('ROLE_USER')"><a th:href="@{/books}">책 목록</a></li>
                         <li sec:authorize="hasRole('ROLE_USER')">
-                            <a th:href="@{'/users/'+ ${user.id} +'/quiz-records'}">마이페이지</a>
+                            <a th:href="@{'/users/'+ ${#authentication.principal.id} +'/quiz-records'}">마이페이지</a>
                         </li>
                         <li sec:authorize="!isAuthenticated()"><a th:href="@{/users}">회원가입</a></li>
                         <li sec:authorize="!isAuthenticated()"><a th:href="@{/session}">로그인</a></li>
-                        <li sec:authorize="isAuthenticated()"><span sec:authentication="principal.username"></span></li>
                     </ul>
                 </div>
             </div>
