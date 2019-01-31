@@ -1,18 +1,127 @@
 <!DOCTYPE HTML>
 <html lang="ko" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <th:block th:insert="fragments/header :: common-header"></th:block>
-    <title>팟 index</title>
+    <th:block th:insert="fragments/head :: common"></th:block>
+    <th:block th:insert="fragments/head :: user-resources"></th:block>
+    <title>PAT</title>
 </head>
 
 <body>
-<p th:inline="text">Hello [[${#httpServletRequest.remoteUser}]]</p>
-<!-- TODO 권한검사 -->
-<a th:if="${user} != null" th:href="@{/admin}">관리자페이지</a><br>
-<a th:if="${user} == null" th:href="@{/session}">로그인</a>
-<a th:if="${user} == null" th:href="@{/users}">회원가입</a><br><br>
-
-<a th:if="${user} != null" th:href="@{/books}">책목록 보기 (문제풀기 / 채점하기)</a><br>
-<a th:if="${user} != null" th:href="@{'/users/'+${user.id}+'/quiz-records'}">이전에 응시했던 시험 목록</a>
+<div id="page">
+    <th:block th:insert="fragments/nav :: user"></th:block>
+    <div class="container-wrap">
+        <aside id="fh5co-hero">
+            <div class="flexslider">
+                <ul class="slides">
+                    <li style="background-image: url(images/img_bg_1.jpg);">
+                        <div class="overlay-gradient"></div>
+                        <div class="container-fluid">
+                            <div class="row">
+                                <div class="col-md-6 col-md-offset-3 col-md-pull-3 slider-text">
+                                    <div class="slider-text-inner">
+                                        <h1>Not Every Project Needs To Be Perfect</h1>
+                                        <h2>Free html5 templates Made by <a href="http://freehtml5.co/" target="_blank">freehtml5.co</a>
+                                        </h2>
+                                        <p><a class="btn btn-primary btn-demo" href="#"></i> View Demo</a> <a
+                                                class="btn btn-primary btn-learn">Learn More</a></p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                    <li style="background-image: url(images/img_bg_2.jpg);">
+                        <div class="overlay-gradient"></div>
+                        <div class="container-fluid">
+                            <div class="row">
+                                <div class="col-md-6 col-md-offset-3 col-md-push-3 slider-text">
+                                    <div class="slider-text-inner">
+                                        <h1>WordPress Theme For People Who Tell Stories</h1>
+                                        <h2>Free html5 templates Made by <a href="http://freehtml5.co/" target="_blank">freehtml5.co</a>
+                                        </h2>
+                                        <p><a class="btn btn-primary btn-demo" href="#"></i> View Demo</a> <a
+                                                class="btn btn-primary btn-learn">Learn More</a></p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                    <li style="background-image: url(images/img_bg_3.jpg);">
+                        <div class="overlay-gradient"></div>
+                        <div class="container-fluids">
+                            <div class="row">
+                                <div class="col-md-6 col-md-offset-3 slider-text">
+                                    <div class="slider-text-inner text-center">
+                                        <h1>What Would You Like To Learn?</h1>
+                                        <h2>Free html5 templates Made by <a href="http://freehtml5.co/" target="_blank">freehtml5.co</a>
+                                        </h2>
+                                        <p><a class="btn btn-primary btn-demo" href="#"></i> View Demo</a> <a
+                                                class="btn btn-primary btn-learn">Learn More</a></p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                    <li style="background-image: url(images/img_bg_4.jpg);">
+                        <div class="overlay-gradient"></div>
+                        <div class="container-fluid">
+                            <div class="row">
+                                <div class="col-md-6 col-md-offset-3 col-md-push-3 slider-text">
+                                    <div class="slider-text-inner">
+                                        <h1>I Love to Tell My Story</h1>
+                                        <h2>Free html5 templates Made by <a href="http://freehtml5.co/" target="_blank">freehtml5.co</a>
+                                        </h2>
+                                        <p><a class="btn btn-primary btn-demo" href="#"></i> View Demo</a> <a
+                                                class="btn btn-primary btn-learn">Learn More</a></p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </aside>
+        <div id="fh5co-services">
+            <div class="row">
+                <div class="col-md-4 text-center animate-box">
+                    <div class="services">
+						<span class="icon">
+							<i class="icon-diamond"></i>
+						</span>
+                        <div class="desc">
+                            <h3><a href="#">Brand Identity</a></h3>
+                            <p>Dignissimos asperiores vitae velit veniam totam fuga molestias accusamus alias autem
+                                provident. Odit ab aliquam dolor eius.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 text-center animate-box">
+                    <div class="services">
+						<span class="icon">
+							<i class="icon-lab2"></i>
+						</span>
+                        <div class="desc">
+                            <h3><a href="#">Web Design &amp; UI</a></h3>
+                            <p>Dignissimos asperiores vitae velit veniam totam fuga molestias accusamus alias autem
+                                provident. Odit ab aliquam dolor eius.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 text-center animate-box">
+                    <div class="services">
+						<span class="icon">
+							<i class="icon-settings"></i>
+						</span>
+                        <div class="desc">
+                            <h3><a href="#">Web Development</a></h3>
+                            <p>Dignissimos asperiores vitae velit veniam totam fuga molestias accusamus alias autem
+                                provident. Odit ab aliquam dolor eius.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 </body>
+<th:block th:insert="fragments/footer :: user"></th:block>
 </html>

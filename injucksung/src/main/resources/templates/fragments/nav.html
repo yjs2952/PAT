@@ -1,0 +1,67 @@
+<!DOCTYPE HTML>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+
+<nav th:fragment="user" class="fh5co-nav" role="navigation">
+    <div class="container-wrap">
+        <div class="top-menu">
+            <div class="row">
+                <div class="col-xs-2">
+                    <div id="fh5co-logo"><a th:href="@{/}" style="color:#ff6f61">PAT</a></div>
+                </div>
+                <div class="col-xs-10 text-right menu-1">
+                    <ul>
+                        <!-- TODO 권한검사 & 동적으로 class="active" 설정하기-->
+                        <!--<li class="active"><a th:href="@{/}">Home</a></li>-->
+                        <li sec:authorize="isAuthenticated()"><span sec:authentication="principal.username"></span></li>
+                        <li><a th:href="@{/}">Home</a></li>
+                        <li sec:authorize="hasRole('ROLE_ADMIN')"><a th:href="@{/admin}">관리자 페이지</a></li>
+                        <li sec:authorize="hasRole('ROLE_USER')"><a th:href="@{/books}">책 목록</a></li>
+                        <li sec:authorize="hasRole('ROLE_USER')">
+                            <a th:href="@{'/users/'+ ${#authentication.principal.id} +'/quiz-records'}">마이페이지</a>
+                        </li>
+                        <li sec:authorize="!isAuthenticated()"><a th:href="@{/users}">회원가입</a></li>
+                        <li sec:authorize="!isAuthenticated()"><a th:href="@{/session}">로그인</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</nav>
+
+<div th:fragment="admin" class="main-navbar sticky-top bg-white">
+    <nav class="navbar align-items-stretch navbar-light flex-md-nowrap p-0">
+        <div action="#" class="main-navbar__search w-100 d-none d-md-flex d-lg-flex">
+        </div>
+        <ul class="navbar-nav border-left flex-row ">
+            <li sec:authorize="isAuthenticated()" class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle text-nowrap px-3" data-toggle="dropdown" href="#"
+                   role="button" aria-haspopup="true" aria-expanded="false">
+                    <img class="user-avatar rounded-circle mr-2" th:src="@{/admin/images/avatars/default.png}"
+                         alt="User Avatar">
+                    <span class="d-none d-md-inline-block" th:text="${#authentication.principal.username}">Sierra Brooks</span>
+                </a>
+                <div class="dropdown-menu dropdown-menu-small">
+                    <a class="dropdown-item" href="user-profile-lite.html">
+                        <i class="material-icons">&#xE7FD;</i> Profile</a>
+                    <a class="dropdown-item" href="components-blog-posts.html">
+                        <i class="material-icons">vertical_split</i> Blog Posts</a>
+                    <a class="dropdown-item" href="add-new-post.html">
+                        <i class="material-icons">note_add</i> Add New Post</a>
+                    <div class="dropdown-divider"></div>
+                    <a class="dropdown-item text-danger" href="#">
+                        <i class="material-icons text-danger">&#xE879;</i> Logout </a>
+                </div>
+            </li>
+        </ul>
+        <nav class="nav">
+            <a href="#"
+               class="nav-link nav-link-icon toggle-sidebar d-md-inline d-lg-none text-center border-left"
+               data-toggle="collapse" data-target=".header-navbar" aria-expanded="false"
+               aria-controls="header-navbar">
+                <i class="material-icons">&#xE5D2;</i>
+            </a>
+        </nav>
+    </nav>
+</div>
+
+</html>

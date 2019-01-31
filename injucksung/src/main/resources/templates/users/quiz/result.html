@@ -1,19 +1,27 @@
 <!DOCTYPE HTML>
 <html lang="ko" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <th:block th:insert="fragments/header :: common-header"></th:block>
-    <title>결과페이지</title>
+    <th:block th:insert="fragments/head :: common"></th:block>
+    <th:block th:insert="fragments/head :: user-resources"></th:block>
+    <title>PAT - 결과 보기</title>
 </head>
 <body>
-<h3>결과 페이지</h3>
-<!-- TODO quizRecord ? 없애기 -->
-<h4 th:text="${quizRecord?.title}"></h4>
-<th:block th:each="result : ${results}">
-    <p>
-        <span th:text="'문제 ID: '+${result.question.id}"></span><br>
-        <span th:text="'선택한 보기: '+${result.checkedChoice}"></span><br>
-        <span th:text="'정답여부: '+${result.isCorrect}"></span>
-    </p>
-</th:block>
+<div id="page">
+    <th:block th:insert="fragments/nav :: user"></th:block>
+    <div class="container-wrap">
+        <div class="animate-box" style="padding: 2em 4em 1em;">
+        <!-- TODO quizRecord ? 없애기 -->
+        <h4 th:text="${quizRecord?.title}"></h4>
+        <th:block th:each="result : ${results}">
+            <p>
+                <span th:text="'문제 ID: '+${result.question.id}"></span><br>
+                <span th:text="'선택한 보기: '+${result.checkedChoice}"></span><br>
+                <span th:text="'정답여부: '+${result.isCorrect}"></span>
+            </p>
+        </th:block>
+        </div>
+    </div>
+</div>
 </body>
+<th:block th:insert="fragments/footer :: user"></th:block>
 </html>
